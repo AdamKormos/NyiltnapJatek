@@ -4,14 +4,13 @@ Lefoglalt - Időmérés, coom, célba érés utáni feladatok (értékelés mega
 
 
 Classoevi:
-
+- Jegyek átlagolása
+- Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 
 
 Elérhető:
 - Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
 - Lépkedés menük között
 - Lineáris pályarendszer ("Játék" menüponton belül)
-- Jegyek átlagolása
 - Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
-- Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 - Kérdések hatása: játékos visszadobása/több akadály megjelenítése + jegy lerontása
