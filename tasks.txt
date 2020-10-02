@@ -8,8 +8,12 @@ Classoevi:
 - Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 
 ogzid:
+- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
+- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
+ha mégegszer kitörlöd kilépek és akkor no grafológus
 - az egész grafika ofc
 - grafológus?
+- yes
 
 erkig
 - raf előkészületei
@@ -26,5 +30,3 @@ Elérhető:
 - Lépkedés menük között
 - Lineáris pályarendszer ("Játék" menüponton belül)
 - Kérdések hatása: játékos visszadobása/több akadály megjelenítése + jegy lerontása
-- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
-- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
