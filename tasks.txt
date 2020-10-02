@@ -13,6 +13,11 @@ ogzid:
 - meg az egész grafika ofc
 - grafológus?
 
+erkig
+- raf előkészületei
+- futószalag felügyelete
+- Állománybeolvasás
+
 Közös:
 - Székdobálás rafológus módjára
 - Coom
