@@ -1,6 +1,6 @@
 Zöld:
-Lefoglalt - Időmérés, coom, célba érés utáni feladatok (értékelés megadása pályánként, kilépés a map-re)
-
+Lefoglalt - Időmérés, célba érés utáni feladatok (értékelés megadása pályánként, kilépés a map-re)
+	  - Karakter mozgása
 
 
 Classoevi:
@@ -10,17 +10,6 @@ Classoevi:
 ogzid:
 - (Grafika) Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
 - (Grafika) Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
-
-erkig
-- raf előkészületei
-- futószalag felügyelete
-- Állománybeolvasás
-- veremkezelés
-
-Közös:
-- Székdobálás rafológus módjára
-- Coom
-
 
 Elérhető:
 - Lépkedés menük között
