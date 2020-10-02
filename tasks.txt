@@ -7,6 +7,11 @@ Classoevi:
 - Jegyek átlagolása
 - Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 
+ogzid:
+- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
+- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
+- meg az egész grafika ofc
+- grafológus?
 
 Közös:
 - Székdobálás rafológus módjára
@@ -14,8 +19,6 @@ Közös:
 
 
 Elérhető:
-- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
 - Lépkedés menük között
 - Lineáris pályarendszer ("Játék" menüponton belül)
-- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
 - Kérdések hatása: játékos visszadobása/több akadály megjelenítése + jegy lerontása
