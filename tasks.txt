@@ -8,9 +8,7 @@ Classoevi:
 - Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 
 ogzid:
-- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
-- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
-- meg az egész grafika ofc
+- az egész grafika ofc
 - grafológus?
 
 erkig
@@ -28,3 +26,5 @@ Elérhető:
 - Lépkedés menük között
 - Lineáris pályarendszer ("Játék" menüponton belül)
 - Kérdések hatása: játékos visszadobása/több akadály megjelenítése + jegy lerontása
+- Töltőképernyő megjeleníthető szövegekkel (tippek/infó a suliról)
+- Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
