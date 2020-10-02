@@ -17,6 +17,7 @@ erkig
 - raf előkészületei
 - futószalag felügyelete
 - Állománybeolvasás
+- veremkezelés
 
 Közös:
 - Székdobálás rafológus módjára
