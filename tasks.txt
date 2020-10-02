@@ -8,6 +8,11 @@ Classoevi:
 - Kérdés szerkezet + kérdésmegjelenítés (válaszok közti váltogatás nyilakkal)
 
 
+Közös:
+- Székdobálás rafológus módjára
+- Coom
+
+
 Elérhető:
 - Főmenü (adott menüpontok megjelenítése, gombok közti lépkedés nyilakkal/wasd-vel)
 - Lépkedés menük között
