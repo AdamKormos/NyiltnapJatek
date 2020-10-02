@@ -5,28 +5,50 @@ using GameNS = GameNS;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] int movePerSec = 20;
+    [SerializeField] int moveStrength = 1;
+    [SerializeField] bool moveAllowed = true;
     [SerializeField] float jumpStrength = 3;
-    bool isOnGround = true;
+    bool isOnGround = true, reachedEnd = false;
     public static bool isOnScreen { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        GameNS::StaticData.player = this;
+        StartCoroutine(Move());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(IsOnGround());
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
         }
     }
 
+    IEnumerator Move()
+    {
+        while (!reachedEnd)
+        {
+            if (moveAllowed)
+            {
+                transform.position += new Vector3(0.05f * moveStrength, 0f);
+                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f);
+                yield return new WaitForSeconds(1f / movePerSec);
+            }
+        }
+
+        while (isOnScreen)
+        {
+            transform.position += new Vector3(0.05f * moveStrength, 0f);
+            yield return new WaitForSeconds(1f / movePerSec);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<LevelEnding>()) { reachedEnd = true; }
         isOnGround = true;
     }
 
