@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: df123d2719474e543b468418692c8b3f
   - enabled: 1
-    path: "Assets/Scenes/K\xF6z\xF6s.unity"
+    path: "Assets/Scripts/K\xF6z\xF6s.unity"
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: "Assets/Scenes/Z\xF6ldMap.unity"
