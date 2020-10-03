@@ -28,20 +28,20 @@ public class Menu : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 buttons[index].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f);
-                index++;
-                if (index > 2)
+                index--;
+                if (index < 0)
                 {
-                    index--;
+                    index++;
                 }
                 buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 buttons[index].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f);
-                index--;
-                if (index < 0)
+                index++;
+                if (index > 2)
                 {
-                    index++;
+                    index--;
                 }
                 buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
             }
@@ -81,8 +81,4 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene((int)Scenes.mainMenu);
     }
-
-    
-
-
 }
