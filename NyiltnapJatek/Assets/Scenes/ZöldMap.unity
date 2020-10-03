@@ -213,10 +213,9 @@ GameObject:
   m_Component:
   - component: {fileID: 353361228}
   - component: {fileID: 353361229}
-  - component: {fileID: 353361230}
   m_Layer: 0
   m_Name: LevelEnding
-  m_TagString: Untagged
+  m_TagString: LevelEnding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,18 +260,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 40.95}
   m_EdgeRadius: 0
---- !u!114 &353361230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353361227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b1c05435247174dac7976a3dd9a2da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &369384045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1747,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Visszat\xE9r\xE9s a men\xFCbe"
+  m_Text: "Tov\xE1bb"
 --- !u!222 &1849133831
 CanvasRenderer:
   m_ObjectHideFlags: 0

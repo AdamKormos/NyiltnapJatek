@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<LevelEnding>()) { reachedEnd = true; }
+        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
         isOnGround = true;
     }
 

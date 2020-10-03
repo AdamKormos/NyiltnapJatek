@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Grade.cs" />
     <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
-    <Compile Include="Assets\Scripts\LevelEnding.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
