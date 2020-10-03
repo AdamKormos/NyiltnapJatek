@@ -21,6 +21,8 @@ public class LoadingScreen : MonoBehaviour
     {
         hintText.text = "";
         GameUI.ToggleChildren(this.gameObject, true);
+        GameNS::StaticData.gameUI.mainMenuTransform.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.gameObject.SetActive(false);
         SceneManager.LoadScene((int)sceneEnum);
         GameNS::StaticData.gameUI.timerText.gameObject.SetActive(false);
         StartCoroutine(Load());
@@ -46,7 +48,7 @@ public class LoadingScreen : MonoBehaviour
             yield return new WaitForSeconds(val / tickAmount);
         }
 
-        GameUI.ToggleChildren(GameNS::StaticData.gameUI.gameObject, false);
         GameUI.ToggleChildren(this.gameObject, false);
+        GameNS::StaticData.gameUI.OnViewChanged(true);
     }
 }

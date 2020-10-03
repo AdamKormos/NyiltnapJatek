@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class Player : MonoBehaviour
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+        levelCompletionPanelParent.GetComponentInChildren<Button>(true).onClick.AddListener(GameNS::StaticData.loadingScreen.LoadToMainMenu);
         Timer t = GameNS::StaticData.gameUI.timerText.GetComponent<Timer>();
         t.OnGameLevelOpen();
         StartCoroutine(Move());

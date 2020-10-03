@@ -6,9 +6,27 @@ using GameNS = GameNS;
 
 public class GameUI : MonoBehaviour
 {
+    [SerializeField] public Transform mainMenuTransform = default;
+    [SerializeField] public Transform gameplayStuffTransform = default;
+    [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Text timerText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
+    [SerializeField] bool startsInMainMenu = true;
+
+    public void OnViewChanged(bool isMainMenuView)
+    {
+        if(isMainMenuView)
+        {
+            gameplayStuffTransform.gameObject.SetActive(false);
+            mainMenuTransform.gameObject.SetActive(true);
+        }
+        else
+        {
+            gameplayStuffTransform.gameObject.SetActive(true);
+            mainMenuTransform.gameObject.SetActive(false);
+        }
+    }
 
     private void Awake()
     {
@@ -16,6 +34,7 @@ public class GameUI : MonoBehaviour
         {
             GameNS::StaticData.gameUI = this;
             DontDestroyOnLoad(this.gameObject);
+            GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu);
         }
         else Destroy(this.gameObject);
     }
