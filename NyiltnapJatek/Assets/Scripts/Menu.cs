@@ -11,6 +11,11 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject menuImg;
     private int index = 0;
 
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -40,12 +45,28 @@ public class Menu : MonoBehaviour
                 }
                 buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
             }
+            else if(Input.GetKeyDown(KeyCode.Return))
+            {
+                switch (index)
+                {
+                    case 0:
+                        Starts();
+                        break;
+                    case 1:
+                        Credits();
+                        break;
+                    case 2:
+                        Exit();
+                        break;
+                    
+                }
+            }
 
         }
     }
 
 
-
+    
     private void Starts()
     {
         menuImg.SetActive(!menuImg.activeSelf);
