@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    int on_render()
+    {
+        return 0;
+    }
+
     IEnumerator Move()
     {
         while (!reachedEnd)
