@@ -71,22 +71,4 @@ public class Player : MonoBehaviour
         isOnScreen = false;
         levelCompletionPanelParent.CallPanel(true);
     }
-<<<<<<< HEAD
-=======
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        compactGrade compgrade = collision.gameObject.GetComponent<compactGrade>();
-        if (compgrade != null)
-        {
-            Grade.count++;
-            Grade.osszegzes_tetele += (int)compgrade.nem;
-        }
-        
-        else
-        {
-
-        }
-    }
->>>>>>> ba187567d19782b17144aef7cd06211dcc541914
 }

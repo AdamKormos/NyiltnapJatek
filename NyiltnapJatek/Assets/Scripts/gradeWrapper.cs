@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class gradeWrapper
+public class gradeWrapper : MonoBehaviour
 {
     Grade[] gradeArr = new Grade[3];
     // Start is called before the first frame update
