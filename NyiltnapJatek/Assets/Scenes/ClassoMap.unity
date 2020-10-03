@@ -1263,6 +1263,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388008648}
   m_CullTransparentMesh: 0
+--- !u!1 &1393794642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1393794644}
+  - component: {fileID: 1393794643}
+  m_Layer: 0
+  m_Name: gradeHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1393794643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393794642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f6eaa1eed210e4389fd1ac36d85a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1393794644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393794642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 565.5787, y: 447.00415, z: -2472.012}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2047500667}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504248017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,10 +1840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a00d27fd1ee524fb086308dc3f287e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gradeArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  coin: {fileID: 0}
+  nem: 0
 --- !u!4 &2047500667
 Transform:
   m_ObjectHideFlags: 0
@@ -1807,8 +1849,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047500665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 501.66608, y: 448.044, z: -136.60347}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -63.912598, y: 1.039856, z: 2335.4084}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 627160705}
@@ -1816,6 +1858,6 @@ Transform:
   - {fileID: 718515077}
   - {fileID: 506849797}
   - {fileID: 138677931}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1393794644}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

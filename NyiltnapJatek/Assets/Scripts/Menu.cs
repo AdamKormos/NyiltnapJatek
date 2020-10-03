@@ -21,7 +21,6 @@ public class Menu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             menuImg.SetActive(!menuImg.activeSelf);
-
         }
         if (menuImg.activeSelf)
         {
@@ -58,7 +57,6 @@ public class Menu : MonoBehaviour
                     case 2:
                         Exit();
                         break;
-                    
                 }
             }
 

@@ -2,28 +2,26 @@
 
 public enum gradeEnum { one = 1, two, three, four, five };
 
-public class compactGrade : MonoBehaviour
-{
-    GameObject coin;
-    public gradeEnum nem;
-}
-
-
 public class Grade : MonoBehaviour
-{
-    [SerializeField] private compactGrade[] gradeArray = new compactGrade[3]; 
+{ 
+    public GameObject coin = default;
+    public gradeEnum nem = default;
     public static int count = 0;
-    public static int osszegzes_tetele = 0;
-    // Start is called before the first frame update
-    void Start()
+    public static int sum = 0;
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    [System.Obsolete]
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.GetComponentInParent<Player>())
+        {
+            Grade.count++;
+            Grade.sum += (int)nem;
+        }
+        DestroyObject(this);
     }
 
 
