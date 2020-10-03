@@ -8,9 +8,23 @@ public class GameUI : MonoBehaviour
 {
     [SerializeField] public Text timerText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
+    [SerializeField] public Slider loadingScreenSlider = default;
 
-    private void Start()
+    private void Awake()
     {
-        GameNS::StaticData.gameUI = this;
+        if (GameNS::StaticData.gameUI == null)
+        {
+            GameNS::StaticData.gameUI = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
+    public static void ToggleChildren(GameObject parent, bool activityState)
+    {
+        RectTransform[] temp = parent.GetComponentsInChildren<RectTransform>(true);
+        for (int i = 1; i < temp.Length; i++)
+        {
+            temp[i].gameObject.SetActive(activityState);
+        }
     }
 }

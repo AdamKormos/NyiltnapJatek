@@ -8,11 +8,7 @@ public class LevelCompletionUI : MonoBehaviour
 {
     public void CallPanel(bool activityState)
     {
-        RectTransform[] temp = GetComponentsInChildren<RectTransform>(true);
-        for (int i = 1; i < temp.Length; i++)
-        {
-            temp[i].gameObject.SetActive(activityState);
-        }
+        GameUI.ToggleChildren(this.gameObject, activityState);
 
         GameNS::StaticData.gameUI.levelCompletionPanelText.text =
             GameNS::StaticData.gameUI.timerText.text + '\n' +
