@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
             GameNS::StaticData.gameUI = this;
             DontDestroyOnLoad(this.gameObject);
         }
+        else Destroy(this.gameObject);
     }
 
     public static void ToggleChildren(GameObject parent, bool activityState)

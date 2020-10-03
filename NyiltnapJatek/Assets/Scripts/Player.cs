@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
-            GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
         }
     }
 

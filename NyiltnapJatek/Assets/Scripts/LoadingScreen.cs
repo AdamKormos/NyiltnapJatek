@@ -26,6 +26,11 @@ public class LoadingScreen : MonoBehaviour
         StartCoroutine(Load());
     }
 
+    public void LoadToMainMenu()
+    {
+        LoadLevel(Menu.Scenes.mainMenu);
+    }
+
     IEnumerator Load()
     {
         hintText.text = hints[Random.Range(0, hints.Length)];
@@ -41,6 +46,7 @@ public class LoadingScreen : MonoBehaviour
             yield return new WaitForSeconds(val / tickAmount);
         }
 
+        GameUI.ToggleChildren(GameNS::StaticData.gameUI.gameObject, false);
         GameUI.ToggleChildren(this.gameObject, false);
     }
 }

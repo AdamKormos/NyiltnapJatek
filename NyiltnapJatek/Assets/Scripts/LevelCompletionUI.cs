@@ -6,6 +6,11 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    private void Start()
+    {
+        GetComponentInChildren<Button>(true).onClick.AddListener(GameNS::StaticData.loadingScreen.LoadToMainMenu);
+    }
+
     public void CallPanel(bool activityState)
     {
         GameUI.ToggleChildren(this.gameObject, activityState);
