@@ -64,14 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameNS.cs" />
+    <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Grade.cs" />
-    <Compile Include="Assets\Scripts\LevelEnding.cs" />
+    <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\Scripts\gradeWrapper.cs" />
     <Compile Include="Assets\Scripts\mainMenu.cs" />
-    <Compile Include="Assets\gradeWrap.cs" />
-    <Compile Include="Assets\gradeWrapper.cs" />
     <Reference Include="UnityEngine">
       <HintPath>F:/Unity/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameNS = GameNS;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] Text timerText = default;
-    int sec = 0;
+    public int sec { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,10 @@ public class Timer : MonoBehaviour
 
     IEnumerator Count()
     {
-        while(true)
+        while(!Player.reachedEnd)
         {
             sec++;
-            timerText.text = ((int)(sec / 60) + ":" +  (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
+            GameNS::StaticData.gameUI.timerText.text = ((int)(sec / 60) + ":" +  (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
             yield return new WaitForSeconds(1f);
         }
     }

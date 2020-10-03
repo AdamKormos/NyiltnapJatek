@@ -6,16 +6,19 @@ using GameNS = GameNS;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] LevelCompletionUI levelCompletionPanelParent = default;
     [SerializeField] int movePerSec = 20;
     [SerializeField] int moveStrength = 1;
     [SerializeField] bool moveAllowed = true;
     [SerializeField] float jumpStrength = 3;
-    bool isOnGround = true, reachedEnd = false;
+    bool isOnGround = true;
+    public static bool reachedEnd { get; private set; }
     public static bool isOnScreen { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
     }
 
@@ -26,11 +29,6 @@ public class Player : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
         }
-    }
-
-    int on_render()
-    {
-        return 0;
     }
 
     IEnumerator Move()
@@ -54,7 +52,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<LevelEnding>()) { reachedEnd = true; }
+        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
         isOnGround = true;
     }
 
@@ -71,6 +69,24 @@ public class Player : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-        // Értékelés
+        levelCompletionPanelParent.CallPanel(true);
     }
+<<<<<<< HEAD
+=======
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        compactGrade compgrade = collision.gameObject.GetComponent<compactGrade>();
+        if (compgrade != null)
+        {
+            Grade.count++;
+            Grade.osszegzes_tetele += (int)compgrade.nem;
+        }
+        
+        else
+        {
+
+        }
+    }
+>>>>>>> ba187567d19782b17144aef7cd06211dcc541914
 }
