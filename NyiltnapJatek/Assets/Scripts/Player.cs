@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelCompletionPanelParent.gameObject.SetActive(false);
+        levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
     }
 
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-        levelCompletionPanelParent.CallPanel();
+        levelCompletionPanelParent.CallPanel(true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
