@@ -14,9 +14,8 @@ public class Quiz : MonoBehaviour
 
     private void Update()
     {
-        if (quizCollider.quizActive)
+        if (quizCollider.quizActive && !Menu.menuImg)
         {
-            
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 but[index].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f);
