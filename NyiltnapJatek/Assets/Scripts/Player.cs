@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class Player : MonoBehaviour
@@ -18,7 +19,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelCompletionPanelParent.CallPanel(false);
+        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
+        if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
     }
 
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour
 
     IEnumerator Move()
     {
+        while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); }
+
         while (!reachedEnd)
         {
             if (moveAllowed)
@@ -69,6 +73,10 @@ public class Player : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-        levelCompletionPanelParent.CallPanel(true);
+        reachedEnd = false; // Setting it back to false for further levels
+        if (levelCompletionPanelParent != null)
+        {
+            levelCompletionPanelParent.CallPanel(true);
+        }
     }
 }

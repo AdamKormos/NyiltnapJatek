@@ -8,9 +8,9 @@ public class Timer : MonoBehaviour
 {
     public int sec { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnGameLevelOpen()
     {
+        sec = 0;
         StartCoroutine(Count());
     }
 

@@ -8,11 +8,7 @@ public class Grade : MonoBehaviour
     public gradeEnum nem = default;
     public static int count = 0;
     public static int sum = 0;
-    void Update()
-    {
-        
-    }
-
+    
     [System.Obsolete]
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,8 +17,14 @@ public class Grade : MonoBehaviour
             Grade.count++;
             Grade.sum += (int)nem;
         }
-        DestroyObject(this);
+        Destroy(this.gameObject);
     }
 
 
+}
+
+
+public class gradeWrapper
+{
+    public Grade[] gradeArr = new Grade[3];
 }

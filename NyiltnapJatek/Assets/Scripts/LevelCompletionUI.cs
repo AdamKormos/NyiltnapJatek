@@ -6,13 +6,17 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
+        }
+    }
+
     public void CallPanel(bool activityState)
     {
-        RectTransform[] temp = GetComponentsInChildren<RectTransform>(true);
-        for (int i = 1; i < temp.Length; i++)
-        {
-            temp[i].gameObject.SetActive(activityState);
-        }
+        GameUI.ToggleChildren(this.gameObject, activityState);
 
         GameNS::StaticData.gameUI.levelCompletionPanelText.text =
             GameNS::StaticData.gameUI.timerText.text + '\n' +
