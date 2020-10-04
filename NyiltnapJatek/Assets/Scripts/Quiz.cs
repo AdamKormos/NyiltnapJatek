@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
-    [SerializeField] private int correctIndex;
+    [SerializeField] private int correctIndex = 0;
     [SerializeField] private List<Button> but = new List<Button>(4);
     private static int index = 0;
     private void Start()
     {
-        MaxandCorrectQuestions.allQuestions += but.Count;    
+        quizMaxAll.allQuestions += but.Count;    
     }
 
     private void Update()
@@ -41,7 +41,7 @@ public class Quiz : MonoBehaviour
             {
                 if (index == correctIndex)
                 {
-                    MaxandCorrectQuestions.correctQuestions++;
+                    quizMaxAll.correctQuestions++;
                 }
                 else
                 {

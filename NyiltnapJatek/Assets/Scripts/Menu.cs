@@ -7,13 +7,8 @@ public class Menu : MonoBehaviour
 {
     public enum Scenes {mainMenu, sampleScene, zoldMap };
     [SerializeField] private Button[] buttons = new Button[3];
-    [SerializeField] private GameObject menuImg;
+    [SerializeField] private GameObject menuImg = default;
     private int index = 0;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
