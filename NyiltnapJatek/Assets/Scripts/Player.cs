@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Move()
     {
-        while (!LoadingScreen.finishedLoading) { yield return new WaitForSeconds(0.1f); }
+        while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); }
 
         while (!reachedEnd)
         {
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnScreen = false;
+        reachedEnd = false; // Setting it back to false for further levels
         if (levelCompletionPanelParent != null)
         {
             levelCompletionPanelParent.CallPanel(true);

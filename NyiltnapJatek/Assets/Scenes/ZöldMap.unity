@@ -651,8 +651,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCompletionPanelParent: {fileID: 242820920}
-  movePerSec: 20
-  moveStrength: 8
+  movePerSec: 60
+  moveStrength: 1
   moveAllowed: 1
   jumpStrength: 3
 --- !u!61 &1264957536

@@ -11,15 +11,18 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] Text hintText = default;
     [SerializeField] string[] hints = default;
     public static bool finishedLoading { get; private set; }
+    public static bool startedLoading { get; private set; }
 
     private void Start()
     {
+        startedLoading = false;
         GameUI.ToggleChildren(this.gameObject, false);
         GameNS::StaticData.loadingScreen = this;
     }
 
     public void LoadLevel(Menu.Scenes sceneEnum)
     {
+        startedLoading = true;
         finishedLoading = false;
         hintText.text = "";
         GameUI.ToggleChildren(this.gameObject, true);
@@ -49,6 +52,7 @@ public class LoadingScreen : MonoBehaviour
         }
 
         finishedLoading = true;
+        startedLoading = false;
         GameUI.ToggleChildren(this.gameObject, false);
         GameNS::StaticData.gameUI.OnViewChanged(isLoadingMainMeenu);
     }

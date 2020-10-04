@@ -33,6 +33,7 @@ public class GameUI : MonoBehaviour
 
             timerText.gameObject.SetActive(true);
             timerText.GetComponent<Timer>().OnGameLevelOpen();
+
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);
         }
@@ -47,6 +48,11 @@ public class GameUI : MonoBehaviour
             GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu);
         }
         else Destroy(this.gameObject);
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public static void ToggleChildren(GameObject parent, bool activityState)
