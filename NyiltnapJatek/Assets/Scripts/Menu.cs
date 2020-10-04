@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-
+using GameNS = GameNS;
 
 public class Menu : MonoBehaviour
 {
@@ -21,12 +20,13 @@ public class Menu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             menuImg.SetActive(!menuImg.activeSelf);
+            GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(!menuImg.activeSelf);
         }
         if (menuImg.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                buttons[index].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f);
+                buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index--;
                 if (index < 0)
                 {
@@ -36,7 +36,7 @@ public class Menu : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                buttons[index].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f);
+                buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index++;
                 if (index > 2)
                 {
@@ -46,10 +46,11 @@ public class Menu : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.Return))
             {
+                menuImg.SetActive(!menuImg.activeSelf);
                 switch (index)
                 {
                     case 0:
-                        Starts();
+                        OnLevelSelectionPress();
                         break;
                     case 1:
                         Credits();
@@ -62,12 +63,10 @@ public class Menu : MonoBehaviour
 
         }
     }
-
-
     
-    private void Starts()
+    private void OnLevelSelectionPress()
     {
-        menuImg.SetActive(!menuImg.activeSelf);
+        GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(true);
     }
 
     private void Credits()

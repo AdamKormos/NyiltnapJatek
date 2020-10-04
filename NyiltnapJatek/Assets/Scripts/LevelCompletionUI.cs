@@ -6,9 +6,12 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
-    private void Start()
+    private void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
+        }
     }
 
     public void CallPanel(bool activityState)

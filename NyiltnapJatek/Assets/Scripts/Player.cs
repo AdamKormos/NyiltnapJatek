@@ -19,10 +19,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
-        levelCompletionPanelParent.GetComponentInChildren<Button>(true).onClick.AddListener(GameNS::StaticData.loadingScreen.LoadToMainMenu);
-        Timer t = GameNS::StaticData.gameUI.timerText.GetComponent<Timer>();
-        t.OnGameLevelOpen();
         StartCoroutine(Move());
     }
 
@@ -37,6 +35,8 @@ public class Player : MonoBehaviour
 
     IEnumerator Move()
     {
+        while (!LoadingScreen.finishedLoading) { yield return new WaitForSeconds(0.1f); }
+
         while (!reachedEnd)
         {
             if (moveAllowed)
@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-        if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(true);
+        if (levelCompletionPanelParent != null)
+        {
+            levelCompletionPanelParent.CallPanel(true);
+        }
     }
 }

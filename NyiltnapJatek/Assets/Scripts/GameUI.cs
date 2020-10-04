@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform gameplayStuffTransform = default;
     [SerializeField] public Transform loadingScreenTransform = default;
+    [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Text timerText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
@@ -19,11 +20,20 @@ public class GameUI : MonoBehaviour
         if(isMainMenuView)
         {
             gameplayStuffTransform.gameObject.SetActive(false);
+            levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(true);
+            ToggleChildren(mainMenuTransform.gameObject, true);
         }
         else
         {
             gameplayStuffTransform.gameObject.SetActive(true);
+
+            levelCompletionPanelText.transform.parent.gameObject.SetActive(true);
+            ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
+
+            timerText.gameObject.SetActive(true);
+            timerText.GetComponent<Timer>().OnGameLevelOpen();
+            levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);
         }
     }
