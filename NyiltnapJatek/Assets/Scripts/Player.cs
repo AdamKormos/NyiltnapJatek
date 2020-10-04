@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] LevelCompletionUI levelCompletionPanelParent = default;
     [SerializeField] int movePerSec = 20;
     [SerializeField] int moveStrength = 1;
-    [SerializeField] bool moveAllowed = true;
+    public static bool moveAllowed = true;
     [SerializeField] float jumpStrength = 3;
     bool isOnGround = true;
     public static bool reachedEnd { get; private set; }
