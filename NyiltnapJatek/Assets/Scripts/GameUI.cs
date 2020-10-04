@@ -53,6 +53,7 @@ public class GameUI : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public static void ToggleChildren(GameObject parent, bool activityState)
