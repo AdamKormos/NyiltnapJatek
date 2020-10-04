@@ -7,6 +7,7 @@ using GameNS = GameNS;
 public class Timer : MonoBehaviour
 {
     public int sec { get; private set; }
+    public static bool isPaused = false;
 
     public void OnGameLevelOpen()
     {
@@ -18,9 +19,13 @@ public class Timer : MonoBehaviour
     {
         while(!Player.reachedEnd)
         {
-            sec++;
-            GameNS::StaticData.gameUI.timerText.text = ((int)(sec / 60) + ":" +  (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
-            yield return new WaitForSeconds(1f);
+            if (!isPaused)
+            {
+                sec++;
+                GameNS::StaticData.gameUI.timerText.text = ((int)(sec / 60) + ":" + (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
+                yield return new WaitForSeconds(1f);
+            }
+            else yield return new WaitForSeconds(0.1f);
         }
     }
 }

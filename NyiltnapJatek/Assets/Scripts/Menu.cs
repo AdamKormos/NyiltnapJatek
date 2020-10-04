@@ -7,11 +7,14 @@ public class Menu : MonoBehaviour
 {
     public enum Scenes {mainMenu, sampleScene, zoldMap };
     [SerializeField] private Button[] buttons = new Button[3];
-    public static GameObject menuImg = default;
+    [SerializeField] public GameObject menuImg = default;
     private int index = 0;
+    public static bool isMenuImgActive { get; private set; }
 
     void Update()
     {
+        isMenuImgActive = menuImg.activeSelf;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             menuImg.SetActive(!menuImg.activeSelf);

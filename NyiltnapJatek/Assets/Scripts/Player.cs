@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
                 Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f);
                 yield return new WaitForSeconds(1f / movePerSec);
             }
+            else yield return new WaitForSeconds(0.1f);
         }
 
         while (isOnScreen)

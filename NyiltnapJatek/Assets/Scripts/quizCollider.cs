@@ -3,17 +3,22 @@ using UnityEngine.UI;
 
 public class quizCollider : MonoBehaviour
 {
+    [SerializeField] Transform quizUI = default;
+
     public static bool quizActive = false;
     private void Start()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        quizUI.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.GetComponentInParent<Image>().enabled = true;
-        transform.GetChild(0).gameObject.SetActive(true);
-        quizActive = true;
-        Player.moveAllowed = false;
+        if (collision.GetComponent<Player>())
+        {
+            Timer.isPaused = true;
+            quizUI.gameObject.SetActive(true);
+            quizActive = true;
+            Player.moveAllowed = false;
+        }
     }
 }
