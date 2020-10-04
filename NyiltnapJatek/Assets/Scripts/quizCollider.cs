@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using GameNS = GameNS;
 
 public class quizCollider : MonoBehaviour
 {
-    [SerializeField] Transform quizUI = default;
-
     public static bool quizActive = false;
     private void Start()
     {
-        quizUI.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,7 +15,7 @@ public class quizCollider : MonoBehaviour
         if (collision.GetComponent<Player>())
         {
             Timer.isPaused = true;
-            quizUI.gameObject.SetActive(true);
+            GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             quizActive = true;
             Player.moveAllowed = false;
         }

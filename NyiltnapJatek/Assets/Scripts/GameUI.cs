@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform gameplayStuffTransform = default;
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
+    [SerializeField] public Transform quizTransform = default;
     [SerializeField] public Text timerText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
@@ -21,6 +22,7 @@ public class GameUI : MonoBehaviour
         {
             gameplayStuffTransform.gameObject.SetActive(false);
             levelSelectionTransform.gameObject.SetActive(false);
+            quizTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(true);
             ToggleChildren(mainMenuTransform.gameObject, true);
         }

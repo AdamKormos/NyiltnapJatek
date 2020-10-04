@@ -22,6 +22,12 @@ public class LevelSelection : MonoBehaviour
     Vector2 panelStartPosition = default;
     int currentIndex = 0;
 
+    private void OnDisable()
+    {
+        transform.position += new Vector3(currentIndex * xOffsetBetweenPanels, 0);
+        currentIndex = 0;
+    }
+
     private void Start()
     {
         samplePanelBackground.SetActive(false);
