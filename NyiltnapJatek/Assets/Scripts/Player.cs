@@ -73,8 +73,11 @@ public class Player : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        
         isOnScreen = false;
         reachedEnd = false; // Setting it back to false for further levels
+        if (LevelSelection.maxIndex < LevelSelection.currentIndex) LevelSelection.maxIndex = LevelSelection.currentIndex;
+
         if (levelCompletionPanelParent != null)
         {
             levelCompletionPanelParent.CallPanel(true);

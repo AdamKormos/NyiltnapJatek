@@ -20,7 +20,8 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] Image samplePanelImage = default;
     [SerializeField] List<LevelPanel> levelPanels = new List<LevelPanel>();
     Vector2 panelStartPosition = default;
-    int currentIndex = 0;
+    public static int currentIndex = 0;
+    public static int maxIndex = 0;
 
     private void OnDisable()
     {
@@ -82,7 +83,10 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
+            if (currentIndex <= maxIndex)
+            {
+                GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
+            }
         }
     }
 }
