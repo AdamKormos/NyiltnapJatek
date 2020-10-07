@@ -658,8 +658,8 @@ GameObject:
   - component: {fileID: 1875318070}
   - component: {fileID: 1875318069}
   - component: {fileID: 1875318068}
-  - component: {fileID: 1875318067}
   - component: {fileID: 1875318066}
+  - component: {fileID: 1875318067}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -702,13 +702,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1875318065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5578ee7b48e2c6441b72e441b0ab9b6a, type: 3}
+  m_Script: {fileID: 11500000, guid: c206e98093215cf4786c863ab4f9c52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levelCompletionPanelParent: {fileID: 1066466209}
   movePerSec: 60
   moveStrength: 1
-  jumpStrength: 3
+  jumpStrength: 0.04
+  fallStrength: 0.05
 --- !u!50 &1875318068
 Rigidbody2D:
   serializedVersion: 4
@@ -717,7 +718,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875318065}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -814,7 +815,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875318065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.23, y: -2.44, z: -5}
+  m_LocalPosition: {x: -5.23, y: 0.62, z: -5}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

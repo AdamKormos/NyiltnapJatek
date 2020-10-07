@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public static bool moveAllowed = true;
     [SerializeField] protected float jumpStrength = 3;
     protected bool isOnGround = true;
-    public static bool reachedEnd { get; private set; }
-    public static bool isOnScreen { get; private set; }
+    public static bool reachedEnd { get; protected set; }
+    public static bool isOnScreen { get; protected set; }
 
     // Start is called before the first frame update
     void Start()
