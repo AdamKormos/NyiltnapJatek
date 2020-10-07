@@ -1084,7 +1084,7 @@ MonoBehaviour:
   timerText: {fileID: 9125414918931107387}
   levelCompletionPanelText: {fileID: 9125414920051254564}
   loadingScreenSlider: {fileID: 9125414919724548732}
-  startsInMainMenu: 1
+  startsInMainMenu: 0
 --- !u!1 &9125414918928961073
 GameObject:
   m_ObjectHideFlags: 0

@@ -346,11 +346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3157270868592329447, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_Text
-      value: Correct
-      objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546928, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -456,26 +451,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: startsInMainMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: loadingScreenTransform
-      value: 
-      objectReference: {fileID: 779029748}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: mainMenuTransform
-      value: 
-      objectReference: {fileID: 779029750}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: gameplayStuffTransform
-      value: 
-      objectReference: {fileID: 779029749}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -493,30 +468,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
---- !u!224 &779029748 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9125414919886857787, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 779029747}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &779029749 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 528165363, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 779029747}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &779029750 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 242109571343307693, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 779029747}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &779029751 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3157270869564252979, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 779029747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1123621353
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ff3f60f6f35944b2cc07f8c796d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quizUI: {fileID: 779029751}
 --- !u!61 &1123621355
 BoxCollider2D:
   m_ObjectHideFlags: 0
