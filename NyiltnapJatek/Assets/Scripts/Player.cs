@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Move()
+    protected virtual IEnumerator Move()
     {
-        while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); }
+        while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
 
         while (!reachedEnd)
         {
