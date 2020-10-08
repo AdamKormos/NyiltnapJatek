@@ -11,19 +11,21 @@ public class Timer : MonoBehaviour
 
     public void OnGameLevelOpen()
     {
+        StopCoroutine("Count");
         sec = 0;
-        StartCoroutine(Count());
+        GameNS::StaticData.gameUI.timerText.text = "00:00";
+        StartCoroutine("Count");
     }
 
-    IEnumerator Count()
+    public IEnumerator Count()
     {
         while(!Player.reachedEnd)
         {
             if (!isPaused)
             {
-                sec++;
-                GameNS::StaticData.gameUI.timerText.text = ((int)(sec / 60) + ":" + (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
                 yield return new WaitForSeconds(1f);
+                sec++;
+                GameNS::StaticData.gameUI.timerText.text = ((sec % 60 < 10 ? "0" : "") + (int)(sec / 60) + ":" + (sec % 60 < 10 ? "0" : "") + (sec % 60)).ToString();
             }
             else yield return new WaitForSeconds(0.1f);
         }
