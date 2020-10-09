@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using GameNS = GameNS;
 
-public class PlayerLvl01Human : Player
+public class PlayerLvl03Muveszetek : Player
 {
-    [SerializeField] protected float fallStrength = 0.05f;
+    [SerializeField] private float jumpStr = 0.5f;
+    [SerializeField] private int curRow = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -18,14 +19,7 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            transform.position += new Vector3(0, jumpStrength);
-        }
-        else
-        {
-            transform.position += new Vector3(0, -fallStrength);
-        }
+        
     }
 
     protected override IEnumerator Move()
@@ -56,8 +50,7 @@ public class PlayerLvl01Human : Player
     }
 
     private void OnBecameInvisible()
-    {
-
+    { 
         isOnScreen = false;
         reachedEnd = false; // Setting it back to false for further levels
         if (LevelSelection.maxIndex < LevelSelection.currentIndex) LevelSelection.maxIndex = LevelSelection.currentIndex;
