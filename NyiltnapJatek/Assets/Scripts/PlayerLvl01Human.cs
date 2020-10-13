@@ -44,7 +44,7 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
-        if (!reachedEnd)
+        if (!reachedEnd && !quizCollider.quizActive)
         {
             if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && wingHealthSlider.value > 0)
             {
