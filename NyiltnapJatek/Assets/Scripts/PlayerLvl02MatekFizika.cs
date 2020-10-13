@@ -9,11 +9,17 @@ public class PlayerLvl02MatekFizika : Player
     [SerializeField] protected float fallStrength = 0.05f;
     [SerializeField] protected float jumpCooldown = 0.1f;
     [SerializeField] protected int jumpTickRate = 15;
+    [SerializeField] protected float objectFallStrength = 0.1f;
     protected Vector3 cameraStartPos, startPos;
+    RaycastHit2D hit;
+    bool isJumpAllowed = true;
+    float halfPlayerSize = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2;
+
         startPos = transform.position;
         cameraStartPos = Camera.main.transform.position;
 
@@ -24,36 +30,73 @@ public class PlayerLvl02MatekFizika : Player
         StartCoroutine(Move());
     }
 
-    RaycastHit2D hit;
-    bool isFallAllowed = true;
-
     // Update is called once per frame
     void Update()
     {
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
-            if (isFallAllowed && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
+            if (isJumpAllowed && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
             {
                 StartCoroutine(OnJump());
             }
-            else if(isFallAllowed)
-            {
-                transform.position += new Vector3(0, -fallStrength);
-            }
+            transform.position += new Vector3(0, -fallStrength);
         }
+    }
+
+    bool canMakeObstacleFall = true;
+
+    IEnumerator MakeObstaclesFall()
+    {
+        while(!reachedEnd)
+        {
+            if (canMakeObstacleFall)
+            {
+                hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize + 1f), Vector2.up);
+
+                if (hit.transform != null)
+                {
+                    yield return new WaitForSeconds(Random.Range(3f, 10f));
+                    StartCoroutine(OnWaitingForObstacleFall(hit.transform));
+                }
+                else yield return new WaitForSeconds(0.1f);
+            }
+            else yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator OnWaitingForObstacleFall(Transform obstacleT)
+    {
+        canMakeObstacleFall = false;
+        
+        while(true)
+        {
+            hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize + 1f), Vector2.up);
+
+            if (hit.transform == null || !hit.transform.Equals(obstacleT))
+            {
+                break;
+            }
+            else yield return new WaitForSeconds(0.5f);
+        }
+
+        for(int i = 0; i < 200; i++)
+        {
+            obstacleT.transform.position -= new Vector3(0, objectFallStrength);
+            yield return new WaitForEndOfFrame();
+        }
+
+        canMakeObstacleFall = true;
     }
 
     IEnumerator OnJump()
     {
-        isFallAllowed = false;
+        isJumpAllowed = false;
 
-        for(int i = 0; i < jumpTickRate; i++)
-        {
-            transform.position += new Vector3(0, jumpStrength / jumpTickRate);
-            yield return new WaitForSeconds(jumpCooldown / jumpTickRate);
-        }
+        fallStrength *= -1;
+        yield return new WaitForSeconds(jumpCooldown);
+        fallStrength *= -1;
 
-        isFallAllowed = true;
+        isJumpAllowed = true;
     }
 
     protected override IEnumerator Move()
@@ -61,6 +104,7 @@ public class PlayerLvl02MatekFizika : Player
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
 
+        StartCoroutine(MakeObstaclesFall());
         GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
 
         while (!reachedEnd)
