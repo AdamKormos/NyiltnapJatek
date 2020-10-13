@@ -6,6 +6,7 @@ using GameNS = GameNS;
 
 public class GameUI : MonoBehaviour
 {
+#pragma warning disable UNT0013
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform gameplayStuffTransform = default;
     [SerializeField] public Transform loadingScreenTransform = default;
@@ -15,6 +16,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
     [SerializeField] bool startsInMainMenu = true;
+#pragma warning restore UNT0013
 
     public void OnViewChanged(bool isMainMenuView)
     {
@@ -34,7 +36,6 @@ public class GameUI : MonoBehaviour
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
 
             timerText.gameObject.SetActive(true);
-            timerText.GetComponent<Timer>().OnGameLevelOpen();
 
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);

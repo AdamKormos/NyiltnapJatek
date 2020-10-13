@@ -20,6 +20,7 @@ public class LevelCompletionUI : MonoBehaviour
 
         GameNS::StaticData.gameUI.levelCompletionPanelText.text =
             GameNS::StaticData.gameUI.timerText.text + '\n' +
-            "";
+            quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
+            gradeAllSum.sum + " / " + gradeAllSum.maxSum;
     }
 }

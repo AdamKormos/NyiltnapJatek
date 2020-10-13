@@ -10,7 +10,7 @@ public class Quiz : MonoBehaviour
 
     private void Start()
     {
-        quizMaxAll.allQuestions += but.Count;    
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
     }
 
     private void Update()
@@ -44,6 +44,7 @@ public class Quiz : MonoBehaviour
                 transform.parent.gameObject.SetActive(false);
                 Player.moveAllowed = true;
                 Timer.isPaused = false;
+                quizCollider.quizActive = false;
             }
         }
     }
