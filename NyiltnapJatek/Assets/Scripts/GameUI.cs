@@ -15,6 +15,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Text timerText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
+    [SerializeField] public LevelHintBar levelHintBar = default;
+    [SerializeField] public Text levelHintBarText = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
@@ -57,6 +59,12 @@ public class GameUI : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void LoadLevelHint(string levelHintString)
+    {
+        levelHintBar.gameObject.SetActive(true);
+        levelHintBarText.text = levelHintString;
     }
 
     public static void ToggleChildren(GameObject parent, bool activityState)

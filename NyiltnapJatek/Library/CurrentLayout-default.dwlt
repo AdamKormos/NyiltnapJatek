@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 123
+  controlID: 126
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 61
+  controlID: 87
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 14690
+  m_LastSelectedObjectID: -3086
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1018,19 +1018,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\NyiltnapJatek\NyiltnapJatek\NyiltnapJatek
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc3b0000
-    m_LastClickedID: 15324
+    m_SelectedIDs: d63b0000
+    m_LastClickedID: 15318
     m_ExpandedIDs: 00000000c83b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1152,7 +1152,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 1015
+  m_LastVerticalScrollValue: 947
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1182,23 +1182,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 3cfbffff5afbffff5efbffff
+      m_SelectedIDs: fcf3ffff
+      m_LastClickedID: -3076
+      m_ExpandedIDs: 0ad3ffff68d5ffffdef3fffff2f3ffff4ef4ffff5efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: LevelCompletedPanel
-        m_OriginalName: LevelCompletedPanel
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1298
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -1244,9 +1244,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 992.6733, y: 648.19055, z: -16.669434}
+    m_Target: {x: 1009.6532, y: 515.72614, z: -86.73158}
     speed: 2
-    m_Value: {x: 992.6733, y: 648.19055, z: -16.669434}
+    m_Value: {x: 1009.6532, y: 515.72614, z: -86.73158}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1296,9 +1296,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 916.1777
+    m_Target: 592.0065
     speed: 2
-    m_Value: 916.1777
+    m_Value: 592.0065
   m_Ortho:
     m_Target: 1
     speed: 2

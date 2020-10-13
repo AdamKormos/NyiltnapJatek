@@ -36,7 +36,7 @@ public class LoadingScreen : MonoBehaviour
 
     int loadTickAmount = 250;
 
-    IEnumerator Load(bool isLoadingMainMeenu)
+    IEnumerator Load(bool isLoadingMainMenu)
     {
         hintText.text = hints[Random.Range(0, hints.Length)];
         float val = Random.Range(minimumLoadTime, maximumLoadTime);
@@ -54,6 +54,6 @@ public class LoadingScreen : MonoBehaviour
         finishedLoading = true;
         startedLoading = false;
         GameUI.ToggleChildren(this.gameObject, false);
-        GameNS::StaticData.gameUI.OnViewChanged(isLoadingMainMeenu);
+        GameNS::StaticData.gameUI.OnViewChanged(isLoadingMainMenu);
     }
 }

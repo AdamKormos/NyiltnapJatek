@@ -67,11 +67,13 @@
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Grade.cs" />
     <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
+    <Compile Include="Assets\Scripts\LevelHintBar.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
     <Compile Include="Assets\Scripts\LoadingScreen.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl01Human.cs" />
+    <Compile Include="Assets\Scripts\PlayerLvl02MatekFizika.cs" />
     <Compile Include="Assets\Scripts\Quiz.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\gradeAllSum.cs" />

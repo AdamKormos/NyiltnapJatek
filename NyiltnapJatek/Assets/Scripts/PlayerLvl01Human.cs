@@ -36,6 +36,7 @@ public class PlayerLvl01Human : Player
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
+        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad!");
         StartCoroutine(Move());
     }
 
@@ -67,6 +68,7 @@ public class PlayerLvl01Human : Player
     protected override IEnumerator Move()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
+        while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
 
         GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
 
