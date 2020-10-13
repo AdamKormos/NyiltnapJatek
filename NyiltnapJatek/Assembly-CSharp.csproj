@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GameNS.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Grade.cs" />
+    <Compile Include="Assets\Scripts\IntentionallyFallingObstacle.cs" />
     <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
     <Compile Include="Assets\Scripts\LevelHintBar.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />

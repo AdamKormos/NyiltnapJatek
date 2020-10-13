@@ -55,7 +55,7 @@ public class PlayerLvl02MatekFizika : Player
 
                 if (hit.transform != null)
                 {
-                    yield return new WaitForSeconds(Random.Range(3f, 10f));
+                    yield return new WaitForSeconds(Random.Range(5f, 25f));
                     StartCoroutine(OnWaitingForObstacleFall(hit.transform));
                 }
                 else yield return new WaitForSeconds(0.1f);
@@ -79,7 +79,7 @@ public class PlayerLvl02MatekFizika : Player
             else yield return new WaitForSeconds(0.5f);
         }
 
-        for(int i = 0; i < 200; i++)
+        for (int i = 0; i < 200 * (objectFallStrength / 0.01f); i++)
         {
             obstacleT.transform.position -= new Vector3(0, objectFallStrength);
             yield return new WaitForEndOfFrame();
