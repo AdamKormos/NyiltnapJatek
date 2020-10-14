@@ -10,18 +10,7 @@ public class IntentionallyFallingObstacle : MonoBehaviour
     {
         if(collision.GetComponent<PlayerLvl02MatekFizika>())
         {
-            StartCoroutine(ObstacleFall());
+            StartCoroutine(FallingObstacle.ObstacleFall(this.transform, objectFallStrength));
         }
-    }
-
-    public IEnumerator ObstacleFall()
-    {
-        for (int i = 0; i < 200 * (objectFallStrength / 0.01f); i++)
-        {
-            transform.position -= new Vector3(0, objectFallStrength);
-            yield return new WaitForEndOfFrame();
-        }
-
-        Destroy(this.gameObject);
     }
 }

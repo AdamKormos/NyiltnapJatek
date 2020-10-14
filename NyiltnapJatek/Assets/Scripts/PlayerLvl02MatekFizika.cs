@@ -79,11 +79,7 @@ public class PlayerLvl02MatekFizika : Player
             else yield return new WaitForSeconds(0.5f);
         }
 
-        for (int i = 0; i < 200 * (objectFallStrength / 0.01f); i++)
-        {
-            obstacleT.transform.position -= new Vector3(0, objectFallStrength);
-            yield return new WaitForEndOfFrame();
-        }
+        StartCoroutine(FallingObstacle.ObstacleFall(obstacleT, objectFallStrength));
 
         canMakeObstacleFall = true;
     }
@@ -140,14 +136,10 @@ public class PlayerLvl02MatekFizika : Player
         GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        OnGameOver();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
+        else if(!collision.GetComponent<IntentionallyFallingObstacle>()) OnGameOver();
     }
 
     private void OnBecameVisible()
