@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\PlayerLvl01Human.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl02MatekFizika.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl03Muveszetek.cs" />
+    <Compile Include="Assets\Scripts\PlayerLvl05Info.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl4Biosz.cs" />
     <Compile Include="Assets\Scripts\Quiz.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />

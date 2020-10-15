@@ -12,14 +12,13 @@ public class PlayerLvl01Human : Player
     [SerializeField] protected float wingHealth = 100f;
     [SerializeField] protected float wingHealthIncreaseOnWaxPickup = 25f;
     [SerializeField] protected float wingHealthDecreasePerFrame = 0.05f;
-    protected Vector3 cameraStartPos, startPos;
     Slider wingHealthSlider = default;
 
     // Start is called before the first frame update
     void Start()
     {
         try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
-        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius / 2; }
+        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius; }
 
         wingHealthSliderGameObject.SetActive(false);
 

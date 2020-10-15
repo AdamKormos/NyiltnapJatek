@@ -17,7 +17,7 @@ public class PlayerLvl02MatekFizika : Player
     void Start()
     {
         try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
-        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius / 2; }
+        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius; }
 
         startPos = transform.position;
         cameraStartPos = Camera.main.transform.position;
