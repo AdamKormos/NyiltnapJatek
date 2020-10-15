@@ -22,6 +22,8 @@ public class LevelSelection : MonoBehaviour
     Vector2 panelStartPosition = default;
     public static int currentIndex = 0;
     public static int maxIndex = 0;
+    public static Menu.Scenes currentScene { get; private set; }
+    static bool[] completedLevel = new bool[5];
 
     private void OnDisable()
     {
@@ -83,7 +85,17 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
+            currentScene = levelPanels[currentIndex].sceneToLoad;
             GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
+        }
+    }
+
+    public static void OnLevelCompleted()
+    {
+        if (!completedLevel[(int)currentScene - 3])
+        {
+            completedLevel[(int)currentScene - 3] = true;
+            maxIndex++;
         }
     }
 }

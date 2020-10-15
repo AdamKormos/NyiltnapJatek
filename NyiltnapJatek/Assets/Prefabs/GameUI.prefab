@@ -236,12 +236,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 51
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 166
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf5a7501043fe545908ce85aa6778a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xOffsetBetweenPanels: 300
+  xOffsetBetweenPanels: 500
   samplePanelBackground: {fileID: 399944704}
   samplePanelText: {fileID: 56034719}
   samplePanelImage: {fileID: 464974660}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Id\u0151:\nV\xE1laszok:\n\xC9rm\xE9k:"
+  m_Text: "Eredm\xE9ny:\nV\xE1laszok:\n\xC9rm\xE9k:"
 --- !u!1 &9125414918607642703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,12 +1488,12 @@ MonoBehaviour:
   loadingScreenTransform: {fileID: 9125414919886857787}
   levelSelectionTransform: {fileID: 1995374818}
   quizTransform: {fileID: 3157270869564252979}
-  timerText: {fileID: 9125414918931107387}
+  scoreCountText: {fileID: 9125414918931107387}
   levelCompletionPanelText: {fileID: 9125414920051254564}
   loadingScreenSlider: {fileID: 9125414919724548732}
   levelHintBar: {fileID: 46764222}
   levelHintBarText: {fileID: 650091863}
-  startsInMainMenu: 0
+  startsInMainMenu: 1
 --- !u!1 &9125414918928961073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,7 +1581,7 @@ GameObject:
   - component: {fileID: 9125414918931107387}
   - component: {fileID: 9125414918931107333}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: ScoreCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,12 +14,12 @@ public class PlayerLvl01Human : Player
     [SerializeField] protected float wingHealthDecreasePerFrame = 0.05f;
     protected Vector3 cameraStartPos, startPos;
     Slider wingHealthSlider = default;
-    float halfPlayerSize = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2;
+        try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
+        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius / 2; }
 
         wingHealthSliderGameObject.SetActive(false);
 
@@ -70,10 +70,9 @@ public class PlayerLvl01Human : Player
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl1);
 
         // Level hint read, gameplay starts:
-
-        GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
         wingHealthSliderGameObject.SetActive(true);
 
         while (!reachedEnd)
@@ -94,22 +93,12 @@ public class PlayerLvl01Human : Player
         }
     }
 
-    private void OnGameOver()
+    protected override void OnGameOver()
     {
-        Timer.isPaused = false;
-        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
-        quizCollider.quizActive = false;
-        Player.moveAllowed = true;
-
-        transform.position = startPos;
-        Camera.main.transform.position = cameraStartPos;
-        startPos = transform.position;
-        cameraStartPos = Camera.main.transform.position;
+        base.OnGameOver();
 
         wingHealthSlider.maxValue = wingHealth;
         wingHealthSlider.value = wingHealthSlider.maxValue;
-
-        GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -120,7 +109,6 @@ public class PlayerLvl01Human : Player
             wingHealthSlider.value = Mathf.Clamp(wingHealthSlider.value + wingHealthIncreaseOnWaxPickup, 0, wingHealthSlider.maxValue);
             Destroy(collision.gameObject);
         }
-        isOnGround = true;
     }
 
     private void OnBecameVisible()
@@ -146,6 +134,7 @@ public class PlayerLvl01Human : Player
 
                 if (levelCompletionPanelParent != null)
                 {
+                    LevelSelection.OnLevelCompleted();
                     levelCompletionPanelParent.CallPanel(true);
                 }
             }

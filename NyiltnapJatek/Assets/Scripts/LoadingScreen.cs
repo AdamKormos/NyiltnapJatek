@@ -30,7 +30,7 @@ public class LoadingScreen : MonoBehaviour
         GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.gameObject.SetActive(false);
         SceneManager.LoadScene((int)sceneEnum);
-        GameNS::StaticData.gameUI.timerText.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.scoreCountText.gameObject.SetActive(false);
         StartCoroutine(Load(sceneEnum == Menu.Scenes.mainMenu));
     }
 

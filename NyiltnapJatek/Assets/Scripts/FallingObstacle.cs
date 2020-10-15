@@ -10,7 +10,7 @@ public class FallingObstacle
         
         while (obstacleT.position.y > positionToDestroyFrom)
         {
-            obstacleT.position -= new Vector3(0, objectFallStrength);
+            if(!quizCollider.quizActive) obstacleT.position -= new Vector3(0, objectFallStrength);
             yield return new WaitForEndOfFrame();
         }
 

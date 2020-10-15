@@ -6,12 +6,6 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        LevelSelection.maxIndex++;
-        Debug.Log("Increased");
-    }
-
     private void Update()
     {
         if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return))
@@ -25,7 +19,7 @@ public class LevelCompletionUI : MonoBehaviour
         GameUI.ToggleChildren(this.gameObject, activityState);
 
         GameNS::StaticData.gameUI.levelCompletionPanelText.text =
-            GameNS::StaticData.gameUI.timerText.text + '\n' +
+            GameNS::StaticData.gameUI.scoreCountText.text + '\n' +
             quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
             gradeAllSum.sum + " / " + gradeAllSum.maxSum;
     }

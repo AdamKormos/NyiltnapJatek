@@ -10,15 +10,14 @@ public class PlayerLvl02MatekFizika : Player
     [SerializeField] protected float jumpCooldown = 0.1f;
     [SerializeField] protected int jumpTickRate = 15;
     [SerializeField] protected float objectFallStrength = 0.1f;
-    protected Vector3 cameraStartPos, startPos;
     RaycastHit2D hit;
     bool isJumpAllowed = true;
-    float halfPlayerSize = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2;
+        try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
+        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius / 2; }
 
         startPos = transform.position;
         cameraStartPos = Camera.main.transform.position;
@@ -99,9 +98,9 @@ public class PlayerLvl02MatekFizika : Player
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl2);
 
         StartCoroutine(MakeObstaclesFall());
-        GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
 
         while (!reachedEnd)
         {
@@ -121,25 +120,10 @@ public class PlayerLvl02MatekFizika : Player
         }
     }
 
-    private void OnGameOver()
-    {
-        Timer.isPaused = false;
-        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
-        quizCollider.quizActive = false;
-        Player.moveAllowed = true;
-
-        transform.position = startPos;
-        Camera.main.transform.position = cameraStartPos;
-        startPos = transform.position;
-        cameraStartPos = Camera.main.transform.position;
-
-        GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if(!collision.GetComponent<IntentionallyFallingObstacle>()) OnGameOver();
+        else if(!collision.GetComponent<quizCollider>()) OnGameOver();
     }
 
     private void OnBecameVisible()
@@ -163,6 +147,7 @@ public class PlayerLvl02MatekFizika : Player
 
                 if (levelCompletionPanelParent != null)
                 {
+                    LevelSelection.OnLevelCompleted();
                     levelCompletionPanelParent.CallPanel(true);
                 }
             }

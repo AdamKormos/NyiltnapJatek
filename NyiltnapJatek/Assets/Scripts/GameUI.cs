@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -12,7 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
-    [SerializeField] public Text timerText = default;
+    [SerializeField] public Text scoreCountText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
     [SerializeField] public LevelHintBar levelHintBar = default;
@@ -37,7 +35,7 @@ public class GameUI : MonoBehaviour
             levelCompletionPanelText.transform.parent.gameObject.SetActive(true);
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
 
-            timerText.gameObject.SetActive(true);
+            scoreCountText.gameObject.SetActive(true);
 
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);

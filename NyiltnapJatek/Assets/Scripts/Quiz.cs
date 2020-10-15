@@ -43,7 +43,7 @@ public class Quiz : MonoBehaviour
 
                 transform.parent.gameObject.SetActive(false);
                 Player.moveAllowed = true;
-                Timer.isPaused = false;
+                Score.isPaused = false;
                 quizCollider.quizActive = false;
             }
         }
