@@ -6,6 +6,12 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        LevelSelection.maxIndex++;
+        Debug.Log("Increased");
+    }
+
     private void Update()
     {
         if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return))

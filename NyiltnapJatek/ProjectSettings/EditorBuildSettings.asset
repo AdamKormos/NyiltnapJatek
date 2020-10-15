@@ -14,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Z\xF6ldMap.unity"
     guid: 515874558ef18bb4fabbaa65a747723d
+  - enabled: 1
+    path: "Assets/Scenes/Level01_Hum\xE1n.unity"
+    guid: 936c7c24e8d2fbf4fa699351355c2c44
+  - enabled: 1
+    path: Assets/Scenes/Level02_MatekFizika.unity
+    guid: 591636f351302c14f8a51bf5e0dd8540
+  - enabled: 1
+    path: Assets/Scenes/Level03_Muveszetek.unity
+    guid: 3084d9aa68f995b42a7ab52d60192771
+  - enabled: 1
+    path: Assets/Scenes/Level04_Biosz.unity
+    guid: 3c43f49cedc4a90488702660bf5d9afe
+  - enabled: 1
+    path: Assets/Scenes/Level05_Info.unity
+    guid: d20e63dc8fd3bef48b08f178b3d7b4d6
   m_configObjects: {}

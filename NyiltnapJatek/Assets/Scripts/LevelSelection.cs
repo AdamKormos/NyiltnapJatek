@@ -69,7 +69,7 @@ public class LevelSelection : MonoBehaviour
                 transform.position += new Vector3(xOffsetBetweenPanels, 0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) && currentIndex < maxIndex)
         {
             currentIndex++;
             if (currentIndex > levelPanels.Count-1)
@@ -83,10 +83,7 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (currentIndex <= maxIndex)
-            {
-                GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
-            }
+            GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
         }
     }
 }

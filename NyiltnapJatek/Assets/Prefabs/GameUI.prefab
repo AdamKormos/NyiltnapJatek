@@ -876,15 +876,21 @@ MonoBehaviour:
   samplePanelText: {fileID: 56034719}
   samplePanelImage: {fileID: 464974660}
   levelPanels:
-  - name: A
+  - name: "Hum\xE1n"
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 2
-  - name: B
+    sceneToLoad: 3
+  - name: Matek-fizika
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 2
-  - name: C
+    sceneToLoad: 4
+  - name: "M\u0171v\xE9szetek"
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 2
+    sceneToLoad: 5
+  - name: "Term\xE9szettudom\xE1ny"
+    img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    sceneToLoad: 6
+  - name: Informatika
+    img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    sceneToLoad: 7
 --- !u!1 &9125414918204835381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,8 +1491,8 @@ MonoBehaviour:
   timerText: {fileID: 9125414918931107387}
   levelCompletionPanelText: {fileID: 9125414920051254564}
   loadingScreenSlider: {fileID: 9125414919724548732}
-  levelHintBar: {fileID: 0}
-  levelHintBarText: {fileID: 0}
+  levelHintBar: {fileID: 46764222}
+  levelHintBarText: {fileID: 650091863}
   startsInMainMenu: 0
 --- !u!1 &9125414918928961073
 GameObject:

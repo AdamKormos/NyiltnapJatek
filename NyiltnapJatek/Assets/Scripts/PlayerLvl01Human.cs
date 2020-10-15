@@ -21,6 +21,8 @@ public class PlayerLvl01Human : Player
     {
         halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2;
 
+        wingHealthSliderGameObject.SetActive(false);
+
         wingHealthSliderGameObject = Instantiate(wingHealthSliderGameObject.gameObject, wingHealthSliderGameObject.transform.position 
                                                                     + new Vector3(GameNS::StaticData.gameUI.GetComponent<RectTransform>().rect.width / 2,
                                                                                   GameNS::StaticData.gameUI.GetComponent<RectTransform>().rect.height / 2),
@@ -28,7 +30,6 @@ public class PlayerLvl01Human : Player
         wingHealthSlider = wingHealthSliderGameObject.GetComponent<Slider>();
         wingHealthSlider.maxValue = wingHealth;
         wingHealthSlider.value = wingHealthSlider.maxValue;
-        wingHealthSliderGameObject.SetActive(true);
 
         startPos = transform.position;
         cameraStartPos = Camera.main.transform.position;
@@ -45,7 +46,7 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
-        if (!reachedEnd && !quizCollider.quizActive)
+        if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && wingHealthSlider.value > 0)
             {
@@ -70,7 +71,10 @@ public class PlayerLvl01Human : Player
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
 
+        // Level hint read, gameplay starts:
+
         GameNS::StaticData.gameUI.timerText.GetComponent<Timer>().OnGameLevelOpen();
+        wingHealthSliderGameObject.SetActive(true);
 
         while (!reachedEnd)
         {
@@ -137,7 +141,6 @@ public class PlayerLvl01Human : Player
             else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
             {
                 reachedEnd = false; // Setting it back to false for further levels
-                if (LevelSelection.maxIndex < LevelSelection.currentIndex) LevelSelection.maxIndex = LevelSelection.currentIndex;
 
                 Destroy(wingHealthSliderGameObject);
 

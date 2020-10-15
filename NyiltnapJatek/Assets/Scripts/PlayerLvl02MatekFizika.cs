@@ -160,7 +160,6 @@ public class PlayerLvl02MatekFizika : Player
             else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
             {
                 reachedEnd = false; // Setting it back to false for further levels
-                if (LevelSelection.maxIndex < LevelSelection.currentIndex) LevelSelection.maxIndex = LevelSelection.currentIndex;
 
                 if (levelCompletionPanelParent != null)
                 {
