@@ -6,18 +6,19 @@ using GameNS = GameNS;
 
 public class Score : MonoBehaviour
 {
-    public int sec { get; private set; }
+    public int value { get; private set; }
     public int tenth { get; private set; }
     public static bool isPaused = false;
 
     public void OnGameLevelOpen(Menu.Scenes sceneEnum)
     {
+        value = 0;
+
         switch (sceneEnum)
         {
             case Menu.Scenes.Lvl1:
                 StopCoroutine("Count");
                 tenth = 0;
-                sec = 0;
                 GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
                 StartCoroutine("Count");
                 break;
@@ -29,22 +30,31 @@ public class Score : MonoBehaviour
             case Menu.Scenes.Lvl4:
                 break;
             case Menu.Scenes.Lvl5:
+                GameNS::StaticData.gameUI.scoreCountText.text = "0";
+                GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(true);
                 break;
         }
     }
 
     public IEnumerator Count()
     {
+        // The "value" variable represents seconds here.
         while(!Player.reachedEnd)
         {
             if (!isPaused)
             {
                 yield return new WaitForSeconds(0.1f);
                 tenth++;
-                sec = tenth / 10;
-                GameNS::StaticData.gameUI.scoreCountText.text = ((sec % 60 < 10 ? "0" : "") + (int)(sec / 60) + ":" + (sec % 60 < 10 ? "0" : "") + (sec % 60) + "." + (tenth % 10)).ToString();
+                value = tenth / 10;
+                GameNS::StaticData.gameUI.scoreCountText.text = ((value % 60 < 10 ? "0" : "") + (int)(value / 60) + ":" + (value % 60 < 10 ? "0" : "") + (value % 60) + "." + (tenth % 10)).ToString();
             }
             else yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public static void OnEnemyKilled(Lvl05Enemy enemy)
+    {
+        GameNS::StaticData.gameUI.scoreCountText.text = (System.Convert.ToInt32(GameNS::StaticData.gameUI.scoreCountText.text) + enemy.scoreReward).ToString();
+        Destroy(enemy.gameObject);
     }
 }

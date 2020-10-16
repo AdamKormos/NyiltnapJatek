@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
+    [SerializeField] public Text bulletCountText = default;
     [SerializeField] public Text scoreCountText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
@@ -20,6 +21,9 @@ public class GameUI : MonoBehaviour
 
     public void OnViewChanged(bool isMainMenuView)
     {
+        // Set level specific objects to false:
+        bulletCountText.gameObject.SetActive(false);
+
         if(isMainMenuView)
         {
             gameplayStuffTransform.gameObject.SetActive(false);

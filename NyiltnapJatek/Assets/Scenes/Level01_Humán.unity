@@ -815,7 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCompletionPanelParent: {fileID: 1066466209}
   movePerSec: 60
-  moveStrength: 1
+  moveStrength: 45
   jumpStrength: 0.03
   fallStrength: 0.011
   cloudObjectTag: Cloud

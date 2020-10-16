@@ -18,7 +18,7 @@ public class quizCollider : MonoBehaviour
             GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             quizActive = true;
             Player.moveAllowed = false;
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

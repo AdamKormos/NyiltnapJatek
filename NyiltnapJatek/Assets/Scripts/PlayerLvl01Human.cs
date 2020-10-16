@@ -17,8 +17,7 @@ public class PlayerLvl01Human : Player
     // Start is called before the first frame update
     void Start()
     {
-        try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
-        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius; }
+        halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
 
         wingHealthSliderGameObject.SetActive(false);
 
@@ -78,8 +77,8 @@ public class PlayerLvl01Human : Player
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f);
-                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f);
+                transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
                 yield return new WaitForSeconds(1f / movePerSec);
             }
             else yield return new WaitForSeconds(0.1f);
@@ -87,7 +86,7 @@ public class PlayerLvl01Human : Player
 
         while (isOnScreen)
         {
-            transform.position += new Vector3(0.05f * moveStrength, 0f);
+            transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
             yield return new WaitForSeconds(1f / movePerSec);
         }
     }

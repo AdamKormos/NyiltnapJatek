@@ -1,17 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class PlayerLvl05Info : Player
 {
+    [SerializeField] byte minimumBulletFromClip = 5;
+    [SerializeField] byte maximumBulletFromClip = 20;
+    [SerializeField] float xMoveStrength = 2f;
+    [SerializeField] KeyCode shootKey = KeyCode.Space;
+    [SerializeField] GameObject bulletObject = default;
+    [SerializeField] GameObject serverObject = default;
     float leftScreenBound = 0f, rightScreenBound = 0f;
+    public static int bulletCount { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        try { halfPlayerSize = GetComponent<BoxCollider2D>().size.y / 2; }
-        catch { halfPlayerSize = GetComponent<CircleCollider2D>().radius; }
+        bulletCount = 50;
+        GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+
+        halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
 
         leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize;
         rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize;
@@ -22,7 +33,7 @@ public class PlayerLvl05Info : Player
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
-        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával!");
+        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");
         StartCoroutine(Move());
     }
 
@@ -31,16 +42,25 @@ public class PlayerLvl05Info : Player
     {
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
+            #region Movement
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position -= new Vector3(0.05f * moveStrength, 0f);
+                transform.position -= new Vector3(0.05f * xMoveStrength, 0f);
             }
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f);
+                transform.position += new Vector3(0.05f * xMoveStrength, 0f);
             }
 
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);
+            #endregion
+
+            if(Input.GetKeyDown(shootKey) && bulletCount > 0)
+            {
+                GameObject bullet = Instantiate(bulletObject, transform.position + new Vector3(0, halfPlayerSize + 0.1f, -5f), Quaternion.identity);
+                bulletCount--;
+                GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+            }
         }
     }
 
@@ -54,8 +74,9 @@ public class PlayerLvl05Info : Player
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0f, 0.05f * moveStrength);
-                Camera.main.transform.position += new Vector3(0f, 0.05f * moveStrength);
+                transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
+                serverObject.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
+                Camera.main.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
                 yield return new WaitForSeconds(1f / movePerSec);
             }
             else yield return new WaitForSeconds(0.1f);
@@ -63,8 +84,19 @@ public class PlayerLvl05Info : Player
 
         while (isOnScreen)
         {
-            transform.position += new Vector3(0f, 0.05f * moveStrength);
+            transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
             yield return new WaitForSeconds(1f / movePerSec);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Z");
+        if (collision.tag.Equals("BulletClip"))
+        {
+            bulletCount += Random.Range(minimumBulletFromClip, maximumBulletFromClip);
+            GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+            Destroy(collision.gameObject);
         }
     }
 
@@ -85,6 +117,7 @@ public class PlayerLvl05Info : Player
                 if (levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
+                    GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(false);
                     levelCompletionPanelParent.CallPanel(true);
                 }
             }

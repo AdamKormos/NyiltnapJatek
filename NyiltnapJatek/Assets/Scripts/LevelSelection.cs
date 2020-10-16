@@ -92,6 +92,8 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
+        if (currentScene <= Menu.Scenes.zoldMap) return;
+
         if (!completedLevel[(int)currentScene - 3])
         {
             completedLevel[(int)currentScene - 3] = true;
