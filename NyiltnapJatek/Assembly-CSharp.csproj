@@ -77,7 +77,6 @@
     <Compile Include="Assets\Scripts\Quiz.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\gradeAllSum.cs" />
-    <Compile Include="Assets\Scripts\mainMenu.cs" />
     <Compile Include="Assets\Scripts\quizCollider.cs" />
     <Compile Include="Assets\Scripts\quizMaxAll.cs" />
     <Compile Include="Assets\String.cs" />

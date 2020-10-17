@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerLvl4Biosz : MonoBehaviour
 {
     private Rigidbody2D body = default;
     private GameObject arrow = default;
 
-    [SerializeField] private float velocity = 40f;
     [SerializeField] private float rotationScale = -20f;
-    //private float rotation = 0.0f;
-    //private float rotationCount = 10f;
+    [SerializeField] private float velocity = 20f;
 
 
     bool canRotate = true;
     bool checkCollision = false;
-    bool rotationSupport = true;
+    //bool upsidedown = false;
 
 
     
@@ -30,28 +27,22 @@ public class PlayerLvl4Biosz : MonoBehaviour
     {
         if (canRotate)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //body.velocity = new Vector2(0.0f, 0.0f);
-                //body.AddRelativeForce(new Vector2(arrow.transform.position.x, arrow.transform.position.y), ForceMode2D.Force);
-                //body.AddForceAtPosition(new Vector2(0.0f, 15.0f), new Vector2(arrow.transform.position.x, arrow.transform.position.y), ForceMode2D.Impulse);
-                //body.AddTorque(velocity, ForceMode2D.Impulse);
-                body.AddForceAtPosition(new Vector3(0.0f, 0.0f, velocity), new Vector3(transform.position.x, transform.position.y, transform.position.z), ForceMode2D.Impulse);
-                arrow.SetActive(false);
-                //canRotate = false;
-                checkCollision = true;
-            }
-            else if ((rotationSupport && transform.rotation.eulerAngles.z >= 90.0f ) || (!rotationSupport && transform.rotation.eulerAngles.z <= 270))
+            if (transform.rotation.eulerAngles.z >= 90.0f && transform.rotation.eulerAngles.z <= 270)
             {
                 rotationScale = -rotationScale;
-                rotationSupport = !rotationSupport;
-                //transform.rotation.eulerAngles.y = 2f;
-                //transform.rotation.eulerAngles.Set(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, rotationSupport ? 275f : 75f);
-                //transform.rotation.eulerAngles.Set(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + rotationScale);
-                transform.rotation.Normalize();
-                //transform.Rotate(Vector3.forward * rotationScale * Time.deltaTime * 15, Space.Self);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //body.AddRelativeForce(new Vector2(transform.right.x, 0), ForceMode2D.Force);
+                canRotate = false;
+                arrow.SetActive(false);
+                //body.AddForce(transform.right * velocity);
+                //body.AddForceAtPosition(new Vector2(velocity, velocity), transform.position);
+                body.AddRelativeForce(new Vector2(velocity, 0f), ForceMode2D.Impulse);
+                checkCollision = true;
             }
             transform.Rotate(Vector3.forward * rotationScale * Time.deltaTime, Space.Self);
+
         }
     }
 
@@ -62,6 +53,7 @@ public class PlayerLvl4Biosz : MonoBehaviour
     {
         if (checkCollision)
         {
+            body.velocity = new Vector2(0f, 0f);
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
             arrow.SetActive(true);
             canRotate = true;

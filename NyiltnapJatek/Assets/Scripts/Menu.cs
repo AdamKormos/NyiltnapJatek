@@ -22,24 +22,16 @@ public class Menu : MonoBehaviour
         }
         if (menuImg.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && index != 0)
             {
                 buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index--;
-                if (index < 0)
-                {
-                    index++;
-                }
                 buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
             }
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 2)
             {
                 buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index++;
-                if (index > 2)
-                {
-                    index--;
-                }
                 buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
             }
             else if(Input.GetKeyDown(KeyCode.Return))
