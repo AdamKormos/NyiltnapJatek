@@ -54,6 +54,6 @@ public class LoadingScreen : MonoBehaviour
         finishedLoading = true;
         startedLoading = false;
         GameUI.ToggleChildren(this.gameObject, false);
-        GameNS::StaticData.gameUI.OnViewChanged(isLoadingMainMenu);
+        GameNS::StaticData.gameUI.OnViewChanged(isLoadingMainMenu, false);
     }
 }

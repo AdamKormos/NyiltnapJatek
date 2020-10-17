@@ -24,7 +24,6 @@ public class PlayerLvl02MatekFizika : Player
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
-        GameNS::StaticData.gameUI.LoadLevelHint("Flappy Bird - Repülj végig a pályán és ugorj a szóköz segítségével!");
         StartCoroutine(Move());
     }
 

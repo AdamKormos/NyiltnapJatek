@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
+    [SerializeField] public Transform lvl05StuffTransform = default;
     [SerializeField] public Text bulletCountText = default;
     [SerializeField] public Text scoreCountText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
@@ -19,10 +20,10 @@ public class GameUI : MonoBehaviour
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
-    public void OnViewChanged(bool isMainMenuView)
+    public void OnViewChanged(bool isMainMenuView, bool isReloadingLevel)
     {
         // Set level specific objects to false:
-        bulletCountText.gameObject.SetActive(false);
+        lvl05StuffTransform.gameObject.SetActive(false);
 
         if(isMainMenuView)
         {
@@ -34,6 +35,26 @@ public class GameUI : MonoBehaviour
         }
         else
         {
+            if (!isReloadingLevel)
+            {
+                switch (LevelSelection.currentScene)
+                {
+                    case Menu.Scenes.Lvl1:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad!");
+                        break;
+                    case Menu.Scenes.Lvl2:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Flappy Bird - Repülj végig a pályán és ugorj a szóköz segítségével!");
+                        break;
+                    case Menu.Scenes.Lvl3:
+                        break;
+                    case Menu.Scenes.Lvl4:
+                        break;
+                    case Menu.Scenes.Lvl5:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");
+                        break;
+                }
+            }
+
             gameplayStuffTransform.gameObject.SetActive(true);
 
             levelCompletionPanelText.transform.parent.gameObject.SetActive(true);
@@ -52,7 +73,7 @@ public class GameUI : MonoBehaviour
         {
             GameNS::StaticData.gameUI = this;
             DontDestroyOnLoad(this.gameObject);
-            GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu);
+            GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu, false);
         }
         else Destroy(this.gameObject);
     }

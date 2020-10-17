@@ -35,7 +35,6 @@ public class PlayerLvl01Human : Player
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
-        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad!");
         StartCoroutine(Move());
     }
 

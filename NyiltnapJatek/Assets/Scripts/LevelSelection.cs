@@ -28,6 +28,10 @@ public class LevelSelection : MonoBehaviour
     private void OnDisable()
     {
         transform.position += new Vector3(currentIndex * xOffsetBetweenPanels, 0);
+
+#if UNITY_EDITOR
+        maxIndex = 4;
+#endif
         currentIndex = 0;
     }
 

@@ -31,7 +31,7 @@ public class Score : MonoBehaviour
                 break;
             case Menu.Scenes.Lvl5:
                 GameNS::StaticData.gameUI.scoreCountText.text = "0";
-                GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(true);
+                GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
                 break;
         }
     }

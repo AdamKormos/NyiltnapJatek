@@ -19,7 +19,7 @@ public class PlayerLvl05Info : Player
     void Start()
     {
         bulletCount = 50;
-        GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
 
         halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
@@ -33,13 +33,19 @@ public class PlayerLvl05Info : Player
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
-        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");
         StartCoroutine(Move());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Lvl05Server.isServerDown) // Game Over
+        {
+            Lvl05Server.isServerDown = false;
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
+            GameNS::StaticData.gameUI.OnViewChanged(false, true);
+        }
+
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             #region Movement
@@ -91,8 +97,8 @@ public class PlayerLvl05Info : Player
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Z");
-        if (collision.tag.Equals("BulletClip"))
+        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
+        else if (collision.tag.Equals("BulletClip"))
         {
             bulletCount += Random.Range(minimumBulletFromClip, maximumBulletFromClip);
             GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
@@ -106,18 +112,14 @@ public class PlayerLvl05Info : Player
 
         if (Camera.main != null)
         {
-            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
-            {
-                OnGameOver();
-            }
-            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
+            if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize)
             {
                 reachedEnd = false; // Setting it back to false for further levels
 
                 if (levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
-                    GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(false);
+                    GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
                     levelCompletionPanelParent.CallPanel(true);
                 }
             }

@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
     <Compile Include="Assets\Scripts\LoadingScreen.cs" />
     <Compile Include="Assets\Scripts\Lvl05Enemy.cs" />
+    <Compile Include="Assets\Scripts\Lvl05Server.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl01Human.cs" />
