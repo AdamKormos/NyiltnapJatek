@@ -7,7 +7,6 @@ public class Lvl05Server : MonoBehaviour
 {
     [SerializeField] byte maxHealth = 20;
     byte health = 0;
-    public static bool isServerDown = false;
 
     private void Start()
     {
@@ -33,8 +32,8 @@ public class Lvl05Server : MonoBehaviour
         health--;
         if(health == 0)
         {
-            isServerDown = true;
             health = maxHealth; // Reset HP
+            PlayerLvl05Info.OnServersBurning();
         }
     }
 }

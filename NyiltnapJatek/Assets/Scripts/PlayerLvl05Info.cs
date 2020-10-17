@@ -39,13 +39,6 @@ public class PlayerLvl05Info : Player
     // Update is called once per frame
     void Update()
     {
-        if (Lvl05Server.isServerDown) // Game Over
-        {
-            Lvl05Server.isServerDown = false;
-            UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
-            GameNS::StaticData.gameUI.OnViewChanged(false, true);
-        }
-
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             #region Movement
@@ -68,6 +61,12 @@ public class PlayerLvl05Info : Player
                 GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
             }
         }
+    }
+
+    public static void OnServersBurning()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
+        GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 
     protected override IEnumerator Move()
