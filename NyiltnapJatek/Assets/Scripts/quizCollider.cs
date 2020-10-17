@@ -14,7 +14,7 @@ public class quizCollider : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            Timer.isPaused = true;
+            Score.isPaused = true;
             GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             quizActive = true;
             Player.moveAllowed = false;

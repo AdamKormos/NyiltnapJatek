@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -12,14 +10,21 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
-    [SerializeField] public Text timerText = default;
+    [SerializeField] public Transform lvl05StuffTransform = default;
+    [SerializeField] public Text bulletCountText = default;
+    [SerializeField] public Text scoreCountText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
     [SerializeField] public Slider loadingScreenSlider = default;
+    [SerializeField] public LevelHintBar levelHintBar = default;
+    [SerializeField] public Text levelHintBarText = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
-    public void OnViewChanged(bool isMainMenuView)
+    public void OnViewChanged(bool isMainMenuView, bool isReloadingLevel)
     {
+        // Set level specific objects to false:
+        lvl05StuffTransform.gameObject.SetActive(false);
+
         if(isMainMenuView)
         {
             gameplayStuffTransform.gameObject.SetActive(false);
@@ -30,12 +35,32 @@ public class GameUI : MonoBehaviour
         }
         else
         {
+            if (!isReloadingLevel)
+            {
+                switch (LevelSelection.currentScene)
+                {
+                    case Menu.Scenes.Lvl1:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad!");
+                        break;
+                    case Menu.Scenes.Lvl2:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Flappy Bird - Repülj végig a pályán és ugorj a szóköz segítségével!");
+                        break;
+                    case Menu.Scenes.Lvl3:
+                        break;
+                    case Menu.Scenes.Lvl4:
+                        break;
+                    case Menu.Scenes.Lvl5:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");
+                        break;
+                }
+            }
+
             gameplayStuffTransform.gameObject.SetActive(true);
 
             levelCompletionPanelText.transform.parent.gameObject.SetActive(true);
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
 
-            timerText.gameObject.SetActive(true);
+            scoreCountText.gameObject.SetActive(true);
 
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);
@@ -48,7 +73,7 @@ public class GameUI : MonoBehaviour
         {
             GameNS::StaticData.gameUI = this;
             DontDestroyOnLoad(this.gameObject);
-            GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu);
+            GameNS::StaticData.gameUI.OnViewChanged(startsInMainMenu, false);
         }
         else Destroy(this.gameObject);
     }
@@ -57,6 +82,12 @@ public class GameUI : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void LoadLevelHint(string levelHintString)
+    {
+        levelHintBar.gameObject.SetActive(true);
+        levelHintBarText.text = levelHintString;
     }
 
     public static void ToggleChildren(GameObject parent, bool activityState)

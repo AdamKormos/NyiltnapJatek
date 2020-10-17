@@ -7,6 +7,7 @@ TagManager:
   - LevelEnding
   - Cloud
   - Wax
+  - BulletClip
   layers:
   - Default
   - TransparentFX

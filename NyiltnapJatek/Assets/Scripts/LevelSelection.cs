@@ -22,10 +22,16 @@ public class LevelSelection : MonoBehaviour
     Vector2 panelStartPosition = default;
     public static int currentIndex = 0;
     public static int maxIndex = 0;
+    public static Menu.Scenes currentScene { get; private set; }
+    static bool[] completedLevel = new bool[5];
 
     private void OnDisable()
     {
         transform.position += new Vector3(currentIndex * xOffsetBetweenPanels, 0);
+
+#if UNITY_EDITOR
+        maxIndex = 4;
+#endif
         currentIndex = 0;
     }
 
@@ -69,7 +75,7 @@ public class LevelSelection : MonoBehaviour
                 transform.position += new Vector3(xOffsetBetweenPanels, 0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) && currentIndex < maxIndex)
         {
             currentIndex++;
             if (currentIndex > levelPanels.Count-1)
@@ -83,10 +89,19 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (currentIndex <= maxIndex)
-            {
-                GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
-            }
+            currentScene = levelPanels[currentIndex].sceneToLoad;
+            GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
+        }
+    }
+
+    public static void OnLevelCompleted()
+    {
+        if (currentScene <= Menu.Scenes.zoldMap) return;
+
+        if (!completedLevel[(int)currentScene - 3])
+        {
+            completedLevel[(int)currentScene - 3] = true;
+            maxIndex++;
         }
     }
 }
