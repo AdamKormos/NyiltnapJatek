@@ -680,8 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCompletionPanelParent: {fileID: 495869163}
-  movePerSec: 60
-  moveStrength: 1
+  moveStrength: 30
   jumpStrength: 3
   fallStrength: 0.02
   jumpCooldown: 0.35

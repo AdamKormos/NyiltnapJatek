@@ -8,7 +8,6 @@ using GameNS = GameNS;
 public class Player : MonoBehaviour
 {
     [SerializeField] protected LevelCompletionUI levelCompletionPanelParent = default;
-    [SerializeField] protected int movePerSec = 20;
     [SerializeField] protected int moveStrength = 1;
     public static bool moveAllowed = true;
     [SerializeField] protected float jumpStrength = 3;
@@ -45,33 +44,24 @@ public class Player : MonoBehaviour
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f);
-                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f);
-                yield return new WaitForSeconds(1f / movePerSec);
+                transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
         }
 
         while (isOnScreen)
         {
-            transform.position += new Vector3(0.05f * moveStrength, 0f);
-            yield return new WaitForSeconds(1f / movePerSec);
+            transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 
     protected virtual void OnGameOver()
     {
-        Score.isPaused = false;
-        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
-        quizCollider.quizActive = false;
-        Player.moveAllowed = true;
-
-        transform.position = startPos;
-        Camera.main.transform.position = cameraStartPos;
-        startPos = transform.position;
-        cameraStartPos = Camera.main.transform.position;
-
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(LevelSelection.currentScene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
+        GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

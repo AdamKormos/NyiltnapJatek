@@ -30,17 +30,17 @@ public class PlayerLvl03Muveszetek : Player
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f);
-                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f);
-                yield return new WaitForSeconds(1f / movePerSec);
+                transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
         }
 
         while (isOnScreen)
         {
-            transform.position += new Vector3(0.05f * moveStrength, 0f);
-            yield return new WaitForSeconds(1f / movePerSec);
+            transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 

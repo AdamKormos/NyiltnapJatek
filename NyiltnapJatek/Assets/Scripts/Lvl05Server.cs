@@ -6,7 +6,7 @@ using static UnityEngine.ParticleSystem;
 public class Lvl05Server : MonoBehaviour
 {
     [SerializeField] byte maxHealth = 20;
-    byte health = 0;
+    public static byte health { get; private set;}
 
     private void Start()
     {
@@ -30,10 +30,5 @@ public class Lvl05Server : MonoBehaviour
         Destroy(enemyCol.gameObject);
 
         health--;
-        if(health == 0)
-        {
-            health = maxHealth; // Reset HP
-            PlayerLvl05Info.OnServersBurning();
-        }
     }
 }

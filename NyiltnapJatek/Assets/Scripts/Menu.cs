@@ -5,7 +5,7 @@ using GameNS = GameNS;
 
 public class Menu : MonoBehaviour
 {
-    public enum Scenes {mainMenu, sampleScene, zoldMap, Lvl1, Lvl2, Lvl3, Lvl4, Lvl5 };
+    public enum Scenes {mainMenu, Lvl1, Lvl2, Lvl3, Lvl4, Lvl5 };
     [SerializeField] private Button[] buttons = new Button[3];
     [SerializeField] public GameObject menuImg = default;
     private int index = 0;

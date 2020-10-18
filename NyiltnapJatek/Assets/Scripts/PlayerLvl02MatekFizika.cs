@@ -106,7 +106,7 @@ public class PlayerLvl02MatekFizika : Player
             {
                 transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
                 Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-                yield return new WaitForSeconds(1f / movePerSec);
+                yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
         }
@@ -114,7 +114,7 @@ public class PlayerLvl02MatekFizika : Player
         while (isOnScreen)
         {
             transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-            yield return new WaitForSeconds(1f / movePerSec);
+            yield return new WaitForEndOfFrame();
         }
     }
 

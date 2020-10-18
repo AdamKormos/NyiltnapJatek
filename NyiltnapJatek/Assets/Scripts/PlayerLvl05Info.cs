@@ -39,6 +39,8 @@ public class PlayerLvl05Info : Player
     // Update is called once per frame
     void Update()
     {
+        if (Lvl05Server.health <= 0) OnGameOver();
+
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             #region Movement
@@ -63,12 +65,6 @@ public class PlayerLvl05Info : Player
         }
     }
 
-    public static void OnServersBurning()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
-        GameNS::StaticData.gameUI.OnViewChanged(false, true);
-    }
-
     protected override IEnumerator Move()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
@@ -82,7 +78,7 @@ public class PlayerLvl05Info : Player
                 transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
                 serverObject.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
                 Camera.main.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
-                yield return new WaitForSeconds(1f / movePerSec);
+                yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
         }
@@ -90,7 +86,7 @@ public class PlayerLvl05Info : Player
         while (isOnScreen)
         {
             transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
-            yield return new WaitForSeconds(1f / movePerSec);
+            yield return new WaitForEndOfFrame();
         }
     }
 

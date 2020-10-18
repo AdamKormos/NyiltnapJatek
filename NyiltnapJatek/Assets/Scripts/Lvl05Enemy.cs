@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lvl05Enemy : MonoBehaviour
 {
+    [SerializeField] public byte health = 2;
     [SerializeField] public int scoreReward = 100;
     bool isAttacking = false;
 
@@ -12,6 +13,16 @@ public class Lvl05Enemy : MonoBehaviour
         if(isAttacking)
         {
             // ...
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Bullet>())
+        {
+            health--;
+            Destroy(collision.gameObject);
+            if(health == 0) Score.OnEnemyKilled(this);
         }
     }
 
