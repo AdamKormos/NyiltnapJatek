@@ -24,6 +24,8 @@ public class Lvl05Server : MonoBehaviour
 
     private void OnDamageTaken(Collision2D enemyCol)
     {
+        GetComponent<ParticleSystem>().Pause();
+
         ShapeModule s = GetComponent<ParticleSystem>().shape;
         s.position = new Vector3((enemyCol.transform.position.x - transform.position.x) / 100f, s.position.y, s.position.z);
         GetComponent<ParticleSystem>().Play();
