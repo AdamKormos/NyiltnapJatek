@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
     {
         isMenuImgActive = menuImg.activeSelf;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !menuImg.activeSelf)
         {
             menuImg.SetActive(!menuImg.activeSelf);
             GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(!menuImg.activeSelf);
@@ -50,7 +50,6 @@ public class Menu : MonoBehaviour
                         break;
                 }
             }
-
         }
     }
     

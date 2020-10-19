@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
     protected virtual void OnGameOver()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)Menu.Scenes.Lvl5);
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int)LevelSelection.currentScene);
         GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 
