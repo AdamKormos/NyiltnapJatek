@@ -25,11 +25,12 @@ public class GameUI : MonoBehaviour
         // Set level specific objects to false:
         lvl05StuffTransform.gameObject.SetActive(false);
 
-        if(isMainMenuView)
+        quizTransform.gameObject.SetActive(false);
+
+        if (isMainMenuView)
         {
             gameplayStuffTransform.gameObject.SetActive(false);
             levelSelectionTransform.gameObject.SetActive(false);
-            quizTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(true);
             ToggleChildren(mainMenuTransform.gameObject, true);
         }

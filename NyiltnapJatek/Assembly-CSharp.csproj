@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BallLvl02MatekFizika.cs" />
+    <Compile Include="Assets\ObstacleLvl02.cs" />
+    <Compile Include="Assets\PlayerLvl02MatFiz.cs" />
     <Compile Include="Assets\RandomText.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\FallingObstacle.cs" />
@@ -70,7 +73,6 @@
     <Compile Include="Assets\Scripts\GameNS.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Grade.cs" />
-    <Compile Include="Assets\Scripts\IntentionallyFallingObstacle.cs" />
     <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
     <Compile Include="Assets\Scripts\LevelHintBar.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
