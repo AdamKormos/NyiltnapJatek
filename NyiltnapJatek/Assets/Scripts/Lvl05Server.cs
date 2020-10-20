@@ -7,11 +7,13 @@ public class Lvl05Server : MonoBehaviour
 {
     [SerializeField] byte maxHealth = 20;
     public static byte health { get; private set;}
+    ParticleSystem particleSystem = default;
 
     private void Start()
     {
+        particleSystem = GetComponent<ParticleSystem>();
         health = maxHealth;
-        GetComponent<ParticleSystem>().Stop();    
+        particleSystem.Stop();    
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,11 +26,9 @@ public class Lvl05Server : MonoBehaviour
 
     private void OnDamageTaken(Collision2D enemyCol)
     {
-        GetComponent<ParticleSystem>().Pause();
-
-        ShapeModule s = GetComponent<ParticleSystem>().shape;
-        s.position = new Vector3((enemyCol.transform.position.x - transform.position.x) / 100f, s.position.y, s.position.z);
-        GetComponent<ParticleSystem>().Play();
+        ShapeModule s = particleSystem.shape;
+        s.position = new Vector3((enemyCol.transform.position.x - transform.position.x) / transform.lossyScale.x, s.position.y, s.position.z);
+        particleSystem.Play();
         Destroy(enemyCol.gameObject);
 
         health--;
