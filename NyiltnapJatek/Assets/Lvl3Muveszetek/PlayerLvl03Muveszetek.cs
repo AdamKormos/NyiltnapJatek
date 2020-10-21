@@ -45,7 +45,8 @@ public class PlayerLvl03Muveszetek : MonoBehaviour
         if (!isMozog)
         {
             num /= Input.GetKey(KeyCode.LeftAlt) ? 2 : 1;
-            
+            altUp = false;
+
             isMozog = true;
             for (i = 0f; i < num && !altUp; i += 0.5f)
             {
@@ -53,7 +54,6 @@ public class PlayerLvl03Muveszetek : MonoBehaviour
                 yield return new WaitForSeconds(waitSecond);
             }
             isMozog = false;
-            altUp = false;
         }
         yield return new WaitForSeconds(0.05f);
     }
