@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerLvl03Muveszetek : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rbd = default;
-    [SerializeField] private float index = 0; 
+    [SerializeField] private int index = 0; 
     [SerializeField] private float kottaGap = 8f;
     [SerializeField] private float waitSecond = 12f;
 
@@ -29,11 +29,11 @@ public class PlayerLvl03Muveszetek : MonoBehaviour
             isMozog = false;
             StartCoroutine(move((float)index - i));
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W) && index != 5)
         {
             StartCoroutine(move(kottaGap));
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) && index != 0)
         {
             StartCoroutine(move(-kottaGap));
         }
