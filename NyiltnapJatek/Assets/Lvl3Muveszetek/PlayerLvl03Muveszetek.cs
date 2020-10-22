@@ -7,8 +7,8 @@ public class PlayerLvl03Muveszetek : Player
 {
     [SerializeField] private int index = 0; 
     [SerializeField] private float kottaGap = 8f;
+    [SerializeField] private int moveTickAmount = 30;
     [SerializeField] private float waitSecond = 12f;
-    private float i = 0f;
 
     private bool Moving = false;
 
@@ -27,35 +27,46 @@ public class PlayerLvl03Muveszetek : Player
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(10f, 0f);
         if (!Moving)
         {
-            if (Input.GetKeyUp(KeyCode.LeftAlt))
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
-                StartCoroutine(move((float)index - i));
+                StartCoroutine(move(-kottaGap / 2));
             }
             else if (Input.GetKey(KeyCode.W) && index != 5)
             {
+                index++;
                 StartCoroutine(move(kottaGap));
             }
             else if (Input.GetKey(KeyCode.S) && index != 0)
             {
+                index--;
                 StartCoroutine(move(-kottaGap));
             }
         }
-
     }
+
+    bool brokeAltMove = false;
 
     IEnumerator move(float num)
     {
         Moving = true;
-        if (Input.GetKey(KeyCode.AltGr)) num /= 2;
-        for (i = 0f; i < num && !Input.GetKeyUp(KeyCode.LeftAlt); i += 0.5f)
+
+        for (int i = 0; i < moveTickAmount; i++)
         {
-            transform.position += new Vector3(num, 0f);
+            if(!Input.GetKey(KeyCode.LeftAlt) && !brokeAltMove)
+            {
+                brokeAltMove = true;
+                StartCoroutine(move(-(num / moveTickAmount) * (moveTickAmount - i)));
+                yield break;
+            }
+
+            transform.position += new Vector3(0, num / moveTickAmount);
             yield return new WaitForSeconds(waitSecond);
         }
+
         Moving = false;
+        brokeAltMove = false;
     }
 
     private void OnBecameVisible()

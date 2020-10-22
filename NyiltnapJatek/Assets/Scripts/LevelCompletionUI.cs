@@ -8,7 +8,7 @@ public class LevelCompletionUI : MonoBehaviour
 {
     private void Update()
     {
-        if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+        if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return) && Score.isGameLevelOpen)
         {
             GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
         }

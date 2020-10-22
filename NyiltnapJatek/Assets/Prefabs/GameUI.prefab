@@ -892,19 +892,19 @@ MonoBehaviour:
   levelPanels:
   - name: "Hum\xE1n"
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 3
+    sceneToLoad: 1
   - name: Matek-fizika
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 4
+    sceneToLoad: 2
   - name: "M\u0171v\xE9szetek"
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 5
+    sceneToLoad: 3
   - name: "Term\xE9szettudom\xE1ny"
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 6
+    sceneToLoad: 4
   - name: Informatika
     img: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 7
+    sceneToLoad: 5
 --- !u!1 &3476079467939632832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   loadingScreenSlider: {fileID: 9125414919724548732}
   levelHintBar: {fileID: 46764222}
   levelHintBarText: {fileID: 650091863}
-  startsInMainMenu: 0
+  startsInMainMenu: 1
 --- !u!1 &9125414918928961073
 GameObject:
   m_ObjectHideFlags: 0
