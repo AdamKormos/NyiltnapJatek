@@ -65,12 +65,12 @@ public class PlayerLvl03Muveszetek : Player
     {
         isOnScreen = false;
 
-        if (Camera.main != null)
-        {
-            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
-            {
-                OnGameOver();
-            }
-        }
+        //if (Camera.main != null)
+        //{
+        //    if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
+        //    {
+        //        OnGameOver();
+        //    }
+        //}
     }
 }
