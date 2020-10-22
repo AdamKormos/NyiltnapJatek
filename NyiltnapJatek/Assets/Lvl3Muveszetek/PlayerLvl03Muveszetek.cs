@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using UnityEngine;
 using GameNS = GameNS;
 
@@ -9,7 +10,7 @@ public class PlayerLvl03Muveszetek : Player
     [SerializeField] private float waitSecond = 12f;
     private float i = 0f;
 
-    private bool altUp = false;
+    private bool Moving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,14 +27,14 @@ public class PlayerLvl03Muveszetek : Player
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        transform.position += new Vector3(10f, 0f);
+        if (!Moving)
         {
-            altUp = true;
-            StartCoroutine(move((float)index - i));
-        }
-        if (!altUp)
-        {
-            if (Input.GetKey(KeyCode.W) && index != 5)
+            if (Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                StartCoroutine(move((float)index - i));
+            }
+            else if (Input.GetKey(KeyCode.W) && index != 5)
             {
                 StartCoroutine(move(kottaGap));
             }
@@ -46,14 +47,15 @@ public class PlayerLvl03Muveszetek : Player
     }
 
     IEnumerator move(float num)
-    { 
-        if (!altUp) num /= 2;
-        for (i = 0f; i < num && !altUp; i += 0.5f)
+    {
+        Moving = true;
+        if (Input.GetKey(KeyCode.AltGr)) num /= 2;
+        for (i = 0f; i < num && !Input.GetKeyUp(KeyCode.LeftAlt); i += 0.5f)
         {
             transform.position += new Vector3(num, 0f);
             yield return new WaitForSeconds(waitSecond);
         }
-        altUp = false;
+        Moving = false;
     }
 
     private void OnBecameVisible()
