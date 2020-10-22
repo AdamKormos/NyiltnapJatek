@@ -10,10 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] protected LevelCompletionUI levelCompletionPanelParent = default;
     [SerializeField] protected int moveStrength = 1;
     public static bool moveAllowed = true;
-    [SerializeField] protected float jumpStrength = 3;
     protected bool isOnGround = true;
     protected float halfPlayerSize = 0f;
-    protected Vector3 cameraStartPos, startPos;
     public static bool reachedEnd { get; protected set; }
     public static bool isOnScreen { get; protected set; }
 
@@ -23,15 +21,6 @@ public class Player : MonoBehaviour
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
-        }
     }
 
     protected virtual IEnumerator Move()

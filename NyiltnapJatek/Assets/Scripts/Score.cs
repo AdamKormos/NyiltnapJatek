@@ -26,6 +26,7 @@ public class Score : MonoBehaviour
                 GameNS::StaticData.gameUI.scoreCountText.text = "0";
                 break;
             case Menu.Scenes.Lvl3:
+                GameNS::StaticData.gameUI.scoreCountText.text = "0";
                 break;
             case Menu.Scenes.Lvl4:
                 break;

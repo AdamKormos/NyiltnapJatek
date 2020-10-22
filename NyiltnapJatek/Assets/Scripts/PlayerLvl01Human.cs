@@ -7,6 +7,7 @@ using GameNS = GameNS;
 public class PlayerLvl01Human : Player
 {
     [SerializeField] protected float fallStrength = 0.05f;
+    [SerializeField] protected float jumpStrength = 3;
     [SerializeField] protected string cloudObjectTag = "Cloud";
     [SerializeField] protected GameObject wingHealthSliderGameObject = default;
     [SerializeField] protected float wingHealth = 100f;
@@ -28,9 +29,6 @@ public class PlayerLvl01Human : Player
         wingHealthSlider = wingHealthSliderGameObject.GetComponent<Slider>();
         wingHealthSlider.maxValue = wingHealth;
         wingHealthSlider.value = wingHealthSlider.maxValue;
-
-        startPos = transform.position;
-        cameraStartPos = Camera.main.transform.position;
 
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
