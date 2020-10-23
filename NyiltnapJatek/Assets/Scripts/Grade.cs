@@ -4,16 +4,13 @@ public class Grade : MonoBehaviour
 { 
     public gradeAllSum.gradeEnum nem = default;
     
-    [System.Obsolete]
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponentInParent<Player>())
+        if (collision.GetComponent<Player>())
         {
             gradeAllSum.count++;
             gradeAllSum.sum += (int)nem;
         }
         Destroy(this.gameObject);
     }
-
-
 }

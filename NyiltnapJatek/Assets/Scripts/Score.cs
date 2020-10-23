@@ -9,12 +9,6 @@ public class Score : MonoBehaviour
     public int value { get; private set; }
     public int tenth { get; private set; }
     public static bool isPaused = false;
-    public static bool isGameLevelOpen = false;
-
-    private void Start()
-    {
-        isGameLevelOpen = false;
-    }
 
     public void OnGameLevelOpen(Menu.Scenes sceneEnum)
     {
@@ -41,8 +35,6 @@ public class Score : MonoBehaviour
                 GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
                 break;
         }
-
-        isGameLevelOpen = true;
     }
 
     public IEnumerator Count()

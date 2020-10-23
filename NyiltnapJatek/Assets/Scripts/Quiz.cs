@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameNS = GameNS;
 
 public class Quiz : MonoBehaviour
 {
-    [SerializeField] private int correctIndex = 0;
+    [SerializeField] Color hoveredAnswerOptionColor = default;
     [SerializeField] private List<Button> but = new List<Button>(4);
-    private static int rowIndex = 0, colIndex = 0;
+    private static int rowIndex = 0, colIndex = 0, correctIndex = 0;
+    private static string[] answerList = new string[4];
 
     private void Start()
     {
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
+        for(int i = 0; i < but.Count; i++)
+        {
+            but[i].GetComponentInChildren<Text>(true).text = answerList[i];
+        }
     }
 
     private void Update()
@@ -27,7 +32,7 @@ public class Quiz : MonoBehaviour
             rowIndex = Mathf.Clamp(rowIndex, 0, 2);
             colIndex = Mathf.Clamp(colIndex, 0, 1);
 
-            but[rowIndex + colIndex].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
+            but[rowIndex + colIndex].GetComponent<Image>().color = hoveredAnswerOptionColor;
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -43,12 +48,15 @@ public class Quiz : MonoBehaviour
 
                 transform.parent.gameObject.SetActive(false);
                 Player.moveAllowed = true;
-                Score.isPaused = false;
                 quizCollider.quizActive = false;
             }
         }
     }
+
+    public static void InitiateQuiz(string questionName, string[] answers, byte correctAnswerIndex)
+    {
+        GameNS::StaticData.gameUI.quizQuestionText.text = questionName;
+        answerList = answers;
+        correctIndex = correctAnswerIndex;
+    }
 }
-
-
-

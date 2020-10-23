@@ -4,6 +4,10 @@ using GameNS = GameNS;
 
 public class quizCollider : MonoBehaviour
 {
+    [SerializeField] string questionName = "";
+    [SerializeField] string[] answers = new string[4];
+    [SerializeField] byte correctAnswerIndex = 0;
+
     public static bool quizActive = false;
     private void Start()
     {
@@ -14,9 +18,9 @@ public class quizCollider : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            Score.isPaused = true;
             GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             quizActive = true;
+            Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
             Player.moveAllowed = false;
             Destroy(this.gameObject);
         }

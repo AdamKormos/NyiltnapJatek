@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
+    [SerializeField] public Text quizQuestionText = default;
     [SerializeField] public Transform lvl05StuffTransform = default;
     [SerializeField] public Text bulletCountText = default;
     [SerializeField] public Text scoreCountText = default;

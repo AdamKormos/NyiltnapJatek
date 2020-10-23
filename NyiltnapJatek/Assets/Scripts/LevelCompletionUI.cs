@@ -6,9 +6,19 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    private void Start()
+    {
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+    }
+
     private void Update()
     {
-        if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return) && Score.isGameLevelOpen)
+        if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
         }
