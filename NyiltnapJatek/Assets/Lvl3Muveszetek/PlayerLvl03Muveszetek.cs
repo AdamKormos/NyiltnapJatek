@@ -33,6 +33,10 @@ public class PlayerLvl03Muveszetek : Player
             {
                 StartCoroutine(move(-kottaGap / 2));
             }
+            else if (Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                StartCoroutine(move(kottaGap / 2));
+            }
             else if (Input.GetKey(KeyCode.W) && index != 5)
             {
                 index++;
@@ -51,13 +55,14 @@ public class PlayerLvl03Muveszetek : Player
     IEnumerator move(float num)
     {
         Moving = true;
+        bool wasHoldingAlt = Input.GetKey(KeyCode.LeftAlt);
 
         for (int i = 0; i < moveTickAmount; i++)
         {
-            if(!Input.GetKey(KeyCode.LeftAlt) && !brokeAltMove)
+            if((wasHoldingAlt && !Input.GetKey(KeyCode.LeftAlt)) && !brokeAltMove)
             {
                 brokeAltMove = true;
-                StartCoroutine(move(-(num / moveTickAmount) * (moveTickAmount - i)));
+                StartCoroutine(move(-(num / moveTickAmount) * i));
                 yield break;
             }
 
