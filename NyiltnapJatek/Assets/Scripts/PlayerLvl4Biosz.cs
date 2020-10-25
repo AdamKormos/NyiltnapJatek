@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using GameNS = GameNS;
 
-public class PlayerLvl4Biosz : MonoBehaviour
+public class PlayerLvl4Biosz : Player
 {
     private Rigidbody2D body = default;
     private GameObject arrow = default;
@@ -13,14 +14,16 @@ public class PlayerLvl4Biosz : MonoBehaviour
     bool checkCollision = false;
     //bool upsidedown = false;
 
-
-    
-
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         body.freezeRotation = true;
         arrow = transform.GetComponentsInChildren<Transform>()[1].gameObject;
+
+        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
+        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+
+        StartCoroutine(Move());
     }
 
     void Update()
@@ -46,9 +49,6 @@ public class PlayerLvl4Biosz : MonoBehaviour
         }
     }
 
-
-    
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (checkCollision)
@@ -58,6 +58,27 @@ public class PlayerLvl4Biosz : MonoBehaviour
             arrow.SetActive(true);
             canRotate = true;
             checkCollision = false;
+        }
+    }
+
+    private void OnBecameInvisible()
+    {
+        isOnScreen = false;
+
+        if (Camera.main != null)
+        {
+            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
+            {
+                OnGameOver();
+            }
+            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
+            {
+                if (levelCompletionPanelParent != null)
+                {
+                    LevelSelection.OnLevelCompleted();
+                    levelCompletionPanelParent.CallPanel(true);
+                }
+            }
         }
     }
 }

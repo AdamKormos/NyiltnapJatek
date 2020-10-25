@@ -23,7 +23,7 @@ public class PlayerLvl02MatFiz : Player
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl2);
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
         ball.gameObject.SetActive(true);
     }
 

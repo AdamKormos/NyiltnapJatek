@@ -9,7 +9,7 @@ using GameNS = GameNS;
 public class Player : MonoBehaviour
 {
     [SerializeField] protected LevelCompletionUI levelCompletionPanelParent = default;
-    [SerializeField] protected int moveStrength = 1;
+    [SerializeField] protected int moveStrength = 30;
     public static bool moveAllowed = true;
     protected bool isOnGround = true;
     protected float halfPlayerSize = 0f;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(LevelSelection.currentScene);
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
         while (!reachedEnd)
         {

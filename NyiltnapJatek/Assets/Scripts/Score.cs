@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -10,11 +11,13 @@ public class Score : MonoBehaviour
     public int tenth { get; private set; }
     public static bool isPaused = false;
 
-    public void OnGameLevelOpen(Menu.Scenes sceneEnum)
+    public void OnGameLevelOpen()
     {
         value = 0;
 
-        switch (sceneEnum)
+        Menu.Scenes currentScene = (Menu.Scenes)(SceneManager.GetActiveScene().buildIndex);
+
+        switch (currentScene)
         {
             case Menu.Scenes.Lvl1:
                 StopCoroutine("Count");
@@ -32,6 +35,10 @@ public class Score : MonoBehaviour
                 GameNS::StaticData.gameUI.scoreCountText.text = "0";
                 break;
             case Menu.Scenes.Lvl4:
+                StopCoroutine("Count");
+                tenth = 0;
+                GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
+                StartCoroutine("Count");
                 break;
             case Menu.Scenes.Lvl5:
                 GameNS::StaticData.gameUI.scoreCountText.text = "0";

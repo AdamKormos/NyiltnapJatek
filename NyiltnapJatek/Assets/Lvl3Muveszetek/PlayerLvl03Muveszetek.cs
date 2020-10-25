@@ -9,7 +9,6 @@ public class PlayerLvl03Muveszetek : Player
     [SerializeField] private float kottaGap = 8f;
     [SerializeField] private int moveTickAmount = 30;
     [SerializeField] private float waitSecond = 12f;
-
     private bool Moving = false;
 
     // Start is called before the first frame update
@@ -33,11 +32,11 @@ public class PlayerLvl03Muveszetek : Player
             {
                 StartCoroutine(move(-kottaGap / 2));
             }
-            else if (Input.GetKeyUp(KeyCode.LeftAlt))
+            else if (heldAltAtStart && Input.GetKeyUp(KeyCode.LeftAlt)) // Reached max distance with alt move
             {
                 StartCoroutine(move(kottaGap / 2));
             }
-            else if (Input.GetKey(KeyCode.W) && index != 5)
+            else if (Input.GetKey(KeyCode.W) && index != 4)
             {
                 index++;
                 StartCoroutine(move(kottaGap));
@@ -48,30 +47,38 @@ public class PlayerLvl03Muveszetek : Player
                 StartCoroutine(move(-kottaGap));
             }
         }
+        //else
+        //{
+        //    if (brokeAltMove) // Released alt during moving down
+        //    {
+        //        brokeAltMove = false;
+        //        StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
+        //    }
+           
+        //}
     }
 
-    bool brokeAltMove = false;
+    //bool brokeAltMove = false;
+    bool heldAltAtStart = false;
 
     IEnumerator move(float num)
     {
         Moving = true;
-        bool wasHoldingAlt = Input.GetKey(KeyCode.LeftAlt);
+        heldAltAtStart = Input.GetKey(KeyCode.LeftAlt);
 
         for (int i = 0; i < moveTickAmount; i++)
         {
-            if((wasHoldingAlt && !Input.GetKey(KeyCode.LeftAlt)) && !brokeAltMove)
+            if (!Input.GetKey(KeyCode.LeftAlt) && heldAltAtStart)
             {
-                brokeAltMove = true;
-                StartCoroutine(move(-(num / moveTickAmount) * i));
+                StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
                 yield break;
             }
 
             transform.position += new Vector3(0, num / moveTickAmount);
-            yield return new WaitForSeconds(waitSecond);
+            yield return new WaitForEndOfFrame();
         }
 
         Moving = false;
-        brokeAltMove = false;
     }
 
     private void OnBecameVisible()
@@ -82,13 +89,5 @@ public class PlayerLvl03Muveszetek : Player
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-
-        //if (Camera.main != null)
-        //{
-        //    if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
-        //    {
-        //        OnGameOver();
-        //    }
-        //}
     }
 }

@@ -653,6 +653,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
+        type: 3}
+      propertyPath: startsInMainMenu
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -703,8 +708,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaab4aa05b6f746478e984b960d64021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 40
+  levelCompletionPanelParent: {fileID: 0}
+  moveStrength: 1
   rotationScale: 20
+  velocity: 40
 --- !u!61 &1672498738
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -946,6 +953,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ff3f60f6f35944b2cc07f8c796d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questionName: 
+  answers:
+  - 
+  - 
+  - 
+  - 
+  correctAnswerIndex: 0
 --- !u!61 &2077218681
 BoxCollider2D:
   m_ObjectHideFlags: 0
