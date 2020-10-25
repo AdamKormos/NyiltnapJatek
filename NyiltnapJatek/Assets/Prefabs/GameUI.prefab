@@ -2150,8 +2150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e51447f563f1624d87103b84f1e9e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumLoadTime: 1
-  maximumLoadTime: 3
+  minimumLoadTime: 4
+  maximumLoadTime: 10
   hintText: {fileID: 572192527}
   hints:
   - A

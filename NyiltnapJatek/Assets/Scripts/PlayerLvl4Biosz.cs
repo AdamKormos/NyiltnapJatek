@@ -49,6 +49,11 @@ public class PlayerLvl4Biosz : Player
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (checkCollision)

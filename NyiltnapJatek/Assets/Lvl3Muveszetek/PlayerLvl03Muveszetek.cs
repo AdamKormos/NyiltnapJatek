@@ -5,6 +5,7 @@ using GameNS = GameNS;
 
 public class PlayerLvl03Muveszetek : Player
 {
+    [SerializeField] KeyCode halfMoveKey = default;
     [SerializeField] private int index = 0; 
     [SerializeField] private float kottaGap = 8f;
     [SerializeField] private int moveTickAmount = 30;
@@ -26,25 +27,31 @@ public class PlayerLvl03Muveszetek : Player
     // Update is called once per frame
     void Update()
     {
-        if (!Moving)
+        if (!Moving && !quizCollider.quizActive)
         {
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            if (heldAltAtStart)
             {
-                StartCoroutine(move(-kottaGap / 2));
+                if (Input.GetKeyUp(halfMoveKey)) // Reached max distance with alt move (so move method won't detect this while descending)
+                {
+                    StartCoroutine(move(kottaGap / 2));
+                }
             }
-            else if (heldAltAtStart && Input.GetKeyUp(KeyCode.LeftAlt)) // Reached max distance with alt move
+            else
             {
-                StartCoroutine(move(kottaGap / 2));
-            }
-            else if (Input.GetKey(KeyCode.W) && index != 4)
-            {
-                index++;
-                StartCoroutine(move(kottaGap));
-            }
-            else if (Input.GetKey(KeyCode.S) && index != 0)
-            {
-                index--;
-                StartCoroutine(move(-kottaGap));
+                if (Input.GetKeyDown(halfMoveKey))
+                {
+                    StartCoroutine(move(-kottaGap / 2));
+                }
+                else if (Input.GetKey(KeyCode.W) && index != 4)
+                {
+                    index++;
+                    StartCoroutine(move(kottaGap));
+                }
+                else if (Input.GetKey(KeyCode.S) && index != 0)
+                {
+                    index--;
+                    StartCoroutine(move(-kottaGap));
+                }
             }
         }
         //else
@@ -64,11 +71,11 @@ public class PlayerLvl03Muveszetek : Player
     IEnumerator move(float num)
     {
         Moving = true;
-        heldAltAtStart = Input.GetKey(KeyCode.LeftAlt);
+        heldAltAtStart = Input.GetKey(halfMoveKey);
 
         for (int i = 0; i < moveTickAmount; i++)
         {
-            if (!Input.GetKey(KeyCode.LeftAlt) && heldAltAtStart)
+            if (!Input.GetKey(halfMoveKey) && heldAltAtStart)
             {
                 StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
                 yield break;
@@ -79,6 +86,12 @@ public class PlayerLvl03Muveszetek : Player
         }
 
         Moving = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
+        else if (collision.tag.Equals("Lvl03Enemy")) OnGameOver();
     }
 
     private void OnBecameVisible()
