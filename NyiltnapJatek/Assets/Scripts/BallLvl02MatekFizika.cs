@@ -4,12 +4,14 @@ public class BallLvl02MatekFizika : MonoBehaviour
 {
     Rigidbody2D rbd = default;
 
-    Vector3 velocity = new Vector3(10f, 0f);
+    [SerializeField] Vector3 velocity = new Vector3(0, 10f);
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         rbd = transform.GetComponent<Rigidbody2D>();
+        rbd.AddForce(new Vector3(transform.right.x, transform.up.y) * 10f, ForceMode2D.Impulse);
+        velocity = rbd.velocity;
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class BallLvl02MatekFizika : MonoBehaviour
         //rbd.velocity = new Vector2(0f, 0f);
         //rbd.AddForce(vel * force);
         //rbd.AddForce(-rbd.velocity.normalized * force, ForceMode2D.Force);
-        velocity = Vector2.Reflect(-rbd.velocity, Vector2.right);
+        velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
+    }
+
+    private void OnBecameInvisible()
+    {
+        PlayerLvl02MatFiz.isBallOnScreen = false;
     }
 }

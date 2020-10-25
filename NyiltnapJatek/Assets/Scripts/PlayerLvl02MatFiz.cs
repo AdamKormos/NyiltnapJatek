@@ -5,10 +5,13 @@ using GameNS = GameNS;
 
 public class PlayerLvl02MatFiz : Player
 {
+    [SerializeField] BallLvl02MatekFizika ball = default;
+    public static bool isBallOnScreen = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameNS::StaticData.gameUI.scoreCountText.text = "0";
+        ball.gameObject.SetActive(false);
 
         levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
         if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
@@ -21,11 +24,18 @@ public class PlayerLvl02MatFiz : Player
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
         GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl2);
+        ball.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isBallOnScreen)
+        {
+            OnGameOver();
+            isBallOnScreen = true;
+        }
+
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             if (Input.GetKey(KeyCode.A))
@@ -47,13 +57,5 @@ public class PlayerLvl02MatFiz : Player
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-
-        if (Camera.main != null)
-        {
-            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
-            {
-                OnGameOver();
-            }
-        }
     }
 }

@@ -23,7 +23,10 @@ public class Score : MonoBehaviour
                 StartCoroutine("Count");
                 break;
             case Menu.Scenes.Lvl2:
-                GameNS::StaticData.gameUI.scoreCountText.text = "0";
+                StopCoroutine("Count");
+                tenth = 0;
+                GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
+                StartCoroutine("Count");
                 break;
             case Menu.Scenes.Lvl3:
                 GameNS::StaticData.gameUI.scoreCountText.text = "0";

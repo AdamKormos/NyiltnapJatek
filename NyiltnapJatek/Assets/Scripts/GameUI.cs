@@ -42,14 +42,16 @@ public class GameUI : MonoBehaviour
                 switch (LevelSelection.currentScene)
                 {
                     case Menu.Scenes.Lvl1:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad!");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni.");
                         break;
                     case Menu.Scenes.Lvl2:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Flappy Bird - Repülj végig a pályán és ugorj a szóköz segítségével!");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét a téglákat a golyó segítségével! Vigyázz, ha leesik, újra kell kezdened a pályát. A platformod az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
                         break;
                     case Menu.Scenes.Lvl3:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Mozogj a kottavonalakon (fel: W/fel nyíl, le: S/le nyíl) hogy kikerüld az akadályokat! A vonalak közé is lemehetsz, ha lenyomva tartod az Alt-ot!");
                         break;
                     case Menu.Scenes.Lvl4:
+                        GameNS::StaticData.gameUI.LoadLevelHint("Menj végig a pályán használva a gravitáció változtatgatását a szóközzel!");
                         break;
                     case Menu.Scenes.Lvl5:
                         GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");

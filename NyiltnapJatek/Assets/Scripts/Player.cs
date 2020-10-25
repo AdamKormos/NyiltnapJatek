@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -49,7 +50,7 @@ public class Player : MonoBehaviour
 
     protected virtual void OnGameOver()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)LevelSelection.currentScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // As this is what works in editor mode
         GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 
