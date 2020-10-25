@@ -18,10 +18,9 @@ public class quizCollider : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             quizActive = true;
+            GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
             Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
-            Player.moveAllowed = false;
             Destroy(this.gameObject);
         }
     }

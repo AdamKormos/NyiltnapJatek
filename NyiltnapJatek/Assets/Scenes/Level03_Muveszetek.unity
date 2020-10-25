@@ -1257,25 +1257,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.a
-      value: 0.99215686
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.r
-      value: 0.9056604
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.g
-      value: 0.694055
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.b
-      value: 0.11534355
+    - target: {fileID: 993005139, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546928, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
@@ -1382,16 +1366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: startsInMainMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: quizQuestionText
-      value: 
-      objectReference: {fileID: 2015143870}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -1409,15 +1383,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
---- !u!114 &2015143870 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8651091090611431551, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 1837258650}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
