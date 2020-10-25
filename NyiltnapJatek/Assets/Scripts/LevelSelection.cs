@@ -10,6 +10,7 @@ public struct LevelPanel
     [SerializeField] public string name;
     [SerializeField] public Sprite img;
     [SerializeField] public Menu.Scenes sceneToLoad;
+    [SerializeField] public Text bestResults;
 }
 
 public class LevelSelection : MonoBehaviour
@@ -92,6 +93,11 @@ public class LevelSelection : MonoBehaviour
             currentScene = levelPanels[currentIndex].sceneToLoad;
             GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
         }
+    }
+
+    public static void FetchCompletionData(string result, gradeAllSum.gradeEnum grade)
+    {
+        
     }
 
     public static void OnLevelCompleted()

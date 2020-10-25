@@ -102,5 +102,17 @@ public class PlayerLvl03Muveszetek : Player
     private void OnBecameInvisible()
     {
         isOnScreen = false;
+
+        if (Camera.main != null)
+        {
+            if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize)
+            {
+                if (levelCompletionPanelParent != null)
+                {
+                    LevelSelection.OnLevelCompleted();
+                    levelCompletionPanelParent.CallPanel(true);
+                }
+            }
+        }
     }
 }
