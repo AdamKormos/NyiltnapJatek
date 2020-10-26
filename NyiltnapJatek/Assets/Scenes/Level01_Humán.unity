@@ -3467,9 +3467,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1586167803}
   - component: {fileID: 1586167802}
-  - component: {fileID: 1586167804}
   - component: {fileID: 1586167805}
   - component: {fileID: 1586167801}
+  - component: {fileID: 1586167804}
   m_Layer: 0
   m_Name: Meteorite
   m_TagString: PassiveEnemy
@@ -3576,9 +3576,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1586167800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0a4e1ef3738dc438fc4cf7a5d0cb5b, type: 3}
+  m_Script: {fileID: 11500000, guid: eae7e8dd3eb0cbd4c9ab7d2d78bca2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movePerFrame: {x: -1, y: -1, z: 0}
 --- !u!61 &1586167805
 BoxCollider2D:
   m_ObjectHideFlags: 0
