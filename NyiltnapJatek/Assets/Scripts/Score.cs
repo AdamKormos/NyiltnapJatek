@@ -8,7 +8,7 @@ using GameNS = GameNS;
 public class Score : MonoBehaviour
 {
     public int value { get; private set; }
-    public int tenth { get; private set; }
+    public static int tenth { get; private set; }
     public static bool isPaused = false;
 
     public void OnGameLevelOpen()
@@ -61,11 +61,27 @@ public class Score : MonoBehaviour
             }
             else yield return new WaitForSeconds(0.1f);
         }
+
+        CalculateResults();
     }
 
     public static void OnEnemyKilled(Lvl05Enemy enemy)
     {
         GameNS::StaticData.gameUI.scoreCountText.text = (System.Convert.ToInt32(GameNS::StaticData.gameUI.scoreCountText.text) + enemy.scoreReward).ToString();
         Destroy(enemy.gameObject);
+    }
+
+    public static void CalculateResults()
+    {
+        float percentage = ((quizMaxAll.correctQuestions / quizMaxAll.allQuestions * 3) 
+            + (gradeAllSum.sum / gradeAllSum.maxSum));
+
+        percentage /= 4;
+
+        int grade = (int)(percentage / 0.2f) + 1;
+
+        LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);
+
+        LevelSelection.FetchCompletionData(tenth, (gradeAllSum.gradeEnum)LevelCompletionUI.calculatedGrade);
     }
 }

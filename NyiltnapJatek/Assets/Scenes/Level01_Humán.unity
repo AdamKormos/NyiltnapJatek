@@ -236,6 +236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2002723887526774158, guid: 2270d2a725f1b7b4b84cf37c89e5bf73,
+        type: 3}
+      propertyPath: nem
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3244664407431775237, guid: 2270d2a725f1b7b4b84cf37c89e5bf73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -857,18 +862,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38c73c0a3bff2894cb83f1eef8887449, type: 3}
---- !u!114 &875974050 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8651091090611431551, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 1066466208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1051948521
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,31 +955,6 @@ PrefabInstance:
     - target: {fileID: 993005139, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.r
-      value: 0.18836774
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.g
-      value: 0.7830189
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.b
-      value: 0.54435396
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157270870541770236, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: hoveredAnswerOptionColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8651091090611431549, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_Name
-      value: QuizQuestionText
       objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546928, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
@@ -1093,16 +1061,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: startsInMainMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: quizQuestionText
-      value: 
-      objectReference: {fileID: 875974050}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -1117,49 +1075,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254564, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_Text
-      value: '0:00
-
-        3/5
-
-        6/9
-
-
-
-        5'
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254564, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254564, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254565, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 113.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254565, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 150.27258
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254565, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 253.73117
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414920051254565, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 32.302
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}

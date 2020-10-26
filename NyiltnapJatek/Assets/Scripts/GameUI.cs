@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -84,8 +85,16 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    IEnumerator GenerateLevelSelectionChildren()
+    {
+        levelSelectionTransform.gameObject.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        levelSelectionTransform.gameObject.SetActive(false);
     }
 
     public void LoadLevelHint(string levelHintString)

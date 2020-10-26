@@ -1,30 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
 [System.Serializable]
-public struct LevelPanel
+public struct LevelPanelData
 {
-    [SerializeField] public string name;
-    [SerializeField] public Sprite img;
-    [SerializeField] public Menu.Scenes sceneToLoad;
-    [SerializeField] public Text bestResults;
+    [SerializeField] public string panelName;
+    [SerializeField] public Sprite levelImage;
+    [HideInInspector] public Menu.Scenes sceneToLoad;
 }
 
 public class LevelSelection : MonoBehaviour
 {
+    [SerializeField] Sprite[] gradeSprites = new Sprite[5];
     [SerializeField] float xOffsetBetweenPanels = 60f;
-    [SerializeField] GameObject samplePanelBackground = default;
-    [SerializeField] Text samplePanelText = default;
-    [SerializeField] Image samplePanelImage = default;
-    [SerializeField] List<LevelPanel> levelPanels = new List<LevelPanel>();
+    [SerializeField] GameObject samplePanel = default;
+    [SerializeField] List<LevelPanelData> levelPanels = new List<LevelPanelData>();
     Vector2 panelStartPosition = default;
     public static int currentIndex = 0;
     public static int maxIndex = 0;
     public static Menu.Scenes currentScene { get; private set; }
     static bool[] completedLevel = new bool[5];
+    static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[5];
+    static string[] scoreRepresentations = new string[5];
+    static LevelPanel[] panelChildren = default;
+    public static Sprite[] s_gradeSprites { get; private set; }
+
+    private void OnEnable()
+    {
+        if (panelChildren != null) foreach (LevelPanel panel in panelChildren) panel.gameObject.SetActive(true);
+    }
 
     private void OnDisable()
     {
@@ -38,28 +46,25 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
-        samplePanelBackground.SetActive(false);
-        samplePanelImage.gameObject.SetActive(false);
-        samplePanelText.gameObject.SetActive(false);
+        s_gradeSprites = gradeSprites;
+        samplePanel.SetActive(false);
 
-        panelStartPosition = samplePanelBackground.transform.position;
+        panelStartPosition = samplePanel.transform.position;
 
-        for(int i = 0; i < levelPanels.Count; i++)
+        if(panelChildren == null) InitiateChildrenCreation();
+    }
+
+    private void InitiateChildrenCreation()
+    {
+        for (int i = 0; i < levelPanels.Count; i++)
         {
-            GameObject panelBackground = Instantiate(samplePanelBackground, 
-                                                new Vector2(panelStartPosition.x + i * xOffsetBetweenPanels, samplePanelBackground.transform.position.y), Quaternion.identity, transform);
-            GameObject panelImage = Instantiate(samplePanelImage.gameObject, 
-                                                new Vector2(panelStartPosition.x + i * xOffsetBetweenPanels, samplePanelImage.transform.position.y), Quaternion.identity, transform);
-            panelImage.GetComponent<Image>().sprite = levelPanels[i].img;
+            GameObject panel = Instantiate(samplePanel, transform.position + new Vector3(i * xOffsetBetweenPanels, 0), Quaternion.identity, this.transform);
 
-            GameObject panelText = Instantiate(samplePanelText.gameObject, 
-                                                new Vector2(panelStartPosition.x + i * xOffsetBetweenPanels, samplePanelText.transform.position.y), Quaternion.identity, transform);
-            panelText.GetComponent<Text>().text = levelPanels[i].name;
-
-            panelBackground.SetActive(true);
-            panelImage.SetActive(true);
-            panelText.SetActive(true);
+            LevelPanelData toPaste = levelPanels[i];
+            panel.GetComponent<LevelPanel>().PasteData(toPaste);
         }
+
+        panelChildren = GetComponentsInChildren<LevelPanel>(true);
     }
 
     private void Update()
@@ -90,14 +95,47 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            currentScene = levelPanels[currentIndex].sceneToLoad;
-            GameNS::StaticData.loadingScreen.LoadLevel(levelPanels[currentIndex].sceneToLoad);
+            currentScene = (Menu.Scenes)currentIndex+1;
+            GameNS::StaticData.loadingScreen.LoadLevel(currentScene);
         }
     }
 
-    public static void FetchCompletionData(string result, gradeAllSum.gradeEnum grade)
+    public static void FetchCompletionData(int resultScore, gradeAllSum.gradeEnum resultGrade)
     {
-        
+        int arrIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
+
+        int newTupleInt;
+        gradeAllSum.gradeEnum newTupleGrade;
+
+        if (results[arrIndex] == null) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
+
+        if (arrIndex == 1 || arrIndex == 2 || arrIndex == 4)
+        {
+            if (resultScore < results[arrIndex].Item1)
+            {
+                newTupleInt = resultScore;
+                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
+                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+            }
+            else newTupleInt = results[arrIndex].Item1;
+        }
+        else
+        {
+            if (resultScore > results[arrIndex].Item1)
+            {
+                newTupleInt = resultScore;
+                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
+                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+            }
+            else newTupleInt = results[arrIndex].Item1;
+        }
+
+        if (resultGrade > results[arrIndex].Item2) newTupleGrade = resultGrade;
+        else newTupleGrade = results[arrIndex].Item2;
+
+        results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(newTupleInt, newTupleGrade);
+
+        panelChildren[arrIndex].InjectRecord(scoreRepresentations[arrIndex], results[arrIndex].Item2);
     }
 
     public static void OnLevelCompleted()

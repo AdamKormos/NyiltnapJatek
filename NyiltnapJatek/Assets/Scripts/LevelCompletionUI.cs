@@ -6,13 +6,18 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    public static int calculatedGrade; // Calculation @ Score.cs
+
     private void Start()
     {
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
+        if (gradeAllSum.maxSum == 0)
         {
-            gradeAllSum.maxSum += (int)grades[i].nem;
+            Grade[] grades = FindObjectsOfType<Grade>();
+
+            for (int i = 0; i < grades.Length; i++)
+            {
+                gradeAllSum.maxSum += (int)grades[i].nem;
+            }
         }
     }
 
@@ -33,22 +38,8 @@ public class LevelCompletionUI : MonoBehaviour
             GameNS::StaticData.gameUI.levelCompletionPanelText.text =
                 GameNS::StaticData.gameUI.scoreCountText.text + '\n' +
                 quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
-                gradeAllSum.sum + " / " + gradeAllSum.maxSum + '\n' + '\n' + '\n';
-
-            float percentage = ((quizMaxAll.correctQuestions / quizMaxAll.allQuestions * 3)
-                + (gradeAllSum.sum / gradeAllSum.maxSum));
-
-            percentage /= 4;
-
-            if (percentage < 0.2f) percentage = 1;
-            else if (percentage >= 0.8f) percentage = 5;
-            else if (percentage >= 0.6f) percentage = 4;
-            else if (percentage >= 0.4f) percentage = 3;
-            else if (percentage >= 0.2f) percentage = 2;
-
-            GameNS::StaticData.gameUI.levelCompletionPanelText.text += percentage;
-
-            LevelSelection.FetchCompletionData(GameNS::StaticData.gameUI.scoreCountText.text, (gradeAllSum.gradeEnum)percentage);
+                gradeAllSum.sum + " / " + gradeAllSum.maxSum + '\n' + '\n' + '\n' +
+                calculatedGrade;
         }
     }
 }

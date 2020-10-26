@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Grade.cs" />
     <Compile Include="Assets\Scripts\LevelCompletionUI.cs" />
     <Compile Include="Assets\Scripts\LevelHintBar.cs" />
+    <Compile Include="Assets\Scripts\LevelPanel.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
     <Compile Include="Assets\Scripts\LoadingScreen.cs" />
     <Compile Include="Assets\Scripts\Lvl05Enemy.cs" />
