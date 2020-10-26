@@ -38,6 +38,9 @@ public class GameUI : MonoBehaviour
         }
         else
         {
+            gradeAllSum.sum = 0;
+            quizMaxAll.correctQuestions = 0;
+
             if (!isReloadingLevel)
             {
                 switch (LevelSelection.currentScene)

@@ -8,7 +8,7 @@ TagManager:
   - Cloud
   - Wax
   - BulletClip
-  - Lvl03Enemy
+  - PassiveEnemy
   layers:
   - Default
   - TransparentFX

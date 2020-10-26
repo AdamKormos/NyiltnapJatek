@@ -17,18 +17,27 @@ public class Quiz : MonoBehaviour
 
     private void OnEnable()
     {
+        but[rowIndex + colIndex].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        rowIndex = 0;
+        colIndex = 0;
+
         countdownIndicator.value = 100f;
+        StartCoroutine(LoadQuestionTexts());
+    }
+
+    IEnumerator LoadQuestionTexts()
+    {
+        yield return new WaitForEndOfFrame();
+        for (int i = 0; i < but.Count; i++)
+        {
+            but[i].GetComponentInChildren<Text>(true).text = answerList[i];
+        }
     }
 
     private void Start()
     {
         sliderDecrWait = new WaitForSeconds(1f / countdownSliderTickPerSec);
         countdownIndicator.maxValue = 100f;
-
-        for(int i = 0; i < but.Count; i++)
-        {
-            but[i].GetComponentInChildren<Text>(true).text = answerList[i];
-        }
     }
 
     private void Update()

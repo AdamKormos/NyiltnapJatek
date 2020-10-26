@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 108534288}
   m_Layer: 0
   m_Name: TestEnemy
-  m_TagString: Lvl03Enemy
+  m_TagString: PassiveEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 871929473}
   m_Layer: 0
   m_Name: Violinkulcs
-  m_TagString: Lvl03Enemy
+  m_TagString: PassiveEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

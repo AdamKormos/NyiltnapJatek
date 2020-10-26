@@ -66,6 +66,7 @@
     <Compile Include="Assets\Lvl3Muveszetek\PlayerLvl03Muveszetek.cs" />
     <Compile Include="Assets\Scripts\BallLvl02MatekFizika.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\DiagonalMovement.cs" />
     <Compile Include="Assets\Scripts\FallingObstacle.cs" />
     <Compile Include="Assets\Scripts\FallingObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\GameNS.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\Scripts\Lvl05Server.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\ObstacleLvl02.cs" />
+    <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl01Human.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl02MatFiz.cs" />

@@ -80,6 +80,8 @@ public class Score : MonoBehaviour
 
         int grade = (int)(percentage / 0.2f) + 1;
 
+        Debug.Log("Full: " + (percentage * 4) + " Full/4: " + percentage + " calculated grade: " + grade);
+
         LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);
 
         LevelSelection.FetchCompletionData(tenth, (gradeAllSum.gradeEnum)LevelCompletionUI.calculatedGrade);

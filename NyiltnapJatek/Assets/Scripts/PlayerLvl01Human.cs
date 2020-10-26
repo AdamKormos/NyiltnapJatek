@@ -8,7 +8,6 @@ public class PlayerLvl01Human : Player
 {
     [SerializeField] protected float fallStrength = 0.05f;
     [SerializeField] protected float jumpStrength = 3;
-    [SerializeField] protected string cloudObjectTag = "Cloud";
     [SerializeField] protected GameObject wingHealthSliderGameObject = default;
     [SerializeField] protected float wingHealth = 100f;
     [SerializeField] protected float wingHealthIncreaseOnWaxPickup = 25f;
@@ -54,12 +53,14 @@ public class PlayerLvl01Human : Player
 
             hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize + 1f), Vector2.up);
 
-            if (hit.transform == null || !hit.transform.tag.Equals(cloudObjectTag)) // TODO: Remove second condition?
+            if (hit.transform == null || !hit.transform.tag.Equals("Cloud"))
             {
                 wingHealthSlider.value -= wingHealthDecreasePerFrame;
             }
         }
     }
+
+    Vector3 positionToAddOnFrame;
 
     protected override IEnumerator Move()
     {
@@ -73,8 +74,9 @@ public class PlayerLvl01Human : Player
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime * (1 - (wingHealthSlider.value / wingHealthSlider.maxValue / 10));
+                transform.position += positionToAddOnFrame;
+                Camera.main.transform.position += positionToAddOnFrame;
                 yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
@@ -91,8 +93,7 @@ public class PlayerLvl01Human : Player
     {
         base.OnGameOver();
 
-        wingHealthSlider.maxValue = wingHealth;
-        wingHealthSlider.value = wingHealthSlider.maxValue;
+        Destroy(wingHealthSliderGameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -103,6 +104,7 @@ public class PlayerLvl01Human : Player
             wingHealthSlider.value = Mathf.Clamp(wingHealthSlider.value + wingHealthIncreaseOnWaxPickup, 0, wingHealthSlider.maxValue);
             Destroy(collision.gameObject);
         }
+        else if (collision.tag.Equals("PassiveEnemy")) OnGameOver();
     }
 
     private void OnBecameVisible()
