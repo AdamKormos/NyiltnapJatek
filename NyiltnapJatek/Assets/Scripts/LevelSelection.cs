@@ -115,7 +115,6 @@ public class LevelSelection : MonoBehaviour
             {
                 newTupleInt = resultScore;
                 scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
-                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
             }
             else newTupleInt = results[arrIndex].Item1;
         }

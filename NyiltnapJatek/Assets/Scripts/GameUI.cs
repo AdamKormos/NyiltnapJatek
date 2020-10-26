@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour
 {
 #pragma warning disable UNT0013
     [SerializeField] public Transform mainMenuTransform = default;
+    [SerializeField] public Transform creditsTransform = default;
     [SerializeField] public Transform gameplayStuffTransform = default;
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
@@ -32,6 +33,7 @@ public class GameUI : MonoBehaviour
         if (isMainMenuView)
         {
             gameplayStuffTransform.gameObject.SetActive(false);
+            creditsTransform.gameObject.SetActive(false);
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(true);
             ToggleChildren(mainMenuTransform.gameObject, true);

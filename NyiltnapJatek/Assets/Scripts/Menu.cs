@@ -6,10 +6,18 @@ using GameNS = GameNS;
 public class Menu : MonoBehaviour
 {
     public enum Scenes {mainMenu, Lvl1, Lvl2, Lvl3, Lvl4, Lvl5 };
+    [SerializeField] Color selectedButtonColor = default;
     [SerializeField] private Button[] buttons = new Button[3];
     [SerializeField] public GameObject menuImg = default;
     private int index = 0;
     public static bool isMenuImgActive { get; private set; }
+
+    private void OnEnable()
+    {
+        buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        index = 0;
+        buttons[index].GetComponent<Image>().color = selectedButtonColor;
+    }
 
     void Update()
     {
@@ -19,6 +27,7 @@ public class Menu : MonoBehaviour
         {
             menuImg.SetActive(!menuImg.activeSelf);
             GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(!menuImg.activeSelf);
+            GameNS::StaticData.gameUI.creditsTransform.gameObject.SetActive(!menuImg.activeSelf);
         }
         if (menuImg.activeSelf)
         {
@@ -26,13 +35,13 @@ public class Menu : MonoBehaviour
             {
                 buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index--;
-                buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
+                buttons[index].GetComponent<Image>().color = selectedButtonColor;
             }
             else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 2)
             {
                 buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
                 index++;
-                buttons[index].GetComponent<Image>().color = new Color(0.1f, 0.3f, 0.4f);
+                buttons[index].GetComponent<Image>().color = selectedButtonColor;
             }
             else if(Input.GetKeyDown(KeyCode.Return))
             {
@@ -60,11 +69,11 @@ public class Menu : MonoBehaviour
 
     private void Credits()
     {
-
+        GameNS::StaticData.gameUI.creditsTransform.gameObject.SetActive(true);
     }
 
     private void Exit()
     {
-        SceneManager.LoadScene((int)Scenes.mainMenu);
+        Application.Quit();
     }
 }
