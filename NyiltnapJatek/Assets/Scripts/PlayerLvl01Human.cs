@@ -74,7 +74,7 @@ public class PlayerLvl01Human : Player
         {
             if (moveAllowed)
             {
-                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime * (1 - (wingHealthSlider.value / wingHealthSlider.maxValue / 10));
+                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime * (0.7f + ((wingHealthSlider.value / wingHealthSlider.maxValue / 10) * 3));
                 transform.position += positionToAddOnFrame;
                 Camera.main.transform.position += positionToAddOnFrame;
                 yield return new WaitForEndOfFrame();
