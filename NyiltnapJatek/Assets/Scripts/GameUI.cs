@@ -96,7 +96,7 @@ public class GameUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        levelCompletionPanelParent = levelCompletionPanelText.GetComponentInParent<LevelCompletionUI>();
+        GameNS::StaticData.gameUI.levelCompletionPanelParent = levelCompletionPanelText.GetComponentInParent<LevelCompletionUI>();
     }
 
     IEnumerator GenerateLevelSelectionChildren()

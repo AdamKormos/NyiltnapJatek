@@ -8,7 +8,6 @@ using GameNS = GameNS;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] protected LevelCompletionUI levelCompletionPanelParent = default;
     [SerializeField] protected int moveStrength = 30;
     public static bool moveAllowed = true;
     protected bool isOnGround = true;
@@ -19,8 +18,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
     }
 
@@ -75,9 +72,9 @@ public class Player : MonoBehaviour
         isOnScreen = false;
         reachedEnd = false; // Setting it back to false for further levels
 
-        if (levelCompletionPanelParent != null)
+        if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
         {
-            levelCompletionPanelParent.CallPanel(true);
+            GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
         }
     }
 }

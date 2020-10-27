@@ -3333,6 +3333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuizQuestionText
       objectReference: {fileID: 0}
+    - target: {fileID: 1167049922, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6043330019767071041, guid: ff5ad3955bc82764299e4559ec5bea9a,
         type: 3}
       propertyPath: hoveredAnswerOptionColor.a

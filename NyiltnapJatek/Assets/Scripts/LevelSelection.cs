@@ -102,22 +102,13 @@ public class LevelSelection : MonoBehaviour
     public static void FetchCompletionData(int resultScore, gradeAllSum.gradeEnum resultGrade)
     {
         int arrIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
-
+        
         int newTupleInt;
         gradeAllSum.gradeEnum newTupleGrade;
 
         if (results[arrIndex] == null) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
 
-        //if (arrIndex == 1 || arrIndex == 2 || arrIndex == 4)
-        //{
-            if (resultScore < results[arrIndex].Item1)
-            {
-                newTupleInt = resultScore;
-                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
-            }
-            else newTupleInt = results[arrIndex].Item1;
-        /*}
-        else
+        if (arrIndex == 5)
         {
             if (resultScore > results[arrIndex].Item1)
             {
@@ -127,7 +118,16 @@ public class LevelSelection : MonoBehaviour
             }
             else newTupleInt = results[arrIndex].Item1;
         }
-        */
+        else
+        {
+            if (resultScore < results[arrIndex].Item1)
+            {
+                newTupleInt = resultScore;
+                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
+            }
+            else newTupleInt = results[arrIndex].Item1;
+        }
+        
         if (resultGrade > results[arrIndex].Item2) newTupleGrade = resultGrade;
         else newTupleGrade = results[arrIndex].Item2;
 

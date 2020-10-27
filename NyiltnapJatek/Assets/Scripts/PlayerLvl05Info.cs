@@ -105,7 +105,7 @@ public class PlayerLvl05Info : Player
             {
                 reachedEnd = false; // Setting it back to false for further levels
 
-                if (levelCompletionPanelParent != null)
+                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
                     GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);

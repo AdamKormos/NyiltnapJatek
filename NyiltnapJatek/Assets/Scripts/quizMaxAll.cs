@@ -13,6 +13,6 @@ public class quizMaxAll : MonoBehaviour
     private void Start()
     {
         allQuestions = FindObjectsOfType<quizCollider>().Length;
-        Debug.Log(allQuestions);
+        //Debug.Log(allQuestions);
     }
 }

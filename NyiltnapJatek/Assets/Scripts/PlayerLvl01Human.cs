@@ -125,7 +125,7 @@ public class PlayerLvl01Human : Player
 
                 Destroy(wingHealthSliderGameObject);
 
-                if (levelCompletionPanelParent != null)
+                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
                 }

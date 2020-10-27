@@ -54,7 +54,7 @@ public class PlayerLvl4Biosz : Player
             }
             else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
             {
-                if (levelCompletionPanelParent != null)
+                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
                 }

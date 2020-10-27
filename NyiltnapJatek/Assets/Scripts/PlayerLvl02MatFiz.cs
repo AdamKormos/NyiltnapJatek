@@ -60,8 +60,9 @@ public class PlayerLvl02MatFiz : Player
                 transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);
             }
         }
-        else if(!quizCollider.quizActive)
+        else if(!quizCollider.quizActive) // No quiz is going and there aren't any bricks on the scene
         {
+            reachedEnd = true;
             LevelSelection.OnLevelCompleted();
         }
     }

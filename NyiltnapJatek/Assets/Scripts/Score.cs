@@ -76,6 +76,8 @@ public class Score : MonoBehaviour
         float percentage = ((((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions * 3f) 
             + ((float)gradeAllSum.sum / (float)gradeAllSum.maxSum)));
 
+        //Debug.Log(percentage);
+
         percentage /= 4f;
         int grade = (int)(percentage / 0.2f) + 1;
 

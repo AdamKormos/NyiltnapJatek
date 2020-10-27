@@ -104,7 +104,7 @@ public class PlayerLvl03Muveszetek : Player
         {
             if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize)
             {
-                if (levelCompletionPanelParent != null)
+                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
                 }
