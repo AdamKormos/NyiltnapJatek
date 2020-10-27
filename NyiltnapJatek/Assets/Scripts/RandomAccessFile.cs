@@ -18,6 +18,7 @@ public class RandomAccessFile
 
     public static void SaveData(int levelIndex, Tuple<string, gradeAllSum.gradeEnum> data)
     {
+        PlayerPrefs.SetInt("MSI", LevelSelection.maxSceneIndex);
         PlayerPrefs.SetString(levelIndex.ToString(), data.Item1 + " " + ((int)data.Item2).ToString());
         PlayerPrefs.Save();
     }

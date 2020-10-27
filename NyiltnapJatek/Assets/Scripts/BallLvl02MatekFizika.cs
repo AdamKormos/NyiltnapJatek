@@ -5,9 +5,19 @@ public class BallLvl02MatekFizika : MonoBehaviour
     Rigidbody2D rbd = default;
 
     [SerializeField] Vector2 velocity = new Vector2(0, 10f);
-    
+
+    private void OnDisable()
+    {
+        rbd.Sleep();
+    }
+
+    private void OnEnable()
+    {
+        if(rbd != null) rbd.WakeUp();
+    }
+
     // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
         rbd = transform.GetComponent<Rigidbody2D>();
         rbd.AddForce(new Vector3(transform.right.x * Random.Range(-10f, 10f), transform.up.y * 10f), ForceMode2D.Impulse);

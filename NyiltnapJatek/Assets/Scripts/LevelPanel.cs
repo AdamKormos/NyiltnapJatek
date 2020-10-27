@@ -22,5 +22,9 @@ public class LevelPanel : MonoBehaviour
             bestResultsText.text = t.Item1;
             gradeImage.sprite = LevelSelection.s_gradeSprites[(int)t.Item2 - 1];
         }
+        else
+        {
+            gradeImage.sprite = LevelSelection.s_missingGradeSprite;
+        }
     }
 }

@@ -36,6 +36,8 @@ public class PlayerLvl02MatFiz : Player
     // Update is called once per frame
     void Update()
     {
+        ball.enabled = !quizCollider.quizActive;
+
         if (brickCount > 0)
         {
             if (!isBallOnScreen)
@@ -57,6 +59,10 @@ public class PlayerLvl02MatFiz : Player
 
                 transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);
             }
+        }
+        else if(!quizCollider.quizActive)
+        {
+            LevelSelection.OnLevelCompleted();
         }
     }
 

@@ -17,13 +17,7 @@ public class ObstacleLvl02 : MonoBehaviour
                     GetComponentInChildren<quizCollider>().OnPlayerTouch();
                     break;
             }
-
             PlayerLvl02MatFiz.brickCount--;
-            if (PlayerLvl02MatFiz.brickCount == 0)
-            {
-                LevelSelection.OnLevelCompleted();
-            }
-
             Destroy(this.gameObject);
         }
     }

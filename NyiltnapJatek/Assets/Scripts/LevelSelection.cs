@@ -15,18 +15,20 @@ public struct LevelPanelData
 public class LevelSelection : MonoBehaviour
 {
     [SerializeField] Sprite[] gradeSprites = new Sprite[5];
+    [SerializeField] Sprite missingGradeSprite = default;
     [SerializeField] float xOffsetBetweenPanels = 60f;
     [SerializeField] GameObject samplePanel = default;
     [SerializeField] List<LevelPanelData> levelPanels = new List<LevelPanelData>();
     Vector2 panelStartPosition = default;
     public static int currentSceneIndex = 0;
-    public static int maxSceneIndex = 0;
+    public static int maxSceneIndex { get; private set; }
     public static Menu.Scenes currentScene { get; private set; }
     static bool[] completedLevel = new bool[5];
     static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[5];
     static string[] scoreRepresentations = new string[5];
     static LevelPanel[] panelChildren = default;
     public static Sprite[] s_gradeSprites { get; private set; }
+    public static Sprite s_missingGradeSprite { get; private set; }
 
     private void OnEnable()
     {
@@ -51,8 +53,10 @@ public class LevelSelection : MonoBehaviour
 #if UNITY_EDITOR
         maxSceneIndex = 4;
 #else
-        maxIndex = 0;
+        maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
 #endif
+
+        s_missingGradeSprite = missingGradeSprite;
         s_gradeSprites = gradeSprites;
         samplePanel.SetActive(false);
 
@@ -78,29 +82,15 @@ public class LevelSelection : MonoBehaviour
     {
         if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.Space)) maxSceneIndex = 4;
 
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentSceneIndex < maxSceneIndex)
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentSceneIndex > 0)
         {
             currentSceneIndex--;
-            if (currentSceneIndex < 0)
-            {
-                currentSceneIndex++;
-            }
-            else
-            {
-                transform.position += new Vector3(xOffsetBetweenPanels, 0);
-            }
+            transform.position += new Vector3(xOffsetBetweenPanels, 0);
         }
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentSceneIndex < maxSceneIndex)
         {
             currentSceneIndex++;
-            if (currentSceneIndex > levelPanels.Count-1)
-            {
-                currentSceneIndex--;
-            }
-            else
-            {
-                transform.position -= new Vector3(xOffsetBetweenPanels, 0);
-            }
+            transform.position -= new Vector3(xOffsetBetweenPanels, 0);
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {

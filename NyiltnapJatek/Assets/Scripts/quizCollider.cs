@@ -16,9 +16,10 @@ public class quizCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() || collision.GetComponent<BallLvl02MatekFizika>())
+        if (collision.GetComponent<Player>())
         {
             OnPlayerTouch();
+            Destroy(this.gameObject);
         }
     }
 
@@ -27,6 +28,5 @@ public class quizCollider : MonoBehaviour
         quizActive = true;
         GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
         Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
-        Destroy(this.gameObject);
     }
 }

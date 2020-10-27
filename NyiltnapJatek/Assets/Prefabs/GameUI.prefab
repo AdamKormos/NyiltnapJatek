@@ -1252,29 +1252,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gradeSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 833464abe388f2848a9e2bb0f90784c5, type: 3}
+  - {fileID: 21300000, guid: 839a66fc09b37ba49ac03abbc7d6289e, type: 3}
+  - {fileID: 21300000, guid: f4f8a52d9089ef44e89bbfcf50ca8388, type: 3}
+  - {fileID: 21300000, guid: 9eceb696c377f204991cc719f004777b, type: 3}
+  - {fileID: 21300000, guid: 5fe4d168e2d127e4cb9f7418cb09f79f, type: 3}
+  missingGradeSprite: {fileID: 21300000, guid: d8e0e3ee80631d8408d070e1bbf09a58, type: 3}
   xOffsetBetweenPanels: 500
   samplePanel: {fileID: 399944704}
   levelPanels:
   - panelName: "Hum\xE1n"
     levelImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 0
   - panelName: Matek-fizika
     levelImage: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 0
   - panelName: "M\u0171v\xE9szetek"
     levelImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 0
   - panelName: "Term\xE9szettudom\xE1ny"
     levelImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 0
   - panelName: Informatika
     levelImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    sceneToLoad: 0
 --- !u!1 &1998508814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,6 +2608,7 @@ MonoBehaviour:
   bulletCountText: {fileID: 1425081445}
   scoreCountText: {fileID: 9125414918931107387}
   levelCompletionPanelText: {fileID: 9125414920051254564}
+  levelCompletionPanelParent: {fileID: 0}
   loadingScreenSlider: {fileID: 9125414919724548732}
   levelHintBar: {fileID: 46764222}
   levelHintBarText: {fileID: 650091863}
