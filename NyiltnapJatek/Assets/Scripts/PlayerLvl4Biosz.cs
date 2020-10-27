@@ -16,7 +16,7 @@ public class PlayerLvl4Biosz : Player
 
     void Update()
     {
-        if (body.velocity.y == 0)
+        if (body.velocity.y == 0 && !reachedEnd && !quizCollider.quizActive)
         {
             if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
             {
@@ -48,11 +48,11 @@ public class PlayerLvl4Biosz : Player
 
         if (Camera.main != null)
         {
-            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
+            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize || transform.position.x < Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2))
             {
                 OnGameOver();
             }
-            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
+            else
             {
                 if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {

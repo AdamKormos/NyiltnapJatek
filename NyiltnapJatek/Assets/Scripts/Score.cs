@@ -17,33 +17,17 @@ public class Score : MonoBehaviour
 
         Menu.Scenes currentScene = (Menu.Scenes)(SceneManager.GetActiveScene().buildIndex);
 
-        switch (currentScene)
+        if(currentScene == Menu.Scenes.Lvl5)
         {
-            case Menu.Scenes.Lvl1:
-                StopCoroutine("Count");
-                tenth = 0;
-                GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
-                StartCoroutine("Count");
-                break;
-            case Menu.Scenes.Lvl2:
-                StopCoroutine("Count");
-                tenth = 0;
-                GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
-                StartCoroutine("Count");
-                break;
-            case Menu.Scenes.Lvl3:
-                GameNS::StaticData.gameUI.scoreCountText.text = "0";
-                break;
-            case Menu.Scenes.Lvl4:
-                StopCoroutine("Count");
-                tenth = 0;
-                GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
-                StartCoroutine("Count");
-                break;
-            case Menu.Scenes.Lvl5:
-                GameNS::StaticData.gameUI.scoreCountText.text = "0";
-                GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
-                break;
+            GameNS::StaticData.gameUI.scoreCountText.text = "0";
+            GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
+        }
+        else
+        {
+            StopCoroutine("Count");
+            tenth = 0;
+            GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
+            StartCoroutine("Count");
         }
     }
 
@@ -76,7 +60,7 @@ public class Score : MonoBehaviour
         float percentage = ((((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions * 3f) 
             + ((float)gradeAllSum.sum / (float)gradeAllSum.maxSum)));
 
-        //Debug.Log(percentage);
+        Debug.Log((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions);
 
         percentage /= 4f;
         int grade = (int)(percentage / 0.2f) + 1;

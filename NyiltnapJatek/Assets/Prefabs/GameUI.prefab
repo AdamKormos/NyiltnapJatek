@@ -2608,7 +2608,7 @@ MonoBehaviour:
   bulletCountText: {fileID: 1425081445}
   scoreCountText: {fileID: 9125414918931107387}
   levelCompletionPanelText: {fileID: 9125414920051254564}
-  levelCompletionPanelParent: {fileID: 0}
+  levelCompletionPanelParent: {fileID: 9125414918242867843}
   loadingScreenSlider: {fileID: 9125414919724548732}
   levelHintBar: {fileID: 46764222}
   levelHintBarText: {fileID: 650091863}
@@ -3335,6 +3335,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1167049922, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
       propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167049922, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167049922, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167049922, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6043330019767071041, guid: ff5ad3955bc82764299e4559ec5bea9a,

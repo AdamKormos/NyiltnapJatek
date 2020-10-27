@@ -6,11 +6,11 @@ public class Grade : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() || collision.GetComponent<BallLvl02MatekFizika>())
+        if (collision.GetComponent<Player>() || collision.GetComponent<Bullet>() || collision.GetComponent<BallLvl02MatekFizika>())
         {
             gradeAllSum.count++;
             gradeAllSum.sum += (int)nem;
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
     }
 }

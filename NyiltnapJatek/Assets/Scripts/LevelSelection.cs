@@ -53,7 +53,8 @@ public class LevelSelection : MonoBehaviour
 #if UNITY_EDITOR
         maxSceneIndex = 4;
 #else
-        maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
+        if(Debug.isDebugBuild) maxSceneIndex = 4;
+        else maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
 #endif
 
         s_missingGradeSprite = missingGradeSprite;
@@ -80,8 +81,6 @@ public class LevelSelection : MonoBehaviour
 
     private void Update()
     {
-        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.Space)) maxSceneIndex = 4;
-
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentSceneIndex > 0)
         {
             currentSceneIndex--;

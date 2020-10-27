@@ -52,7 +52,7 @@ public class GameUI : MonoBehaviour
                         GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni.");
                         break;
                     case Menu.Scenes.Lvl2:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha leesik a golyó, újra kell kezdened a pályát. A platformot az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha kizuhan a golyó, újra kell kezdened a pályát. A platformot az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
                         break;
                     case Menu.Scenes.Lvl3:
                         GameNS::StaticData.gameUI.LoadLevelHint("Mozogj a kottavonalakon (fel: W/fel nyíl, le: S/le nyíl) hogy kikerüld az akadályokat! A vonalak közé is lemehetsz, ha lenyomva tartod az Alt-ot!");
@@ -61,7 +61,7 @@ public class GameUI : MonoBehaviour
                         GameNS::StaticData.gameUI.LoadLevelHint("Menj végig a pályán használva a gravitáció változtatgatását a szóközzel!");
                         break;
                     case Menu.Scenes.Lvl5:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az A/D billentyűkkel és a bal/jobb nyilakkal pedig az űrhajót tudod vízszintesen mozgatni.");
                         break;
                 }
             }
@@ -95,8 +95,6 @@ public class GameUI : MonoBehaviour
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        GameNS::StaticData.gameUI.levelCompletionPanelParent = levelCompletionPanelText.GetComponentInParent<LevelCompletionUI>();
     }
 
     IEnumerator GenerateLevelSelectionChildren()

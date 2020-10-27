@@ -71,10 +71,5 @@ public class Player : MonoBehaviour
     {
         isOnScreen = false;
         reachedEnd = false; // Setting it back to false for further levels
-
-        if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
-        {
-            GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
-        }
     }
 }

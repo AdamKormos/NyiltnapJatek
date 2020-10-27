@@ -8,7 +8,7 @@ public class PlayerLvl02MatFiz : Player
     [SerializeField] BallLvl02MatekFizika ball = default;
     public static bool isBallOnScreen = true;
     float leftScreenBound = 0f, rightScreenBound = 0f;
-    public static int brickCount;
+    public static int brickCount = 1;
 
     // Start is called before the first frame update
     void Start()

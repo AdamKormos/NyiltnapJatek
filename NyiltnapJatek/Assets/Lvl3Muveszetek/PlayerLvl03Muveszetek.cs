@@ -15,9 +15,8 @@ public class PlayerLvl03Muveszetek : Player
     // Start is called before the first frame update
     void Start()
     {
-        GameNS::StaticData.gameUI.scoreCountText.text = "0";
-
         waitSecond = 1f / waitSecond;
+
         StartCoroutine(Move()); // Inherited, automatic Move
     }
 
@@ -39,12 +38,12 @@ public class PlayerLvl03Muveszetek : Player
                 {
                     StartCoroutine(move(-kottaGap / 2));
                 }
-                else if (Input.GetKey(KeyCode.W) && index != 4)
+                else if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
                 {
                     index++;
                     StartCoroutine(move(kottaGap));
                 }
-                else if (Input.GetKey(KeyCode.S) && index != 0)
+                else if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
                 {
                     index--;
                     StartCoroutine(move(-kottaGap));
@@ -102,13 +101,7 @@ public class PlayerLvl03Muveszetek : Player
 
         if (Camera.main != null)
         {
-            if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize)
-            {
-                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
-                {
-                    LevelSelection.OnLevelCompleted();
-                }
-            }
+            LevelSelection.OnLevelCompleted(); 
         }
     }
 }
