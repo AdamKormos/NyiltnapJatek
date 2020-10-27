@@ -2,30 +2,29 @@
 
 public class ObstacleLvl02 : MonoBehaviour
 {
-    private int health = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public enum BrickType { Normal, Question};
+    [SerializeField] BrickType brickType = BrickType.Normal;
+    [SerializeField] int health = 3;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ++health;
-        switch (health)
+        health--;
+        if(health == 0)
         {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+            switch(brickType)
+            {
+                case BrickType.Question:
+                    GetComponentInChildren<quizCollider>().OnPlayerTouch();
+                    break;
+            }
+
+            PlayerLvl02MatFiz.brickCount--;
+            if (PlayerLvl02MatFiz.brickCount == 0)
+            {
+                LevelSelection.OnLevelCompleted();
+            }
+
+            Destroy(this.gameObject);
         }
     }
 }

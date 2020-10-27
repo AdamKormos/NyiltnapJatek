@@ -19,8 +19,8 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] GameObject samplePanel = default;
     [SerializeField] List<LevelPanelData> levelPanels = new List<LevelPanelData>();
     Vector2 panelStartPosition = default;
-    public static int currentIndex = 0;
-    public static int maxIndex = 0;
+    public static int currentSceneIndex = 0;
+    public static int maxSceneIndex = 0;
     public static Menu.Scenes currentScene { get; private set; }
     static bool[] completedLevel = new bool[5];
     static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[5];
@@ -42,14 +42,14 @@ public class LevelSelection : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.position += new Vector3(currentIndex * xOffsetBetweenPanels, 0);
-        currentIndex = 0;
+        transform.position += new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
+        currentSceneIndex = 0;
     }
 
     private void Start()
     {
 #if UNITY_EDITOR
-        maxIndex = 4;
+        maxSceneIndex = 4;
 #else
         maxIndex = 0;
 #endif
@@ -76,26 +76,26 @@ public class LevelSelection : MonoBehaviour
 
     private void Update()
     {
-        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.Space)) maxIndex = 4;
+        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.Space)) maxSceneIndex = 4;
 
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentIndex < maxIndex)
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentSceneIndex < maxSceneIndex)
         {
-            currentIndex--;
-            if (currentIndex < 0)
+            currentSceneIndex--;
+            if (currentSceneIndex < 0)
             {
-                currentIndex++;
+                currentSceneIndex++;
             }
             else
             {
                 transform.position += new Vector3(xOffsetBetweenPanels, 0);
             }
         }
-        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentIndex < maxIndex)
+        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentSceneIndex < maxSceneIndex)
         {
-            currentIndex++;
-            if (currentIndex > levelPanels.Count-1)
+            currentSceneIndex++;
+            if (currentSceneIndex > levelPanels.Count-1)
             {
-                currentIndex--;
+                currentSceneIndex--;
             }
             else
             {
@@ -104,7 +104,7 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            currentScene = (Menu.Scenes)currentIndex+1;
+            currentScene = (Menu.Scenes)currentSceneIndex+1;
             GameNS::StaticData.loadingScreen.LoadLevel(currentScene);
         }
     }
@@ -118,15 +118,15 @@ public class LevelSelection : MonoBehaviour
 
         if (results[arrIndex] == null) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
 
-        if (arrIndex == 1 || arrIndex == 2 || arrIndex == 4)
-        {
+        //if (arrIndex == 1 || arrIndex == 2 || arrIndex == 4)
+        //{
             if (resultScore < results[arrIndex].Item1)
             {
                 newTupleInt = resultScore;
                 scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
             }
             else newTupleInt = results[arrIndex].Item1;
-        }
+        /*}
         else
         {
             if (resultScore > results[arrIndex].Item1)
@@ -137,7 +137,7 @@ public class LevelSelection : MonoBehaviour
             }
             else newTupleInt = results[arrIndex].Item1;
         }
-
+        */
         if (resultGrade > results[arrIndex].Item2) newTupleGrade = resultGrade;
         else newTupleGrade = results[arrIndex].Item2;
 
@@ -148,12 +148,15 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
-        if (currentScene == Menu.Scenes.mainMenu) return;
-
-        if (!completedLevel[(int)currentScene - 1])
+        if (currentSceneIndex != (int)Menu.Scenes.mainMenu)
         {
-            completedLevel[(int)currentScene - 1] = true;
-            maxIndex++;
+            if (!completedLevel[(int)currentScene - 1])
+            {
+                completedLevel[(int)currentScene - 1] = true;
+                maxSceneIndex++;
+            }
         }
+
+        GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
     }
 }

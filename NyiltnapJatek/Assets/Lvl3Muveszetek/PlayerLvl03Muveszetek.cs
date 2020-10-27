@@ -17,9 +17,6 @@ public class PlayerLvl03Muveszetek : Player
     {
         GameNS::StaticData.gameUI.scoreCountText.text = "0";
 
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
-
         waitSecond = 1f / waitSecond;
         StartCoroutine(Move()); // Inherited, automatic Move
     }
@@ -110,7 +107,6 @@ public class PlayerLvl03Muveszetek : Player
                 if (levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
-                    levelCompletionPanelParent.CallPanel(true);
                 }
             }
         }

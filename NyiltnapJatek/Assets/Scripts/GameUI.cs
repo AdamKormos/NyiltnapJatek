@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Text bulletCountText = default;
     [SerializeField] public Text scoreCountText = default;
     [SerializeField] public Text levelCompletionPanelText = default;
+    [SerializeField] public LevelCompletionUI levelCompletionPanelParent = default;
     [SerializeField] public Slider loadingScreenSlider = default;
     [SerializeField] public LevelHintBar levelHintBar = default;
     [SerializeField] public Text levelHintBarText = default;
@@ -51,7 +52,7 @@ public class GameUI : MonoBehaviour
                         GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni.");
                         break;
                     case Menu.Scenes.Lvl2:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét a téglákat a golyó segítségével! Vigyázz, ha leesik, újra kell kezdened a pályát. A platformod az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha leesik a golyó, újra kell kezdened a pályát. A platformot az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
                         break;
                     case Menu.Scenes.Lvl3:
                         GameNS::StaticData.gameUI.LoadLevelHint("Mozogj a kottavonalakon (fel: W/fel nyíl, le: S/le nyíl) hogy kikerüld az akadályokat! A vonalak közé is lemehetsz, ha lenyomva tartod az Alt-ot!");
@@ -94,6 +95,8 @@ public class GameUI : MonoBehaviour
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        levelCompletionPanelParent = levelCompletionPanelText.GetComponentInParent<LevelCompletionUI>();
     }
 
     IEnumerator GenerateLevelSelectionChildren()

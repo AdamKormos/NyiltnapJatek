@@ -7,14 +7,20 @@ public class PlayerLvl02MatFiz : Player
 {
     [SerializeField] BallLvl02MatekFizika ball = default;
     public static bool isBallOnScreen = true;
+    float leftScreenBound = 0f, rightScreenBound = 0f;
+    public static int brickCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
+
         ball.gameObject.SetActive(false);
 
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
+
+        leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
+        rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
 
         StartCoroutine(WaitForOK());
     }
@@ -30,21 +36,26 @@ public class PlayerLvl02MatFiz : Player
     // Update is called once per frame
     void Update()
     {
-        if (!isBallOnScreen)
+        if (brickCount > 0)
         {
-            OnGameOver();
-            isBallOnScreen = true;
-        }
-
-        if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
-        {
-            if (Input.GetKey(KeyCode.A))
+            if (!isBallOnScreen)
             {
-                transform.position -= new Vector3(10f * Time.deltaTime, 0f);
+                OnGameOver();
+                isBallOnScreen = true;
             }
-            else if (Input.GetKey(KeyCode.D))
+
+            if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
             {
-                transform.position += new Vector3(10f * Time.deltaTime, 0f);
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    transform.position -= new Vector3(10f * Time.deltaTime, 0f);
+                }
+                else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.position += new Vector3(10f * Time.deltaTime, 0f);
+                }
+
+                transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);
             }
         }
     }

@@ -17,7 +17,7 @@ public class PlayerLvl01Human : Player
     // Start is called before the first frame update
     void Start()
     {
-        halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
 
         wingHealthSliderGameObject.SetActive(false);
 
@@ -28,9 +28,6 @@ public class PlayerLvl01Human : Player
         wingHealthSlider = wingHealthSliderGameObject.GetComponent<Slider>();
         wingHealthSlider.maxValue = wingHealth;
         wingHealthSlider.value = wingHealthSlider.maxValue;
-
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
 
         StartCoroutine(Move());
     }
@@ -51,7 +48,7 @@ public class PlayerLvl01Human : Player
                 transform.position += new Vector3(0, -fallStrength);
             }
 
-            hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize + 1f), Vector2.up);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize.y + 1f), Vector2.up);
 
             if (hit.transform == null || !hit.transform.tag.Equals("Cloud"))
             {
@@ -131,7 +128,6 @@ public class PlayerLvl01Human : Player
                 if (levelCompletionPanelParent != null)
                 {
                     LevelSelection.OnLevelCompleted();
-                    levelCompletionPanelParent.CallPanel(true);
                 }
             }
         }

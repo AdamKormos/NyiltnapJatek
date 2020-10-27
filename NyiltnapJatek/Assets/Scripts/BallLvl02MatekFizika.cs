@@ -4,13 +4,13 @@ public class BallLvl02MatekFizika : MonoBehaviour
 {
     Rigidbody2D rbd = default;
 
-    [SerializeField] Vector3 velocity = new Vector3(0, 10f);
+    [SerializeField] Vector2 velocity = new Vector2(0, 10f);
     
     // Start is called before the first frame update
     void OnEnable()
     {
         rbd = transform.GetComponent<Rigidbody2D>();
-        rbd.AddForce(new Vector3(transform.right.x, transform.up.y) * 10f, ForceMode2D.Impulse);
+        rbd.AddForce(new Vector3(transform.right.x * Random.Range(-10f, 10f), transform.up.y * 10f), ForceMode2D.Impulse);
         velocity = rbd.velocity;
     }
 

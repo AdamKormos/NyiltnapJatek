@@ -16,12 +16,17 @@ public class quizCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>())
+        if (collision.GetComponent<Player>() || collision.GetComponent<BallLvl02MatekFizika>())
         {
-            quizActive = true;
-            GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
-            Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
-            Destroy(this.gameObject);
+            OnPlayerTouch();
         }
+    }
+
+    public void OnPlayerTouch()
+    {
+        quizActive = true;
+        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
+        Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
+        Destroy(this.gameObject);
     }
 }

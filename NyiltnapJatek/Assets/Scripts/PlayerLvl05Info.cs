@@ -22,13 +22,10 @@ public class PlayerLvl05Info : Player
         GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
 
-        halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
 
-        leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize;
-        rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize;
-
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+        leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
+        rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
 
         StartCoroutine(Move());
     }
@@ -55,7 +52,7 @@ public class PlayerLvl05Info : Player
 
             if(Input.GetKeyDown(shootKey) && bulletCount > 0)
             {
-                GameObject bullet = Instantiate(bulletObject, transform.position + new Vector3(0, halfPlayerSize + 0.1f, -5f), Quaternion.identity);
+                GameObject bullet = Instantiate(bulletObject, transform.position + new Vector3(0, halfPlayerSize.y + 0.1f, -5f), Quaternion.identity);
                 bulletCount--;
                 GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
             }
@@ -112,7 +109,6 @@ public class PlayerLvl05Info : Player
                 {
                     LevelSelection.OnLevelCompleted();
                     GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
-                    levelCompletionPanelParent.CallPanel(true);
                 }
             }
         }

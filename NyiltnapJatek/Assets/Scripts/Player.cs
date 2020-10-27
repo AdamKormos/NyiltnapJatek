@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] protected int moveStrength = 30;
     public static bool moveAllowed = true;
     protected bool isOnGround = true;
-    protected float halfPlayerSize = 0f;
+    protected Vector2 halfPlayerSize = default;
     public static bool reachedEnd { get; protected set; }
     public static bool isOnScreen { get; protected set; }
 
