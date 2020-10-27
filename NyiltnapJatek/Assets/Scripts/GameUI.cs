@@ -74,6 +74,7 @@ public class GameUI : MonoBehaviour
 
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);
+            creditsTransform.gameObject.SetActive(false);
         }
     }
 

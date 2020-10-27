@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +15,12 @@ public class LevelPanel : MonoBehaviour
         levelImage.sprite = lpd.levelImage;
     }
 
-    public void InjectRecord(string result, gradeAllSum.gradeEnum grade)
+    public void InjectRecord(Tuple<string, gradeAllSum.gradeEnum> t)
     {
-        bestResultsText.text = result;
-        gradeImage.sprite = LevelSelection.s_gradeSprites[(int)grade - 1];
+        if (t != null)
+        {
+            bestResultsText.text = t.Item1;
+            gradeImage.sprite = LevelSelection.s_gradeSprites[(int)t.Item2 - 1];
+        }
     }
 }

@@ -10,7 +10,6 @@ public struct LevelPanelData
 {
     [SerializeField] public string panelName;
     [SerializeField] public Sprite levelImage;
-    [HideInInspector] public Menu.Scenes sceneToLoad;
 }
 
 public class LevelSelection : MonoBehaviour
@@ -31,21 +30,29 @@ public class LevelSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        if (panelChildren != null) foreach (LevelPanel panel in panelChildren) panel.gameObject.SetActive(true);
+        if (panelChildren != null)
+        {
+            for (int i = 1; i < panelChildren.Length; i++) // panelChildren[0] is the sample panel
+            {
+                panelChildren[i].InjectRecord(RandomAccessFile.LoadData(i-1));
+                panelChildren[i].gameObject.SetActive(true);
+            }
+        }
     }
 
     private void OnDisable()
     {
         transform.position += new Vector3(currentIndex * xOffsetBetweenPanels, 0);
-
-#if UNITY_EDITOR
-        maxIndex = 4;
-#endif
         currentIndex = 0;
     }
 
     private void Start()
     {
+#if UNITY_EDITOR
+        maxIndex = 4;
+#else
+        maxIndex = 0;
+#endif
         s_gradeSprites = gradeSprites;
         samplePanel.SetActive(false);
 
@@ -69,7 +76,9 @@ public class LevelSelection : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.Space)) maxIndex = 4;
+
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentIndex < maxIndex)
         {
             currentIndex--;
             if (currentIndex < 0)
@@ -81,7 +90,7 @@ public class LevelSelection : MonoBehaviour
                 transform.position += new Vector3(xOffsetBetweenPanels, 0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) && currentIndex < maxIndex)
+        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentIndex < maxIndex)
         {
             currentIndex++;
             if (currentIndex > levelPanels.Count-1)
@@ -134,7 +143,7 @@ public class LevelSelection : MonoBehaviour
 
         results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(newTupleInt, newTupleGrade);
 
-        panelChildren[arrIndex].InjectRecord(scoreRepresentations[arrIndex], results[arrIndex].Item2);
+        RandomAccessFile.SaveData(arrIndex - 1, new Tuple<string, gradeAllSum.gradeEnum>(scoreRepresentations[arrIndex], results[arrIndex].Item2));
     }
 
     public static void OnLevelCompleted()
