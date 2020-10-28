@@ -17,7 +17,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (true)
         {
-            GameObject obstacle = Instantiate(obstacleToSpawn, transform.position, obstacleToSpawn.transform.rotation);
+            GameObject obstacle = Instantiate(obstacleToSpawn, transform.position, obstacleToSpawn.transform.rotation, transform.parent);
             obstacle.SetActive(true);
             yield return new WaitForSeconds(spawnCooldown);
         }

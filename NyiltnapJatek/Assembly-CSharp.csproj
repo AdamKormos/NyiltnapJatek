@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\ObstacleLvl02.cs" />
     <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
+    <Compile Include="Assets\Scripts\ObstacleSpawnerOnCollision.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl01Human.cs" />
     <Compile Include="Assets\Scripts\PlayerLvl02MatFiz.cs" />

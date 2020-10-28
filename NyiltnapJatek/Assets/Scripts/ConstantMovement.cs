@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ConstantMovement : MonoBehaviour
 {
-    [SerializeField] Vector3 movePerFrame = default;
-    bool isOnScreen = false;
+    [SerializeField] protected Vector3 movePerFrame = default;
+    protected bool isOnScreen = false;
 
     private void OnBecameVisible()
     {
