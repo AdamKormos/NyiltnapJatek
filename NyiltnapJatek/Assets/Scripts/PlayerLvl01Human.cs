@@ -39,7 +39,7 @@ public class PlayerLvl01Human : Player
     {
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
-            if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && wingHealthSlider.value > 0)
+            if (Input.GetKey(KeyCode.Space) && wingHealthSlider.value > 0)
             {
                 transform.position += new Vector3(0, jumpStrength);
             }
