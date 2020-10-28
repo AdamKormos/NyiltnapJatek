@@ -18,7 +18,7 @@ public class PlayerLvl4Biosz : Player
     {
         if (body.velocity.y == 0 && !reachedEnd && !quizCollider.quizActive)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 body.gravityScale = -body.gravityScale;
             }
@@ -28,6 +28,11 @@ public class PlayerLvl4Biosz : Player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
+        else if (collision.tag.Equals("DNASQ")) 
+        { 
+            moveStrength = (int)(moveStrength * 1.25f);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

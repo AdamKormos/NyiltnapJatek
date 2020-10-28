@@ -9,6 +9,7 @@ TagManager:
   - Wax
   - BulletClip
   - PassiveEnemy
+  - DNASQ
   layers:
   - Default
   - TransparentFX
