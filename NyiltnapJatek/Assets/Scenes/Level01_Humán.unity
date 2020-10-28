@@ -13549,26 +13549,6 @@ PrefabInstance:
       propertyPath: levelCompletionPanelParent
       value: 
       objectReference: {fileID: 1066466209}
-    - target: {fileID: 5186284660482857625, guid: 8ab982e5212e8544ead085756da6b9c1,
-        type: 3}
-      propertyPath: moveStrength
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5186284660482857625, guid: 8ab982e5212e8544ead085756da6b9c1,
-        type: 3}
-      propertyPath: jumpStrength
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 5186284660482857625, guid: 8ab982e5212e8544ead085756da6b9c1,
-        type: 3}
-      propertyPath: fallStrength
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5186284660482857625, guid: 8ab982e5212e8544ead085756da6b9c1,
-        type: 3}
-      propertyPath: wingHealthIncreaseOnWaxPickup
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 5186284660482857627, guid: 8ab982e5212e8544ead085756da6b9c1,
         type: 3}
       propertyPath: m_Name

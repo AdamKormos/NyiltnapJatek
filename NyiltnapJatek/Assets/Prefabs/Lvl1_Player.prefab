@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5186284660482857624}
   - component: {fileID: 5186284660482857625}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Lvl1_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,13 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c206e98093215cf4786c863ab4f9c52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCompletionPanelParent: {fileID: 0}
-  moveStrength: 25
+  moveStrength: 60
   fallStrength: 0.01
   jumpStrength: 0.02
-  cloudObjectTag: Cloud
   wingHealthSliderGameObject: {fileID: 4307522261365236049, guid: ce7d0b1745bcf0645a403c5b8b8cadef,
     type: 3}
   wingHealth: 100
-  wingHealthIncreaseOnWaxPickup: 25
+  wingHealthIncreaseOnWaxPickup: 40
   wingHealthDecreasePerFrame: 0.05

@@ -112,7 +112,11 @@ public class LevelSelection : MonoBehaviour
         int newTupleInt;
         gradeAllSum.gradeEnum newTupleGrade;
 
-        if (results[arrIndex] == null) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
+        if (results[arrIndex] == null)
+        {
+            if(arrIndex == 5) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(0, gradeAllSum.gradeEnum.one);
+            else results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
+        }
 
         if (arrIndex == 5)
         {
