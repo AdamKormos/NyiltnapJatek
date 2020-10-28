@@ -14,6 +14,7 @@ public struct LevelPanelData
 
 public class LevelSelection : MonoBehaviour
 {
+    [SerializeField] GameObject lockGameObject = default;
     [SerializeField] Sprite[] gradeSprites = new Sprite[5];
     [SerializeField] Sprite missingGradeSprite = default;
     [SerializeField] float xOffsetBetweenPanels = 60f;
@@ -23,12 +24,13 @@ public class LevelSelection : MonoBehaviour
     public static int currentSceneIndex = 0;
     public static int maxSceneIndex { get; private set; }
     public static Menu.Scenes currentScene { get; private set; }
+    public static Sprite[] s_gradeSprites { get; private set; }
+    public static Sprite s_missingGradeSprite { get; private set; }
     static bool[] completedLevel = new bool[5];
     static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[5];
     static string[] scoreRepresentations = new string[5];
     static LevelPanel[] panelChildren = default;
-    public static Sprite[] s_gradeSprites { get; private set; }
-    public static Sprite s_missingGradeSprite { get; private set; }
+    static Image[] lockImageArray = new Image[5];
 
     private void OnEnable()
     {
@@ -71,12 +73,17 @@ public class LevelSelection : MonoBehaviour
         for (int i = 0; i < levelPanels.Count; i++)
         {
             GameObject panel = Instantiate(samplePanel, transform.position + new Vector3(i * xOffsetBetweenPanels, 0), Quaternion.identity, this.transform);
+            GameObject lockObject = Instantiate(lockGameObject, transform.position + new Vector3(i * xOffsetBetweenPanels, 0) + lockGameObject.transform.position, 
+                                                Quaternion.identity, panel.transform);
 
             LevelPanelData toPaste = levelPanels[i];
             panel.GetComponent<LevelPanel>().PasteData(toPaste);
+
+            lockImageArray[i] = lockObject.GetComponent<Image>();
         }
 
-        panelChildren = GetComponentsInChildren<LevelPanel>(true);
+        Destroy(lockImageArray[0].gameObject); // First level is always available
+        panelChildren = GetComponentsInChildren<LevelPanel>(true); // Collect panels in children
     }
 
     private void Update()
@@ -143,6 +150,7 @@ public class LevelSelection : MonoBehaviour
             {
                 completedLevel[(int)currentScene - 1] = true;
                 maxSceneIndex++;
+                Destroy(lockImageArray[maxSceneIndex].gameObject);
             }
         }
 

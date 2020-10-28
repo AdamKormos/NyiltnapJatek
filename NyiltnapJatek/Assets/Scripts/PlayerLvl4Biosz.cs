@@ -52,7 +52,7 @@ public class PlayerLvl4Biosz : Player
             {
                 OnGameOver();
             }
-            else
+            else if(reachedEnd)
             {
                 if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
                 {

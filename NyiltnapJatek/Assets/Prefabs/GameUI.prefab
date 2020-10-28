@@ -1251,6 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf5a7501043fe545908ce85aa6778a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockGameObject: {fileID: 16563457277640087, guid: 45f9876b87dffcd4eb87174b4f162742,
+    type: 3}
   gradeSprites:
   - {fileID: 21300000, guid: 833464abe388f2848a9e2bb0f90784c5, type: 3}
   - {fileID: 21300000, guid: 839a66fc09b37ba49ac03abbc7d6289e, type: 3}

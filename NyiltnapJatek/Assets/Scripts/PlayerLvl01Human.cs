@@ -119,7 +119,7 @@ public class PlayerLvl01Human : Player
             {
                 OnGameOver();
             }
-            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
+            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize && reachedEnd)
             {
                 reachedEnd = false; // Setting it back to false for further levels
 

@@ -99,7 +99,7 @@ public class PlayerLvl03Muveszetek : Player
     {
         isOnScreen = false;
 
-        if (Camera.main != null)
+        if (Camera.main != null && reachedEnd)
         {
             LevelSelection.OnLevelCompleted(); 
         }

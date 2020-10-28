@@ -17,10 +17,6 @@ public class Quiz : MonoBehaviour
 
     private void OnEnable()
     {
-        but[rowIndex + colIndex].GetComponent<Image>().color = new Color(1f, 1f, 1f);
-        rowIndex = 0;
-        colIndex = 0;
-
         countdownIndicator.value = 100f;
         StartCoroutine(LoadQuestionTexts());
     }
@@ -96,6 +92,10 @@ public class Quiz : MonoBehaviour
 
     private void CloseQuiz()
     {
+        but[rowIndex + colIndex].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        rowIndex = 0;
+        colIndex = 0;
+
         transform.parent.gameObject.SetActive(false);
         Player.moveAllowed = true;
         quizCollider.quizActive = false;

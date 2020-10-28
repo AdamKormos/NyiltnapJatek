@@ -1925,6 +1925,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1995374819, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
+      propertyPath: lockGameObject
+      value: 
+      objectReference: {fileID: 16563457277640087, guid: 45f9876b87dffcd4eb87174b4f162742,
+        type: 3}
     - target: {fileID: 9125414918875546928, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_LocalPosition.x
