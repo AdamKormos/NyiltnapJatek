@@ -3351,6 +3351,16 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6043330019166367322, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330019166367322, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6043330019767071041, guid: ff5ad3955bc82764299e4559ec5bea9a,
         type: 3}
       propertyPath: hoveredAnswerOptionColor.a
@@ -3380,6 +3390,26 @@ PrefabInstance:
         type: 3}
       propertyPath: countdownSliderTickPerSec
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330019964521448, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330019964521448, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330020002981951, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330020002981951, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6043330020207742862, guid: ff5ad3955bc82764299e4559ec5bea9a,
         type: 3}
@@ -3490,6 +3520,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: quizPic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330020546153431, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043330020546153431, guid: ff5ad3955bc82764299e4559ec5bea9a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff5ad3955bc82764299e4559ec5bea9a, type: 3}
