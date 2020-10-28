@@ -58,11 +58,11 @@ public class Score : MonoBehaviour
     public static void CalculateResults()
     {
         float percentage = ((((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions * 3f) 
-            + ((float)gradeAllSum.sum / (float)gradeAllSum.maxSum)));
+            + ((float)gradeAllSum.sum / (float)gradeAllSum.maxSum) * 2f));
 
         Debug.Log((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions);
 
-        percentage /= 4f;
+        percentage /= 5f;
         int grade = (int)(percentage / 0.2f) + 1;
 
         LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);

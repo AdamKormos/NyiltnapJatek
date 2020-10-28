@@ -6,6 +6,7 @@ using GameNS = GameNS;
 public class GameUI : MonoBehaviour
 {
 #pragma warning disable UNT0013
+    [SerializeField] public Sprite coinSprite = default;
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform creditsTransform = default;
     [SerializeField] public Transform gameplayStuffTransform = default;
