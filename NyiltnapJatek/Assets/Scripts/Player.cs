@@ -54,14 +54,14 @@ public class Player : MonoBehaviour
 
     protected static bool respawnedAtCheckpoint = false;
 
-    protected virtual void OnGameOver()
+    protected void OnGameOver()
     {
         if (Quiz.checkpoint == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameNS::StaticData.gameUI.OnViewChanged(false, true);
         }
-        else
+        else if(SceneManager.GetActiveScene().buildIndex != 2)
         {
             transform.position = new Vector3(Quiz.checkpoint.position.x, Quiz.checkpoint.position.y, transform.position.z);
 
