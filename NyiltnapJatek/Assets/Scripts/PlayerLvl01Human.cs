@@ -132,14 +132,13 @@ public class PlayerLvl01Human : Player
             }
             else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize && reachedEnd)
             {
-                reachedEnd = false; // Setting it back to false for further levels
-
+                reachedEnd = false;
                 Destroy(wingHealthSliderGameObject);
 
-                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
-                {
+                //if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
+                //{
                     LevelSelection.OnLevelCompleted();
-                }
+                //}
             }
         }
     }

@@ -65,10 +65,12 @@ public class PlayerLvl4Biosz : Player
             }
             else if(reachedEnd)
             {
-                if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
-                {
+                reachedEnd = false;
+
+                //if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
+                //{
                     LevelSelection.OnLevelCompleted();
-                }
+                //}
             }
         }
     }

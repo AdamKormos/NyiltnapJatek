@@ -110,9 +110,9 @@ public class PlayerLvl05Info : Player
             //if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize && reachedEnd)
             //{
                 reachedEnd = false; // Setting it back to false for further levels
+                GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
 
                 LevelSelection.OnLevelCompleted();
-                GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
             //}
         }
     }

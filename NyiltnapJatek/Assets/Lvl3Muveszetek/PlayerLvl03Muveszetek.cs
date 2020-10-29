@@ -107,6 +107,7 @@ public class PlayerLvl03Muveszetek : Player
 
         if (Camera.main != null && reachedEnd)
         {
+            reachedEnd = false;
             LevelSelection.OnLevelCompleted(); 
         }
     }

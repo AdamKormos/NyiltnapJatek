@@ -62,7 +62,6 @@ public class PlayerLvl02MatFiz : Player
         }
         else if(!quizCollider.quizActive) // No quiz is going and there aren't any bricks on the scene
         {
-            reachedEnd = true;
             LevelSelection.OnLevelCompleted();
         }
     }
