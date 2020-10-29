@@ -16,11 +16,15 @@ public class PlayerLvl4Biosz : Player
         body = GetComponent<Rigidbody2D>();
         body.freezeRotation = true;
 
+        cameraOffset = Camera.main.transform.position - transform.position;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
         StartCoroutine(Move());
     }
 
     void Update()
     {
+        currentPosition = transform.position;
+
         if (body.velocity.y == 0 && !reachedEnd && !quizCollider.quizActive)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -51,6 +55,16 @@ public class PlayerLvl4Biosz : Player
         //    canRotate = true;
         //    checkCollision = false;
         //}
+    }
+
+    private void OnBecameVisible()
+    {
+        isOnScreen = true;
+
+        if (respawnedAtCheckpoint)
+        {
+            respawnedAtCheckpoint = false;
+        }
     }
 
     private void OnBecameInvisible()

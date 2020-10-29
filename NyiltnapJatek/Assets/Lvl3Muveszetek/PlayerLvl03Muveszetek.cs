@@ -23,12 +23,18 @@ public class PlayerLvl03Muveszetek : Player
 
         waitSecond = 1f / waitSecond;
 
+        cameraOffset = Camera.main.transform.position - transform.position;
+
+        cameraOffset = Camera.main.transform.position - transform.position;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
         StartCoroutine(Move()); // Inherited, automatic Move
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentPosition = transform.position;
+
         if (!Moving && !quizCollider.quizActive)
         {
             if (heldAltAtStart)
@@ -99,6 +105,11 @@ public class PlayerLvl03Muveszetek : Player
     private void OnBecameVisible()
     {
         isOnScreen = true;
+
+        if (respawnedAtCheckpoint)
+        {
+            respawnedAtCheckpoint = false;
+        }
     }
 
     private void OnBecameInvisible()
@@ -108,7 +119,7 @@ public class PlayerLvl03Muveszetek : Player
         if (Camera.main != null && reachedEnd)
         {
             reachedEnd = false;
-            LevelSelection.OnLevelCompleted(); 
+            LevelSelection.OnLevelCompleted();
         }
     }
 }

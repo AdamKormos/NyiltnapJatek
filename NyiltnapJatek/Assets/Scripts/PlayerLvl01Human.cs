@@ -24,11 +24,11 @@ public class PlayerLvl01Human : Player
         wingHealthIncreaseOnWaxPickup = 40;
 #endif
 
-        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
-
         GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;
         GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
 
+        cameraOffset = Camera.main.transform.position - transform.position;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
         StartCoroutine(Move());
     }
 
@@ -37,8 +37,6 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
-        //GameNS::StaticData.gameUI.debugText.text = (1f / Time.deltaTime) + '\n' + ("Decr: " + wingHealthDecreasePerFrame.ToString());
-
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             if (Input.GetKey(KeyCode.Space) && GameNS::StaticData.gameUI.leftTopSlider.value > 0)
@@ -57,6 +55,8 @@ public class PlayerLvl01Human : Player
                 GameNS::StaticData.gameUI.leftTopSlider.value -= wingHealthDecreasePerFrame;
             }
         }
+
+        currentPosition = transform.position;
     }
 
     Vector3 positionToAddOnFrame;
@@ -103,6 +103,12 @@ public class PlayerLvl01Human : Player
     private void OnBecameVisible()
     {
         isOnScreen = true;
+        
+        if (respawnedAtCheckpoint)
+        {
+            GameNS::StaticData.gameUI.leftTopSlider.value = wingHealth;
+            respawnedAtCheckpoint = false;
+        }
     }
 
     private void OnBecameInvisible()

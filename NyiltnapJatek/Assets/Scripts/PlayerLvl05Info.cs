@@ -28,20 +28,22 @@ public class PlayerLvl05Info : Player
         GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
 
-        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
-
         leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
         rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
 
         GameNS::StaticData.gameUI.leftTopSlider.maxValue = serverObject.maxHealth;
         GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
 
+        cameraOffset = Camera.main.transform.position - transform.position;
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
         StartCoroutine(Move());
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentPosition = transform.position;
+
         if (Lvl05Server.health <= 0) OnGameOver();
 
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
@@ -103,6 +105,16 @@ public class PlayerLvl05Info : Player
             bulletCount += Random.Range(minimumBulletFromClip, maximumBulletFromClip);
             GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
             Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnBecameVisible()
+    {
+        isOnScreen = true;
+
+        if (respawnedAtCheckpoint)
+        {
+            respawnedAtCheckpoint = false;
         }
     }
 

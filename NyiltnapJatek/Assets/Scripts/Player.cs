@@ -14,11 +14,18 @@ public class Player : MonoBehaviour
     protected Vector2 halfPlayerSize = default;
     public static bool reachedEnd { get; protected set; }
     public static bool isOnScreen { get; protected set; }
+    public static Vector3 currentPosition { get; protected set; }
+    protected static Vector2 cameraOffset;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Move());
+    }
+
+    private void Update()
+    {
+        currentPosition = transform.position;
     }
 
     protected virtual IEnumerator Move()
@@ -45,10 +52,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    protected static bool respawnedAtCheckpoint = false;
+
     protected virtual void OnGameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        GameNS::StaticData.gameUI.OnViewChanged(false, true);
+        if (Quiz.checkpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameNS::StaticData.gameUI.OnViewChanged(false, true);
+        }
+        else
+        {
+            transform.position = new Vector3(Quiz.checkpoint.position.x, Quiz.checkpoint.position.y, transform.position.z);
+
+            if (SceneManager.GetActiveScene().buildIndex == 5)
+            {
+                Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Quiz.checkpoint.position.y + cameraOffset.y, Camera.main.transform.position.z);
+                Score.value = System.Convert.ToInt32(Quiz.checkpoint.score);
+                GameNS::StaticData.gameUI.scoreCountText.text = Score.value.ToString();
+            }
+            else
+            {
+                Camera.main.transform.position = new Vector3(Quiz.checkpoint.position.x + cameraOffset.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            }
+
+            respawnedAtCheckpoint = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

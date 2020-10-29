@@ -7,7 +7,7 @@ using GameNS = GameNS;
 
 public class Score : MonoBehaviour
 {
-    public int value { get; private set; }
+    public static int value { get; set; }
     public static int tenth { get; private set; }
     public static bool isPaused = false;
 

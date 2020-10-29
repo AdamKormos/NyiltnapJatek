@@ -50,6 +50,7 @@ public class GameUI : MonoBehaviour
         {
             gradeAllSum.sum = 0;
             quizMaxAll.correctQuestions = 0;
+            Quiz.checkpoint = null;
 
             if (!isReloadingLevel)
             {

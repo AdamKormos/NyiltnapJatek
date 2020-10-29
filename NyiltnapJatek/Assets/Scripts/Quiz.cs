@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
+public class Checkpoint
+{
+    public Vector2 position;
+    public string score;
+
+    public Checkpoint(Vector2 pos, string sc)
+    {
+        position = pos;
+        score = sc;
+    }
+}
+
 public class Quiz : MonoBehaviour
 {
     [SerializeField] float quizAnswerTimeLimit = 10f;
@@ -11,6 +23,7 @@ public class Quiz : MonoBehaviour
     [SerializeField] int countdownSliderTickPerSec = 30;
     [SerializeField] Color hoveredAnswerOptionColor = default;
     [SerializeField] private List<Button> but = new List<Button>(4);
+    public static Checkpoint checkpoint = null;
     private static int rowIndex = 0, colIndex = 0, correctIndex = 0;
     private static string[] answerList = new string[4];
     WaitForSeconds sliderDecrWait;
@@ -56,8 +69,8 @@ public class Quiz : MonoBehaviour
             {
                 if (rowIndex + colIndex == correctIndex)
                 {
-                    Debug.Log("Nice");
                     quizMaxAll.correctQuestions++;
+                    CreateCheckpoint();
                 }
                 else
                 {
@@ -67,6 +80,11 @@ public class Quiz : MonoBehaviour
                 CloseQuiz();
             }
         }
+    }
+
+    private void CreateCheckpoint()
+    {
+        checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text);
     }
 
     public static void InitiateQuiz(string questionName, string[] answers, byte correctAnswerIndex)
