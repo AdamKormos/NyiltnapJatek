@@ -18,11 +18,26 @@ public class quizCollider : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
-            quizActive = true;
-            Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
-            Player.moveAllowed = false;
-            Destroy(this.gameObject);
+            if (collision.GetComponent<PlayerLvl01Human>())
+            {
+                if (GameNS::StaticData.gameUI.leftTopSlider.value > 0)
+                {
+                    OnPlayerTouch();
+                    Destroy(this.gameObject);
+                }
+            }
+            else
+            {
+                OnPlayerTouch();
+                Destroy(this.gameObject);
+            }
         }
+    }
+
+    public void OnPlayerTouch()
+    {
+        quizActive = true;
+        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
+        Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
     }
 }

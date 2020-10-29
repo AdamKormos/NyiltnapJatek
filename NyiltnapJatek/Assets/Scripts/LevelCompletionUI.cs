@@ -6,21 +6,27 @@ using GameNS = GameNS;
 
 public class LevelCompletionUI : MonoBehaviour
 {
+    public static int calculatedGrade; // Calculation @ Score.cs
+
     private void Start()
     {
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
+        if (gradeAllSum.maxSum == 0)
         {
-            gradeAllSum.maxSum += (int)grades[i].nem;
+            Grade[] grades = FindObjectsOfType<Grade>();
+
+            for (int i = 0; i < grades.Length; i++)
+            {
+                gradeAllSum.maxSum += (int)grades[i].nem;
+            }
         }
     }
 
     private void Update()
     {
-        if(!Player.isOnScreen && Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+        if(Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && (!Player.isOnScreen || PlayerLvl02MatFiz.brickCount < 1))
         {
-            GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
+            PlayerLvl02MatFiz.brickCount = 1;
+            GameNS::StaticData.loadingScreen.LoadLevel(0); // Main Menu
         }
     }
 
@@ -28,9 +34,13 @@ public class LevelCompletionUI : MonoBehaviour
     {
         GameUI.ToggleChildren(this.gameObject, activityState);
 
-        GameNS::StaticData.gameUI.levelCompletionPanelText.text =
-            GameNS::StaticData.gameUI.scoreCountText.text + '\n' +
-            quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
-            gradeAllSum.sum + " / " + gradeAllSum.maxSum;
+        if (activityState)
+        {
+            GameNS::StaticData.gameUI.levelCompletionPanelText.text =
+                GameNS::StaticData.gameUI.scoreCountText.text + '\n' +
+                quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
+                gradeAllSum.sum + " / " + gradeAllSum.maxSum + '\n' + '\n' + '\n' +
+                calculatedGrade;
+        }
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Cloud
   - Wax
   - BulletClip
+  - PassiveEnemy
+  - DNASQ
   layers:
   - Default
   - TransparentFX

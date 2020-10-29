@@ -8,30 +8,26 @@ public class PlayerLvl01Human : Player
 {
     [SerializeField] protected float fallStrength = 0.05f;
     [SerializeField] protected float jumpStrength = 3;
-    [SerializeField] protected string cloudObjectTag = "Cloud";
-    [SerializeField] protected GameObject wingHealthSliderGameObject = default;
     [SerializeField] protected float wingHealth = 100f;
     [SerializeField] protected float wingHealthIncreaseOnWaxPickup = 25f;
     [SerializeField] protected float wingHealthDecreasePerFrame = 0.05f;
-    Slider wingHealthSlider = default;
 
     // Start is called before the first frame update
     void Start()
     {
-        halfPlayerSize = GetComponent<SpriteRenderer>().bounds.size.y / 2;
+#if UNITY_EDITOR
+#else
+        moveStrength = 60;
+        fallStrength = 0.04f;
+        jumpStrength = 0.06f;
+        wingHealthDecreasePerFrame = 0.2f;
+        wingHealthIncreaseOnWaxPickup = 40;
+#endif
 
-        wingHealthSliderGameObject.SetActive(false);
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
 
-        wingHealthSliderGameObject = Instantiate(wingHealthSliderGameObject.gameObject, wingHealthSliderGameObject.transform.position 
-                                                                    + new Vector3(GameNS::StaticData.gameUI.GetComponent<RectTransform>().rect.width / 2,
-                                                                                  GameNS::StaticData.gameUI.GetComponent<RectTransform>().rect.height / 2),
-                                                                                  Quaternion.identity, GameNS::StaticData.gameUI.transform);
-        wingHealthSlider = wingHealthSliderGameObject.GetComponent<Slider>();
-        wingHealthSlider.maxValue = wingHealth;
-        wingHealthSlider.value = wingHealthSlider.maxValue;
-
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+        GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;
+        GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
 
         StartCoroutine(Move());
     }
@@ -41,9 +37,11 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
+        //GameNS::StaticData.gameUI.debugText.text = (1f / Time.deltaTime) + '\n' + ("Decr: " + wingHealthDecreasePerFrame.ToString());
+
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
-            if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && wingHealthSlider.value > 0)
+            if (Input.GetKey(KeyCode.Space) && GameNS::StaticData.gameUI.leftTopSlider.value > 0)
             {
                 transform.position += new Vector3(0, jumpStrength);
             }
@@ -52,30 +50,33 @@ public class PlayerLvl01Human : Player
                 transform.position += new Vector3(0, -fallStrength);
             }
 
-            hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize + 1f), Vector2.up);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize.y + 1f), Vector2.up);
 
-            if (hit.transform == null || !hit.transform.tag.Equals(cloudObjectTag)) // TODO: Remove second condition?
+            if (hit.transform == null || !hit.transform.tag.Equals("Cloud"))
             {
-                wingHealthSlider.value -= wingHealthDecreasePerFrame;
+                GameNS::StaticData.gameUI.leftTopSlider.value -= wingHealthDecreasePerFrame;
             }
         }
     }
+
+    Vector3 positionToAddOnFrame;
 
     protected override IEnumerator Move()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl1);
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
-        // Level hint read, gameplay starts:
-        wingHealthSliderGameObject.SetActive(true);
+        GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
 
         while (!reachedEnd)
         {
             if (moveAllowed)
             {
-                transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-                Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
+                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime
+                    * (0.7f + ((GameNS::StaticData.gameUI.leftTopSlider.value / GameNS::StaticData.gameUI.leftTopSlider.maxValue / 10) * 3));
+                transform.position += positionToAddOnFrame;
+                Camera.main.transform.position += positionToAddOnFrame;
                 yield return new WaitForEndOfFrame();
             }
             else yield return new WaitForSeconds(0.1f);
@@ -88,22 +89,15 @@ public class PlayerLvl01Human : Player
         }
     }
 
-    protected override void OnGameOver()
-    {
-        base.OnGameOver();
-
-        wingHealthSlider.maxValue = wingHealth;
-        wingHealthSlider.value = wingHealthSlider.maxValue;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
         else if (collision.tag.Equals("Wax"))
         {
-            wingHealthSlider.value = Mathf.Clamp(wingHealthSlider.value + wingHealthIncreaseOnWaxPickup, 0, wingHealthSlider.maxValue);
+            GameNS::StaticData.gameUI.leftTopSlider.value = Mathf.Clamp(GameNS::StaticData.gameUI.leftTopSlider.value + wingHealthIncreaseOnWaxPickup, 0, GameNS::StaticData.gameUI.leftTopSlider.maxValue);
             Destroy(collision.gameObject);
         }
+        else if (collision.tag.Equals("PassiveEnemy")) OnGameOver();
     }
 
     private void OnBecameVisible()
@@ -121,17 +115,14 @@ public class PlayerLvl01Human : Player
             {
                 OnGameOver();
             }
-            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize)
+            else if (transform.position.y < Camera.main.transform.position.y + Camera.main.orthographicSize && reachedEnd)
             {
-                reachedEnd = false; // Setting it back to false for further levels
+                reachedEnd = false;
 
-                Destroy(wingHealthSliderGameObject);
-
-                if (levelCompletionPanelParent != null)
-                {
+                //if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
+                //{
                     LevelSelection.OnLevelCompleted();
-                    levelCompletionPanelParent.CallPanel(true);
-                }
+                //}
             }
         }
     }

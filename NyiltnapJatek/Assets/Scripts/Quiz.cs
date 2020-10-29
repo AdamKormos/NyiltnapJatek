@@ -1,21 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class Quiz : MonoBehaviour
 {
+    [SerializeField] float quizAnswerTimeLimit = 10f;
+    [SerializeField] Slider countdownIndicator = default;
+    [SerializeField] int countdownSliderTickPerSec = 30;
     [SerializeField] Color hoveredAnswerOptionColor = default;
     [SerializeField] private List<Button> but = new List<Button>(4);
     private static int rowIndex = 0, colIndex = 0, correctIndex = 0;
     private static string[] answerList = new string[4];
+    WaitForSeconds sliderDecrWait;
 
-    private void Start()
+    private void OnEnable()
     {
-        for(int i = 0; i < but.Count; i++)
+        countdownIndicator.value = 100f;
+        StartCoroutine(LoadQuestionTexts());
+    }
+
+    IEnumerator LoadQuestionTexts()
+    {
+        yield return new WaitForEndOfFrame();
+        for (int i = 0; i < but.Count; i++)
         {
             but[i].GetComponentInChildren<Text>(true).text = answerList[i];
         }
+    }
+
+    private void Start()
+    {
+        sliderDecrWait = new WaitForSeconds(1f / countdownSliderTickPerSec);
+        countdownIndicator.maxValue = 100f;
     }
 
     private void Update()
@@ -46,9 +64,7 @@ public class Quiz : MonoBehaviour
                     Debug.Log("Bad");
                 }
 
-                transform.parent.gameObject.SetActive(false);
-                Player.moveAllowed = true;
-                quizCollider.quizActive = false;
+                CloseQuiz();
             }
         }
     }
@@ -58,5 +74,30 @@ public class Quiz : MonoBehaviour
         GameNS::StaticData.gameUI.quizQuestionText.text = questionName;
         answerList = answers;
         correctIndex = correctAnswerIndex;
+        Player.moveAllowed = false;
+    }
+
+    public IEnumerator QuizCountdown()
+    {
+        float toDecrementPerTick = countdownIndicator.maxValue / (quizAnswerTimeLimit * countdownSliderTickPerSec);
+
+        while (quizCollider.quizActive && countdownIndicator.value > 0)
+        {
+            countdownIndicator.value -= toDecrementPerTick;
+            yield return sliderDecrWait;
+        }
+        
+        if(quizCollider.quizActive) CloseQuiz();
+    }
+
+    private void CloseQuiz()
+    {
+        but[rowIndex + colIndex].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        rowIndex = 0;
+        colIndex = 0;
+
+        transform.parent.gameObject.SetActive(false);
+        Player.moveAllowed = true;
+        quizCollider.quizActive = false;
     }
 }

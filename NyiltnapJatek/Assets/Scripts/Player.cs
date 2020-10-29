@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] protected LevelCompletionUI levelCompletionPanelParent = default;
-    [SerializeField] protected int moveStrength = 1;
+    [SerializeField] protected int moveStrength = 30;
     public static bool moveAllowed = true;
     protected bool isOnGround = true;
-    protected float halfPlayerSize = 0f;
+    protected Vector2 halfPlayerSize = default;
     public static bool reachedEnd { get; protected set; }
     public static bool isOnScreen { get; protected set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if(levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
         StartCoroutine(Move());
     }
 
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(LevelSelection.currentScene);
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
         while (!reachedEnd)
         {
@@ -49,7 +47,7 @@ public class Player : MonoBehaviour
 
     protected virtual void OnGameOver()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)LevelSelection.currentScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 
@@ -73,10 +71,5 @@ public class Player : MonoBehaviour
     {
         isOnScreen = false;
         reachedEnd = false; // Setting it back to false for further levels
-
-        if (levelCompletionPanelParent != null)
-        {
-            levelCompletionPanelParent.CallPanel(true);
-        }
     }
 }

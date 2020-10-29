@@ -5,13 +5,22 @@ using GameNS = GameNS;
 
 public class PlayerLvl02MatFiz : Player
 {
+    [SerializeField] BallLvl02MatekFizika ball = default;
+    public static bool isBallOnScreen = true;
+    float leftScreenBound = 0f, rightScreenBound = 0f;
+    public static int brickCount = 1;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameNS::StaticData.gameUI.scoreCountText.text = "0";
+        brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
 
-        levelCompletionPanelParent = GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.GetComponent<LevelCompletionUI>();
-        if (levelCompletionPanelParent != null) levelCompletionPanelParent.CallPanel(false);
+        ball.gameObject.SetActive(false);
+
+        halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
+
+        leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
+        rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
 
         StartCoroutine(WaitForOK());
     }
@@ -20,22 +29,40 @@ public class PlayerLvl02MatFiz : Player
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen(Menu.Scenes.Lvl2);
+        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
+        ball.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+        ball.enabled = !quizCollider.quizActive;
+
+        if (brickCount > 0)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (!isBallOnScreen)
             {
-                transform.position -= new Vector3(10f * Time.deltaTime, 0f);
+                OnGameOver();
+                isBallOnScreen = true;
             }
-            else if (Input.GetKey(KeyCode.D))
+
+            if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
             {
-                transform.position += new Vector3(10f * Time.deltaTime, 0f);
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    transform.position -= new Vector3(10f * Time.deltaTime, 0f);
+                }
+                else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.position += new Vector3(10f * Time.deltaTime, 0f);
+                }
+
+                transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);
             }
+        }
+        else if(!quizCollider.quizActive) // No quiz is going and there aren't any bricks on the scene
+        {
+            LevelSelection.OnLevelCompleted();
         }
     }
 
@@ -47,13 +74,5 @@ public class PlayerLvl02MatFiz : Player
     private void OnBecameInvisible()
     {
         isOnScreen = false;
-
-        if (Camera.main != null)
-        {
-            if (transform.position.y < Camera.main.transform.position.y - Camera.main.orthographicSize)
-            {
-                OnGameOver();
-            }
-        }
     }
 }

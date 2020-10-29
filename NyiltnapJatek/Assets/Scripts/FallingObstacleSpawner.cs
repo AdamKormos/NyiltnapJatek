@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingObstacleSpawner : MonoBehaviour
+public class FallingObstacleSpawner : ObstacleSpawner
 {
-    [SerializeField] GameObject obstacleToSpawn = default;
-    [SerializeField] float spawnCooldown = 20f;
-    [SerializeField] float objectFallStrength = 0.05f;
+    [SerializeField] protected float objectFallStrength = 0.05f;
 
     private void Start()
     {
+        obstacleToSpawn.SetActive(false);
         StartCoroutine(Spawn());
     }
 

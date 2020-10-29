@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5154142795924032233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.22, y: -5, z: -5.6191406}
+  m_LocalPosition: {x: -5.22, y: -5, z: -5}
   m_LocalScale: {x: 30, y: 40, z: 1}
   m_Children:
   - {fileID: 4248772372343695074}
@@ -96,6 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ff3f60f6f35944b2cc07f8c796d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questionName: 
+  answers:
+  - 
+  - 
+  - 
+  - 
+  correctAnswerIndex: 0
 --- !u!61 &6285624642822351343
 BoxCollider2D:
   m_ObjectHideFlags: 0
