@@ -18,7 +18,6 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] GameObject lockGameObject = default;
     [SerializeField] Sprite[] gradeSprites = new Sprite[5];
     [SerializeField] Sprite missingGradeSprite = default;
-    [SerializeField] Text guideText = default;
     [SerializeField] float xOffsetBetweenPanels = 60f;
     [SerializeField] GameObject samplePanel = default;
     [SerializeField] List<LevelPanelData> levelPanels = new List<LevelPanelData>();
@@ -48,7 +47,7 @@ public class LevelSelection : MonoBehaviour
     private void OnDisable()
     {
         transform.position += new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
-        guideText.transform.position -= new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
+        GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position -= new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
         currentSceneIndex = 0;
     }
 
@@ -66,7 +65,7 @@ public class LevelSelection : MonoBehaviour
         samplePanel.SetActive(false);
 
         panelStartPosition = samplePanel.transform.position;
-        guideTextStartPos = guideText.transform.position;
+        guideTextStartPos = GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position;
 
         if(panelChildren == null) InitiateChildrenCreation();
     }
@@ -95,13 +94,13 @@ public class LevelSelection : MonoBehaviour
         {
             currentSceneIndex--;
             transform.position += new Vector3(xOffsetBetweenPanels, 0);
-            guideText.transform.position -= new Vector3(xOffsetBetweenPanels, 0);
+            GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position -= new Vector3(xOffsetBetweenPanels, 0);
         }
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentSceneIndex < maxSceneIndex)
         {
             currentSceneIndex++;
             transform.position -= new Vector3(xOffsetBetweenPanels, 0);
-            guideText.transform.position += new Vector3(xOffsetBetweenPanels, 0);
+            GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position += new Vector3(xOffsetBetweenPanels, 0);
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {

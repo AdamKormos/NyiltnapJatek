@@ -19,7 +19,7 @@ public class Lvl05Server : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Lvl05Enemy>())
+        if (collision.gameObject.GetComponent<Lvl05Enemy>() || collision.gameObject.GetComponent<EnemyBullet>())
         {
             OnDamageTaken(collision);
         }

@@ -25,6 +25,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public LevelHintBar levelHintBar = default;
     [SerializeField] public Text levelHintBarText = default;
     [SerializeField] public Slider leftTopSlider = default;
+    [SerializeField] public Text levelSelectionGuideText = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
@@ -33,6 +34,7 @@ public class GameUI : MonoBehaviour
         // Set level specific objects to false:
         lvl05StuffTransform.gameObject.SetActive(false);
         leftTopSlider.gameObject.SetActive(false);
+        levelSelectionGuideText.gameObject.SetActive(false);
 
         quizTransform.gameObject.SetActive(false);
 

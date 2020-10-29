@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 68
+  controlID: 123
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 69
+  controlID: 57
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 70
+  controlID: 58
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 73382
+  m_LastSelectedObjectID: -1930
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -341,20 +341,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - "Assets/Art/Lvl05_Inf\xF3"
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - "Assets/Art/Lvl05_Inf\xF3"
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\NyiltnapJatek\NyiltnapJatek\NyiltnapJatek
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 363e0000
-    m_LastClickedID: 15926
-    m_ExpandedIDs: 00000000263e000000ca9a3b
+    m_SelectedIDs: aa3f0000
+    m_LastClickedID: 16298
+    m_ExpandedIDs: 00000000d43c0000de3c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -382,7 +382,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000263e0000
+    m_ExpandedIDs: 00000000d43c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -410,7 +410,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000c8390000c23e00002042000000000000ee430000
+    m_ExpandedInstanceIDs: c6230000c8390000c23e00002042000000000000ee430000983f00008a3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -505,23 +505,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a61e0100
-      m_LastClickedID: 73382
-      m_ExpandedIDs: 60c0feff68c0feffa0c0feffa2c0feffa6c0feffaac0feffaec0feffc4c0feffd0c0feffd4c0feffe2c0fefff2c0feff4e1e01005e1e0100a61e0100ec1e0100581f0100
+      m_SelectedIDs: 063e0000
+      m_LastClickedID: 15878
+      m_ExpandedIDs: 36f8ffff46f8ffff76f8ffff82f8ffff5efbffff323d00004a3d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: LevelSelectMenu
-        m_OriginalName: LevelSelectMenu
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 54434
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -560,16 +560,16 @@ MonoBehaviour:
   m_ShowContextualTools: 0
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
-  m_SceneIsLit: 0
+  m_SceneIsLit: 1
   m_SceneLighting: 1
   m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1302.9907, y: 590.72076, z: -72.375}
+    m_Target: {x: 23.376657, y: 95.334885, z: -52.546875}
     speed: 2
-    m_Value: {x: 1302.9907, y: 590.72076, z: -72.375}
+    m_Value: {x: 23.376657, y: 95.334885, z: -52.546875}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_SceneViewState:
     showFog: 1
     showMaterialUpdate: 0
-    showSkybox: 0
+    showSkybox: 1
     showFlares: 1
     showImageEffects: 1
     showParticleSystems: 1
@@ -619,9 +619,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 693.3705
+    m_Target: 95.905594
     speed: 2
-    m_Value: 693.3705
+    m_Value: 100.424706
   m_Ortho:
     m_Target: 1
     speed: 2

@@ -51,6 +51,12 @@ public class Score : MonoBehaviour
         Destroy(enemy.gameObject);
     }
 
+    public static void OnEnemyKilled(Lvl05SpaceshipEnemy enemy)
+    {
+        GameNS::StaticData.gameUI.scoreCountText.text = (System.Convert.ToInt32(GameNS::StaticData.gameUI.scoreCountText.text) + enemy.scoreReward).ToString();
+        Destroy(enemy.gameObject);
+    }
+
     public static void CalculateResults()
     {
         float percentage = ((((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions * 3f) 

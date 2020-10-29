@@ -1263,7 +1263,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9eceb696c377f204991cc719f004777b, type: 3}
   - {fileID: 21300000, guid: 5fe4d168e2d127e4cb9f7418cb09f79f, type: 3}
   missingGradeSprite: {fileID: 21300000, guid: d8e0e3ee80631d8408d070e1bbf09a58, type: 3}
-  guideText: {fileID: 3826496417913642554}
   xOffsetBetweenPanels: 500
   samplePanel: {fileID: 399944704}
   levelPanels:
@@ -2874,6 +2873,7 @@ MonoBehaviour:
   levelHintBar: {fileID: 46764222}
   levelHintBarText: {fileID: 650091863}
   leftTopSlider: {fileID: 3782452619875908260}
+  levelSelectionGuideText: {fileID: 3826496417913642554}
   startsInMainMenu: 0
 --- !u!1 &9125414918928961073
 GameObject:
