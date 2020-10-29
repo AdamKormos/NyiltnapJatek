@@ -9,6 +9,7 @@ public class Grade : MonoBehaviour
     {
         transform.localScale = new Vector3(0.15f, 0.15f, 1);
         //GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        GetComponent<CircleCollider2D>().radius = 2.65f;
         GetComponent<SpriteRenderer>().sprite = GameNS::StaticData.gameUI.coinSprite;
 
         switch(nem)

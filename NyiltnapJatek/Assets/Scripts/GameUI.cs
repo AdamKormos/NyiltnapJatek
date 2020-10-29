@@ -54,7 +54,7 @@ public class GameUI : MonoBehaviour
                 switch (SceneManager.GetActiveScene().buildIndex)
                 {
                     case 1:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni. A szárny \"életét\" bal felül találod.");
                         break;
                     case 2:
                         GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha kizuhan a golyó, újra kell kezdened a pályát. A platformot az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
@@ -66,7 +66,7 @@ public class GameUI : MonoBehaviour
                         GameNS::StaticData.gameUI.LoadLevelHint("Menj végig a pályán használva a gravitáció változtatgatását a szóközzel! A DNS szekvenciák felvételével gyorsabban mész. Vigyázz, mert ha túl sokáig blokkolja valami az utad, lemaradsz, és akkor újra kell kezdened a pályát.");
                         break;
                     case 5:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az A/D billentyűkkel és a bal/jobb nyilakkal pedig az űrhajót tudod vízszintesen mozgatni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az A/D billentyűkkel és a bal/jobb nyilakkal pedig az űrhajót tudod vízszintesen mozgatni. A szerver életét bal felül láthatod.");
                         break;
                 }
 

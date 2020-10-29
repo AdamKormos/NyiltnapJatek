@@ -11,7 +11,7 @@ public class PlayerLvl05Info : Player
     [SerializeField] float xMoveStrength = 2f;
     [SerializeField] KeyCode shootKey = KeyCode.Space;
     [SerializeField] GameObject bulletObject = default;
-    [SerializeField] GameObject serverObject = default;
+    [SerializeField] Lvl05Server serverObject = default;
     float leftScreenBound = 0f, rightScreenBound = 0f;
     public static int bulletCount { get; private set; }
 
@@ -32,6 +32,9 @@ public class PlayerLvl05Info : Player
 
         leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
         rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
+
+        GameNS::StaticData.gameUI.leftTopSlider.maxValue = serverObject.maxHealth;
+        GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
 
         StartCoroutine(Move());
     }
@@ -70,6 +73,8 @@ public class PlayerLvl05Info : Player
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
         GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
+
+        GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
 
         while (!reachedEnd)
         {

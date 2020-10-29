@@ -23,7 +23,7 @@ public class LevelCompletionUI : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && (!Player.isOnScreen || PlayerLvl02MatFiz.brickCount < 1))
+        if(Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && (Player.reachedEnd || PlayerLvl02MatFiz.brickCount < 1))
         {
             PlayerLvl02MatFiz.brickCount = 1;
             GameNS::StaticData.loadingScreen.LoadLevel(0); // Main Menu

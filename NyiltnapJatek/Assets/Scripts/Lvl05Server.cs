@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameNS = GameNS;
 using static UnityEngine.ParticleSystem;
 
 public class Lvl05Server : MonoBehaviour
 {
-    [SerializeField] byte maxHealth = 20;
+    [SerializeField] public byte maxHealth = 20;
     public static byte health { get; private set;}
     ParticleSystem particleSystem = default;
 
@@ -32,5 +33,6 @@ public class Lvl05Server : MonoBehaviour
         Destroy(enemyCol.gameObject);
 
         health--;
+        GameNS::StaticData.gameUI.leftTopSlider.value--;
     }
 }
