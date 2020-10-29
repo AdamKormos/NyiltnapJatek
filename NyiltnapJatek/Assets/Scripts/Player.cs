@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     protected virtual void OnGameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // As this is what works in editor mode
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GameNS::StaticData.gameUI.OnViewChanged(false, true);
     }
 

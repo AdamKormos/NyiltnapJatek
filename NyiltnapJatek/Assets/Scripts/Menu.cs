@@ -5,7 +5,6 @@ using GameNS = GameNS;
 
 public class Menu : MonoBehaviour
 {
-    public enum Scenes {mainMenu, Lvl1, Lvl2, Lvl3, Lvl4, Lvl5 };
     [SerializeField] Color selectedButtonColor = default;
     [SerializeField] private Button[] buttons = new Button[3];
     [SerializeField] public GameObject menuImg = default;

@@ -20,7 +20,7 @@ public class quizCollider : MonoBehaviour
         {
             if (collision.GetComponent<PlayerLvl01Human>())
             {
-                if (collision.GetComponent<PlayerLvl01Human>().wingHealthSlider.value > 0)
+                if (GameNS::StaticData.gameUI.leftTopSlider.value > 0)
                 {
                     OnPlayerTouch();
                     Destroy(this.gameObject);

@@ -15,9 +15,7 @@ public class Score : MonoBehaviour
     {
         value = 0;
 
-        Menu.Scenes currentScene = (Menu.Scenes)(SceneManager.GetActiveScene().buildIndex);
-
-        if(currentScene == Menu.Scenes.Lvl5)
+        if(SceneManager.GetActiveScene().buildIndex == 5)
         {
             GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
         }

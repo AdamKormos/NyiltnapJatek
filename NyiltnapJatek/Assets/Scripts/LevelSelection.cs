@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -23,7 +24,6 @@ public class LevelSelection : MonoBehaviour
     Vector2 panelStartPosition = default;
     public static int currentSceneIndex = 0;
     public static int maxSceneIndex { get; private set; }
-    public static Menu.Scenes currentScene { get; private set; }
     public static Sprite[] s_gradeSprites { get; private set; }
     public static Sprite s_missingGradeSprite { get; private set; }
     static bool[] completedLevel = new bool[5];
@@ -100,8 +100,7 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            currentScene = (Menu.Scenes)currentSceneIndex+1;
-            GameNS::StaticData.loadingScreen.LoadLevel(currentScene);
+            GameNS::StaticData.loadingScreen.LoadLevel(currentSceneIndex+1);
         }
     }
 
@@ -148,11 +147,11 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
-        if (currentSceneIndex != (int)Menu.Scenes.mainMenu)
+        if (currentSceneIndex != 0)
         {
-            if (!completedLevel[(int)currentScene - 1])
+            if (!completedLevel[currentSceneIndex - 1])
             {
-                completedLevel[(int)currentScene - 1] = true;
+                completedLevel[currentSceneIndex - 1] = true;
                 maxSceneIndex++;
                 Destroy(lockImageArray[maxSceneIndex].gameObject);
             }

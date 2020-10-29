@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
 public class GameUI : MonoBehaviour
 {
 #pragma warning disable UNT0013
-    [SerializeField] public Text debugText = default;
+    //[SerializeField] public Text debugText = default;
     [SerializeField] public Sprite coinSprite = default;
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform creditsTransform = default;
@@ -23,6 +24,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Slider loadingScreenSlider = default;
     [SerializeField] public LevelHintBar levelHintBar = default;
     [SerializeField] public Text levelHintBarText = default;
+    [SerializeField] public Slider leftTopSlider = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
@@ -30,6 +32,7 @@ public class GameUI : MonoBehaviour
     {
         // Set level specific objects to false:
         lvl05StuffTransform.gameObject.SetActive(false);
+        leftTopSlider.gameObject.SetActive(false);
 
         quizTransform.gameObject.SetActive(false);
 
@@ -48,28 +51,28 @@ public class GameUI : MonoBehaviour
 
             if (!isReloadingLevel)
             {
-                switch (LevelSelection.currentScene)
+                switch (SceneManager.GetActiveScene().buildIndex)
                 {
-                    case Menu.Scenes.Lvl1:
+                    case 1:
                         GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni.");
                         break;
-                    case Menu.Scenes.Lvl2:
+                    case 2:
                         GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha kizuhan a golyó, újra kell kezdened a pályát. A platformot az A/D billentyűkkel és a bal/jobb nyilakkal tudod mozgatni.");
                         break;
-                    case Menu.Scenes.Lvl3:
+                    case 3:
                         GameNS::StaticData.gameUI.LoadLevelHint("Mozogj a kottavonalakon (fel: W/fel nyíl, le: S/le nyíl) hogy kikerüld az akadályokat! A vonalak közé is lemehetsz, ha lenyomva tartod az Alt-ot!");
                         break;
-                    case Menu.Scenes.Lvl4:
+                    case 4:
                         GameNS::StaticData.gameUI.LoadLevelHint("Menj végig a pályán használva a gravitáció változtatgatását a szóközzel! A DNS szekvenciák felvételével gyorsabban mész. Vigyázz, mert ha túl sokáig blokkolja valami az utad, lemaradsz, és akkor újra kell kezdened a pályát.");
                         break;
-                    case Menu.Scenes.Lvl5:
+                    case 5:
                         GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az A/D billentyűkkel és a bal/jobb nyilakkal pedig az űrhajót tudod vízszintesen mozgatni.");
                         break;
                 }
 
-                switch(LevelSelection.currentScene)
+                switch(SceneManager.GetActiveScene().buildIndex)
                 {
-                    case Menu.Scenes.Lvl5:
+                    case 5:
                         GameNS::StaticData.gameUI.scoreCountText.text = "0";
                         break;
                     default:
@@ -111,7 +114,18 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
-        
+        if(SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameNS::StaticData.loadingScreen.LoadLevel(0);
+            }
+            else if(Input.GetKeyDown(KeyCode.R)) // OnGameOver() copy paste
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                OnViewChanged(false, true);
+            }
+        }
     }
 
     IEnumerator GenerateLevelSelectionChildren()

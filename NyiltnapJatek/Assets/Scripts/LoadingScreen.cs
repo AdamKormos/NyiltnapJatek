@@ -20,18 +20,21 @@ public class LoadingScreen : MonoBehaviour
         GameNS::StaticData.loadingScreen = this;
     }
 
-    public void LoadLevel(Menu.Scenes sceneEnum)
+    public void LoadLevel(int sceneIndex)
     {
         startedLoading = true;
         finishedLoading = false;
         hintText.text = "";
         GameUI.ToggleChildren(this.gameObject, true);
+
         GameNS::StaticData.gameUI.mainMenuTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.levelCompletionPanelText.transform.parent.gameObject.SetActive(false);
-        SceneManager.LoadScene((int)sceneEnum);
+
+        SceneManager.LoadScene(sceneIndex);
         GameNS::StaticData.gameUI.scoreCountText.gameObject.SetActive(false);
-        StartCoroutine(Load(sceneEnum == Menu.Scenes.mainMenu));
+        GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(false);
+        StartCoroutine(Load(sceneIndex == 0)); // Is Scene Index the Main Menu Index?
     }
 
     int loadTickAmount = 250;

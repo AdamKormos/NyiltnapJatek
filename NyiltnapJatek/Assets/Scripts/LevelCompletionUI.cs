@@ -26,7 +26,7 @@ public class LevelCompletionUI : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && (!Player.isOnScreen || PlayerLvl02MatFiz.brickCount < 1))
         {
             PlayerLvl02MatFiz.brickCount = 1;
-            GameNS::StaticData.loadingScreen.LoadLevel(Menu.Scenes.mainMenu);
+            GameNS::StaticData.loadingScreen.LoadLevel(0); // Main Menu
         }
     }
 
