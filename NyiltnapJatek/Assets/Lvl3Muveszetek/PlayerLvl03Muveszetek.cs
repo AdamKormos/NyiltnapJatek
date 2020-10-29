@@ -34,8 +34,9 @@ public class PlayerLvl03Muveszetek : Player
     void Update()
     {
         currentPosition = transform.position;
-
-        if (!Moving && !quizCollider.quizActive)
+        
+        if(heldAltAtStart && quizCollider.quizActive) StartCoroutine(move(kottaGap / 2));
+        else if (!Moving && !quizCollider.quizActive)
         {
             if (heldAltAtStart)
             {
@@ -62,15 +63,6 @@ public class PlayerLvl03Muveszetek : Player
                 }
             }
         }
-        //else
-        //{
-        //    if (brokeAltMove) // Released alt during moving down
-        //    {
-        //        brokeAltMove = false;
-        //        StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
-        //    }
-           
-        //}
     }
 
     //bool brokeAltMove = false;
@@ -79,11 +71,11 @@ public class PlayerLvl03Muveszetek : Player
     IEnumerator move(float num)
     {
         Moving = true;
-        heldAltAtStart = Input.GetKey(halfMoveKey);
+        heldAltAtStart = Input.GetKey(halfMoveKey) && !quizCollider.quizActive;
 
         for (int i = 0; i < moveTickAmount; i++)
         {
-            if (!Input.GetKey(halfMoveKey) && heldAltAtStart)
+            if ((!Input.GetKey(halfMoveKey) || quizCollider.quizActive) && heldAltAtStart)
             {
                 StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
                 yield break;

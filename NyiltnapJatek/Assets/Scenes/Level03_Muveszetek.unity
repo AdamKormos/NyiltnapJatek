@@ -6787,7 +6787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveStrength: 60
-  halfMoveKey: 308
+  halfMoveKey: 32
   index: 0
   kottaGap: 1
   moveTickAmount: 75
@@ -12275,6 +12275,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 993005139, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782452620894395859, guid: 4b355125ce2f0774e896766d12fe9cbe,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782452620894395859, guid: 4b355125ce2f0774e896766d12fe9cbe,
+        type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
