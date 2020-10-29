@@ -1911,7 +1911,7 @@ MonoBehaviour:
   moveStrength: 30
   minimumBulletFromClip: 5
   maximumBulletFromClip: 20
-  xMoveStrength: 0.8
+  xMoveStrength: 1
   shootKey: 32
   bulletObject: {fileID: 8183047607732492443, guid: c6642ccd766449547a460aa198948000,
     type: 3}

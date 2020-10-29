@@ -20,7 +20,7 @@ public class PlayerLvl05Info : Player
     {
 #if UNITY_EDITOR
 #else
-        moveStrength = 80;
+        moveStrength = 30;
         xMoveStrength *= 2f;
 #endif
 

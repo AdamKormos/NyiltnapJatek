@@ -34,6 +34,8 @@ public class LevelSelection : MonoBehaviour
 
     private void OnEnable()
     {
+        GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(true);
+
         if (panelChildren != null)
         {
             for (int i = 1; i < panelChildren.Length; i++) // panelChildren[0] is the sample panel
@@ -49,6 +51,8 @@ public class LevelSelection : MonoBehaviour
         transform.position += new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
         GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position -= new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
         currentSceneIndex = 0;
+
+        GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(false);
     }
 
     private void Start()
