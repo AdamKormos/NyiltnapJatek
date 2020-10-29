@@ -15,6 +15,12 @@ public class PlayerLvl03Muveszetek : Player
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_EDITOR
+#else
+        moveStrength = 60;
+        moveTickAmount = 20;
+#endif
+
         waitSecond = 1f / waitSecond;
 
         StartCoroutine(Move()); // Inherited, automatic Move

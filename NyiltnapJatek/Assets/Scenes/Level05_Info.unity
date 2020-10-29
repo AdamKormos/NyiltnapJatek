@@ -204,18 +204,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &414989874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8651091090611431551, guid: 4b355125ce2f0774e896766d12fe9cbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 525499758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &477552495
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,16 +599,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: startsInMainMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: quizQuestionText
-      value: 
-      objectReference: {fileID: 414989874}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -6019,7 +5997,7 @@ PrefabInstance:
     - target: {fileID: 3525198881236962844, guid: e2ba7734eaff81c42b69ee4e4ad34009,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5592802037076140567, guid: e2ba7734eaff81c42b69ee4e4ad34009,
         type: 3}

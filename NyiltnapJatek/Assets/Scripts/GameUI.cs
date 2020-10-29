@@ -6,6 +6,7 @@ using GameNS = GameNS;
 public class GameUI : MonoBehaviour
 {
 #pragma warning disable UNT0013
+    [SerializeField] public Text debugText = default;
     [SerializeField] public Sprite coinSprite = default;
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform creditsTransform = default;
@@ -65,6 +66,16 @@ public class GameUI : MonoBehaviour
                         GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az A/D billentyűkkel és a bal/jobb nyilakkal pedig az űrhajót tudod vízszintesen mozgatni.");
                         break;
                 }
+
+                switch(LevelSelection.currentScene)
+                {
+                    case Menu.Scenes.Lvl5:
+                        GameNS::StaticData.gameUI.scoreCountText.text = "0";
+                        break;
+                    default:
+                        GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
+                        break;
+                }
             }
 
             gameplayStuffTransform.gameObject.SetActive(true);
@@ -96,6 +107,11 @@ public class GameUI : MonoBehaviour
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        
     }
 
     IEnumerator GenerateLevelSelectionChildren()

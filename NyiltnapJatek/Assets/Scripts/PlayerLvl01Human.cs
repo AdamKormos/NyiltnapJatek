@@ -12,11 +12,20 @@ public class PlayerLvl01Human : Player
     [SerializeField] protected float wingHealth = 100f;
     [SerializeField] protected float wingHealthIncreaseOnWaxPickup = 25f;
     [SerializeField] protected float wingHealthDecreasePerFrame = 0.05f;
-    Slider wingHealthSlider = default;
+    [HideInInspector] public Slider wingHealthSlider = default;
 
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_EDITOR
+#else
+        moveStrength = 60;
+        fallStrength = 0.04f;
+        jumpStrength = 0.06f;
+        wingHealthDecreasePerFrame = 0.2f;
+        wingHealthIncreaseOnWaxPickup = 40;
+#endif
+
         halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
 
         wingHealthSliderGameObject.SetActive(false);
@@ -37,6 +46,8 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
+        //GameNS::StaticData.gameUI.debugText.text = (1f / Time.deltaTime) + '\n' + ("Decr: " + wingHealthDecreasePerFrame.ToString());
+
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
             if (Input.GetKey(KeyCode.Space) && wingHealthSlider.value > 0)

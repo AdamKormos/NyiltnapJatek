@@ -18,6 +18,12 @@ public class PlayerLvl05Info : Player
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_EDITOR
+#else
+        moveStrength = 80;
+        xMoveStrength *= 2f;
+#endif
+
         bulletCount = 50;
         GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();

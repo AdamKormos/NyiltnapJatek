@@ -8,6 +8,11 @@ public class PlayerLvl4Biosz : Player
 
     void Start()
     {
+#if UNITY_EDITOR
+#else
+        moveStrength = 60;
+#endif
+
         body = GetComponent<Rigidbody2D>();
         body.freezeRotation = true;
 
@@ -31,6 +36,7 @@ public class PlayerLvl4Biosz : Player
         else if (collision.tag.Equals("DNASQ")) 
         { 
             moveStrength = (int)(moveStrength * 1.25f);
+            body.gravityScale *= 1.5f;
             Destroy(collision.gameObject);
         }
     }

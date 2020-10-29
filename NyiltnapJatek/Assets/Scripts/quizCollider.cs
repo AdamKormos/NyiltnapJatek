@@ -18,8 +18,19 @@ public class quizCollider : MonoBehaviour
     {
         if (collision.GetComponent<Player>())
         {
-            OnPlayerTouch();
-            Destroy(this.gameObject);
+            if (collision.GetComponent<PlayerLvl01Human>())
+            {
+                if (collision.GetComponent<PlayerLvl01Human>().wingHealthSlider.value > 0)
+                {
+                    OnPlayerTouch();
+                    Destroy(this.gameObject);
+                }
+            }
+            else
+            {
+                OnPlayerTouch();
+                Destroy(this.gameObject);
+            }
         }
     }
 

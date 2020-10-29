@@ -1292,11 +1292,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: startsInMainMenu
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name

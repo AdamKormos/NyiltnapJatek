@@ -19,14 +19,12 @@ public class Score : MonoBehaviour
 
         if(currentScene == Menu.Scenes.Lvl5)
         {
-            GameNS::StaticData.gameUI.scoreCountText.text = "0";
             GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(true);
         }
         else
         {
             StopCoroutine("Count");
             tenth = 0;
-            GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
             StartCoroutine("Count");
         }
     }
