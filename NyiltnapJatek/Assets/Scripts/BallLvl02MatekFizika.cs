@@ -20,7 +20,7 @@ public class BallLvl02MatekFizika : MonoBehaviour
     void Start()
     {
         rbd = transform.GetComponent<Rigidbody2D>();
-        rbd.AddForce(new Vector3(transform.right.x * Random.Range(-10f, 10f), transform.up.y * 10f), ForceMode2D.Impulse);
+        rbd.AddForce(new Vector3(transform.right.x * velocity.y, transform.up.y * velocity.y), ForceMode2D.Impulse);
         velocity = rbd.velocity;
     }
 

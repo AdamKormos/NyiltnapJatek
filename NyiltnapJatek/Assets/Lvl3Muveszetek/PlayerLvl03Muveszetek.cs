@@ -65,6 +65,8 @@ public class PlayerLvl03Muveszetek : Player
                 }
             }
         }
+
+        Debug.Log(index);
     }
 
     //bool brokeAltMove = false;
@@ -77,7 +79,13 @@ public class PlayerLvl03Muveszetek : Player
 
         for (int i = 0; i < moveTickAmount; i++)
         {
-            if ((!Input.GetKey(halfMoveKey) || quizCollider.quizActive) && heldAltAtStart)
+            if (respawnedAtCheckpoint)
+            {
+                respawnedAtCheckpoint = false;
+                heldAltAtStart = false;
+                break;
+            }
+            else if ((!Input.GetKey(halfMoveKey) || quizCollider.quizActive) && heldAltAtStart)
             {
                 StartCoroutine(move((kottaGap / 2) / moveTickAmount * i));
                 yield break;

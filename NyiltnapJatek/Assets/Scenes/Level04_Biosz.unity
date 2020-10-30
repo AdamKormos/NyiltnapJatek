@@ -5365,6 +5365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 762897286}
   - component: {fileID: 762897285}
+  - component: {fileID: 762897287}
   m_Layer: 0
   m_Name: 4-asset-ds-tankv1
   m_TagString: Untagged
@@ -5429,13 +5430,39 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762897284}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9908085, y: 1.3792889, z: 120.09085}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14522696, w: 0.98939836}
+  m_LocalPosition: {x: 0.68, y: 4.92, z: 120.09085}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1795261511}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.701}
+--- !u!61 &762897287
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762897284}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.7691802, y: 0.23200893}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.8, y: 2.7}
+    newSize: {x: 4.8, y: 2.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6753895, y: 2.235982}
+  m_EdgeRadius: 0
 --- !u!1 &770187979
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,7 +5798,7 @@ PrefabInstance:
     - target: {fileID: 8508188081795883095, guid: 38c73c0a3bff2894cb83f1eef8887449,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.512589
+      value: -19.68
       objectReference: {fileID: 0}
     - target: {fileID: 8508188081795883095, guid: 38c73c0a3bff2894cb83f1eef8887449,
         type: 3}
