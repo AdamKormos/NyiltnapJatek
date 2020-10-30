@@ -6,11 +6,11 @@ using GameNS = GameNS;
 public class PlayerLvl03Muveszetek : Player
 {
     [SerializeField] KeyCode halfMoveKey = default;
-    [SerializeField] private int index = 0; 
     [SerializeField] private float kottaGap = 8f;
     [SerializeField] private int moveTickAmount = 30;
     [SerializeField] private float waitSecond = 12f;
     private bool Moving = false;
+    public static int index = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,8 @@ public class PlayerLvl03Muveszetek : Player
         moveTickAmount = 20;
 #endif
 
+        index = 0;
+        heldAltAtStart = false;
         waitSecond = 1f / waitSecond;
 
         cameraOffset = Camera.main.transform.position - transform.position;
@@ -66,7 +68,7 @@ public class PlayerLvl03Muveszetek : Player
     }
 
     //bool brokeAltMove = false;
-    bool heldAltAtStart = false;
+    public static bool heldAltAtStart = false;
 
     IEnumerator move(float num)
     {
@@ -100,6 +102,7 @@ public class PlayerLvl03Muveszetek : Player
 
         if (respawnedAtCheckpoint)
         {
+            heldAltAtStart = false;
             respawnedAtCheckpoint = false;
         }
     }

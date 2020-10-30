@@ -27,8 +27,8 @@ public class LevelSelection : MonoBehaviour
     public static Sprite[] s_gradeSprites { get; private set; }
     public static Sprite s_missingGradeSprite { get; private set; }
     static bool[] completedLevel = new bool[5];
-    static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[5];
-    static string[] scoreRepresentations = new string[5];
+    static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[6];
+    static string[] scoreRepresentations = new string[6];
     static LevelPanel[] panelChildren = default;
     static Image[] lockImageArray = new Image[5];
 
@@ -79,16 +79,17 @@ public class LevelSelection : MonoBehaviour
         for (int i = 0; i < levelPanels.Count; i++)
         {
             GameObject panel = Instantiate(samplePanel, transform.position + new Vector3(i * xOffsetBetweenPanels, 0), Quaternion.identity, this.transform);
-            GameObject lockObject = Instantiate(lockGameObject, transform.position + new Vector3(i * xOffsetBetweenPanels, 0) + lockGameObject.transform.position, 
-                                                Quaternion.identity, panel.transform);
+            GameObject lockObject = Instantiate(lockGameObject, transform.position + new Vector3(i * xOffsetBetweenPanels, 0) + lockGameObject.transform.position,
+                                              Quaternion.identity, panel.transform);
+            lockImageArray[i] = lockObject.GetComponent<Image>();
 
             LevelPanelData toPaste = levelPanels[i];
             panel.GetComponent<LevelPanel>().PasteData(toPaste);
 
-            lockImageArray[i] = lockObject.GetComponent<Image>();
+            if (i <= maxSceneIndex) lockImageArray[i].enabled = false;
         }
 
-        Destroy(lockImageArray[0].gameObject); // First level is always available
+        //Destroy(lockImageArray[0].gameObject); // First level is always available
         panelChildren = GetComponentsInChildren<LevelPanel>(true); // Collect panels in children
     }
 
@@ -114,8 +115,8 @@ public class LevelSelection : MonoBehaviour
 
     public static void FetchCompletionData(int resultScore, gradeAllSum.gradeEnum resultGrade)
     {
-        int arrIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
-        
+        int arrIndex = SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
+
         int newTupleInt;
         gradeAllSum.gradeEnum newTupleGrade;
 
@@ -127,7 +128,7 @@ public class LevelSelection : MonoBehaviour
 
         if (arrIndex == 5)
         {
-            if (resultScore > results[arrIndex].Item1)
+            if (resultScore >= results[arrIndex].Item1)
             {
                 newTupleInt = resultScore;
                 scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
@@ -137,7 +138,7 @@ public class LevelSelection : MonoBehaviour
         }
         else
         {
-            if (resultScore < results[arrIndex].Item1)
+            if (resultScore <= results[arrIndex].Item1)
             {
                 newTupleInt = resultScore;
                 scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
@@ -155,15 +156,11 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
-        if (currentSceneIndex != 0)
-        {
-            if (!completedLevel[currentSceneIndex - 1])
-            {
-                completedLevel[currentSceneIndex - 1] = true;
-                maxSceneIndex++;
-                Destroy(lockImageArray[maxSceneIndex].gameObject);
-            }
-        }
+        maxSceneIndex = Mathf.Clamp(Mathf.Max(currentSceneIndex + 1, maxSceneIndex + 1), 0, 4);
+        PlayerPrefs.SetInt("MSI", maxSceneIndex);
+        PlayerPrefs.Save();
+        lockImageArray[maxSceneIndex].enabled = false;
+
 
         GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
     }

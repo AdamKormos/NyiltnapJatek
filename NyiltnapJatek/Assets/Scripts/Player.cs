@@ -56,12 +56,12 @@ public class Player : MonoBehaviour
 
     protected void OnGameOver()
     {
-        if (Quiz.checkpoint == null)
+        if (Quiz.checkpoint == null || SceneManager.GetActiveScene().buildIndex == 2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameNS::StaticData.gameUI.OnViewChanged(false, true);
         }
-        else if(SceneManager.GetActiveScene().buildIndex != 2)
+        else
         {
             //GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
             //moveAllowed = true;
@@ -78,14 +78,19 @@ public class Player : MonoBehaviour
             else
             {
                 Camera.main.transform.position = new Vector3(Quiz.checkpoint.position.x + cameraOffset.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
-                if(SceneManager.GetActiveScene().buildIndex == 1)
+                if (SceneManager.GetActiveScene().buildIndex == 1)
                 {
                     GameNS::StaticData.gameUI.leftTopSlider.value = PlayerLvl01Human.s_wingHealth;
                 }
+                else if (SceneManager.GetActiveScene().buildIndex == 3)
+                {
+                    PlayerLvl03Muveszetek.index = System.Convert.ToInt32(Quiz.checkpoint.other[0]);
+                    PlayerLvl03Muveszetek.heldAltAtStart = false;
+                }
             }
-
-            respawnedAtCheckpoint = true;
         }
+
+        respawnedAtCheckpoint = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

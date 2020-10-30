@@ -77,7 +77,7 @@ public class PlayerLvl05Info : Player
         GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
         GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
-
+        
         while (!reachedEnd)
         {
             if (moveAllowed)
@@ -129,6 +129,7 @@ public class PlayerLvl05Info : Player
                 reachedEnd = false; // Setting it back to false for further levels
                 GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
 
+                Score.CalculateResults();
                 LevelSelection.OnLevelCompleted();
             //}
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
 
@@ -8,11 +9,13 @@ public class Checkpoint
 {
     public Vector2 position;
     public string score;
+    public string[] other;
 
-    public Checkpoint(Vector2 pos, string sc)
+    public Checkpoint(Vector2 pos, string sc, params string[] rest)
     {
         position = pos;
         score = sc;
+        other = rest;
     }
 }
 
@@ -84,7 +87,11 @@ public class Quiz : MonoBehaviour
 
     private void CreateCheckpoint()
     {
-        checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text);
+        if(SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text, PlayerLvl03Muveszetek.index.ToString());
+        }
+        else checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text);
     }
 
     public static void InitiateQuiz(string questionName, string[] answers, byte correctAnswerIndex)

@@ -121,6 +121,7 @@ public class GameUI : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                levelSelectionGuideText.gameObject.SetActive(false);
                 GameNS::StaticData.loadingScreen.LoadLevel(0);
             }
             else if(Input.GetKeyDown(KeyCode.R)) // OnGameOver() copy paste

@@ -671,7 +671,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: 14ded4e7d88bab12bda59679c83d3519
+      Hash: a9059b7f1d0137aad547e340df6f53b8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerLvl03Muveszetek
@@ -1247,4 +1247,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Level03_Muveszetek.unity
   - Assets/Scenes/Level04_Biosz.unity
   - Assets/Scenes/Level05_Info.unity
-  playerPath: D:/Unity/NyiltnapJatek_Builds/Oct28/4_DevBuild/NyiltnapJatek.exe
+  playerPath: D:/Unity/NyiltnapJatek_Builds/Oct30/6_ProdReady/NyiltnapJatek.exe

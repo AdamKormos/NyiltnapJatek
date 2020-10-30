@@ -21,11 +21,13 @@ public class LevelCompletionUI : MonoBehaviour
         }
     }
 
+    bool exitAllowed = false;
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && (Player.reachedEnd || PlayerLvl02MatFiz.brickCount < 1))
+        if(Input.GetKeyDown(KeyCode.Return) && exitAllowed)
         {
-            PlayerLvl02MatFiz.brickCount = 1;
+            exitAllowed = false;
             GameNS::StaticData.loadingScreen.LoadLevel(0); // Main Menu
         }
     }
@@ -41,6 +43,7 @@ public class LevelCompletionUI : MonoBehaviour
                 quizMaxAll.correctQuestions + " / " + quizMaxAll.allQuestions + '\n' +
                 gradeAllSum.sum + " / " + gradeAllSum.maxSum + '\n' + '\n' + '\n' +
                 calculatedGrade;
+            exitAllowed = true;
         }
     }
 }

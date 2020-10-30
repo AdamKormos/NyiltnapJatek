@@ -6787,8 +6787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveStrength: 60
-  halfMoveKey: 32
-  index: 0
+  halfMoveKey: 308
   kottaGap: 1
   moveTickAmount: 75
   waitSecond: 12
@@ -12952,7 +12951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947902832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.37, y: -1.08, z: 149.7041}
+  m_LocalPosition: {x: 35.37, y: -1.18, z: 149.7041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1620040253}
