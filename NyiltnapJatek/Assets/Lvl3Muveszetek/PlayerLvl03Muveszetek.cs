@@ -91,7 +91,7 @@ public class PlayerLvl03Muveszetek : Player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if (collision.tag.Equals("PassiveEnemy")) OnGameOver();
+        else if (collision.tag.Equals("PassiveEnemy") && moveAllowed) OnGameOver();
     }
 
     private void OnBecameVisible()

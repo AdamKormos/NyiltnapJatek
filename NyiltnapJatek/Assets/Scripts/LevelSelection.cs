@@ -34,7 +34,7 @@ public class LevelSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(true);
+        if(GameNS::StaticData.gameUI != null) GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(true);
 
         if (panelChildren != null)
         {

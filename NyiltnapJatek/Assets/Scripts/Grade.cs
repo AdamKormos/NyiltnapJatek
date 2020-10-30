@@ -15,19 +15,19 @@ public class Grade : MonoBehaviour
         switch(nem)
         {
             case gradeAllSum.gradeEnum.one:
-                GetComponent<SpriteRenderer>().color = new Color32(0, 175, 255, 255);
+                GetComponent<SpriteRenderer>().color = new Color32(0, 175, 255, 255); // Sötétzöld
                 break;
             case gradeAllSum.gradeEnum.two:
-                GetComponent<SpriteRenderer>().color = new Color32(109, 109, 255, 255);
+                GetComponent<SpriteRenderer>().color = new Color32(109, 109, 255, 255); // Szürkés
                 break;
             case gradeAllSum.gradeEnum.three:
-                GetComponent<SpriteRenderer>().color = new Color32(109, 0, 255, 255);
+                GetComponent<SpriteRenderer>().color = new Color32(109, 0, 255, 255); // Lila
                 break;
             case gradeAllSum.gradeEnum.four:
-                GetComponent<SpriteRenderer>().color = new Color32(109, 255, 255, 255);
+                GetComponent<SpriteRenderer>().color = new Color32(109, 255, 255, 255); // Világoszöld
                 break;
             case gradeAllSum.gradeEnum.five:
-                GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255); // Arany
                 break;
         }
     }

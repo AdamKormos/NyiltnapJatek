@@ -12,6 +12,8 @@ public class PlayerLvl01Human : Player
     [SerializeField] protected float wingHealthIncreaseOnWaxPickup = 25f;
     [SerializeField] protected float wingHealthDecreasePerFrame = 0.05f;
 
+    public static float s_wingHealth { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class PlayerLvl01Human : Player
         wingHealthIncreaseOnWaxPickup = 40;
 #endif
 
+        s_wingHealth = wingHealth;
         GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;
         GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
 
@@ -97,7 +100,7 @@ public class PlayerLvl01Human : Player
             GameNS::StaticData.gameUI.leftTopSlider.value = Mathf.Clamp(GameNS::StaticData.gameUI.leftTopSlider.value + wingHealthIncreaseOnWaxPickup, 0, GameNS::StaticData.gameUI.leftTopSlider.maxValue);
             Destroy(collision.gameObject);
         }
-        else if (collision.tag.Equals("PassiveEnemy")) OnGameOver();
+        else if (collision.tag.Equals("PassiveEnemy") && moveAllowed) OnGameOver();
     }
 
     private void OnBecameVisible()
@@ -106,7 +109,6 @@ public class PlayerLvl01Human : Player
         
         if (respawnedAtCheckpoint)
         {
-            GameNS::StaticData.gameUI.leftTopSlider.value = wingHealth;
             respawnedAtCheckpoint = false;
         }
     }

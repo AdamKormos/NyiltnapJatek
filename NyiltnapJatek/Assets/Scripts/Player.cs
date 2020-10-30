@@ -63,6 +63,10 @@ public class Player : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().buildIndex != 2)
         {
+            //GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
+            //moveAllowed = true;
+            //quizCollider.quizActive = false;
+
             transform.position = new Vector3(Quiz.checkpoint.position.x, Quiz.checkpoint.position.y, transform.position.z);
 
             if (SceneManager.GetActiveScene().buildIndex == 5)
@@ -74,6 +78,10 @@ public class Player : MonoBehaviour
             else
             {
                 Camera.main.transform.position = new Vector3(Quiz.checkpoint.position.x + cameraOffset.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                if(SceneManager.GetActiveScene().buildIndex == 1)
+                {
+                    GameNS::StaticData.gameUI.leftTopSlider.value = PlayerLvl01Human.s_wingHealth;
+                }
             }
 
             respawnedAtCheckpoint = true;
