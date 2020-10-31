@@ -146,29 +146,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3826496417913642554, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_Text
-      value: "A p\xE1ly\xE1kon k\xE9rd\xE9seket kell megv\xE1laszolnod, \xE9rm\xE9ket
-        kell gy\u0171jtened \xE9s ki kell ker\xFCln\xF6d az akad\xE1lyokat.\nA jegyek
-        60 sz\xE1zal\xE9ka a v\xE1laszaid helyess\xE9g\xE9t\u0151l, a tov\xE1bbi
-        40 sz\xE1zal\xE9ka pedig att\xF3l f\xFCgg, hogy h\xE1ny \xE9rm\xE9t gy\u0171jt\xF6tt\xE9l
-        \xF6ssze az adott p\xE1ly\xE1n.\nHa helyesen v\xE1laszolsz, a k\xE9rd\xE9s
-        hely\xE9n\xE9l \xE9ledsz \xFAjra hal\xE1l eset\xE9n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\xC9rm\xE9k
-        \xE9rt\xE9ke:\nEgy - S\xF6t\xE9tz\xF6ld\nKett\u0151 - Sz\xFCrk\xE9s\nH\xE1rom
-        - Lila\nN\xE9gy - Vil\xE1gosz\xF6ld\n\xD6t - Arany\nIr\xE1ny\xEDt\xE1s: WASD
-        billenty\u0171kkel \xE9s nyilakkal"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826496417913642554, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826496417913642554, guid: 4b355125ce2f0774e896766d12fe9cbe,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9125414918875546928, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_LocalPosition.x
