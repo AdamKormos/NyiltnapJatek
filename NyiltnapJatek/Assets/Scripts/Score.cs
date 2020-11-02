@@ -13,6 +13,8 @@ public class Score : MonoBehaviour
 
     public void OnGameLevelOpen()
     {
+        GameNS::StaticData.gameUI.scoreCountText.gameObject.SetActive(true);
+        GameNS::StaticData.gameUI.keyGuide.gameObject.SetActive(true);
         value = 0;
 
         if(SceneManager.GetActiveScene().buildIndex == 5)

@@ -26,6 +26,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Text levelHintBarText = default;
     [SerializeField] public Slider leftTopSlider = default;
     [SerializeField] public Text levelSelectionGuideText = default;
+    [SerializeField] public Text keyGuide = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
 
@@ -35,6 +36,8 @@ public class GameUI : MonoBehaviour
         lvl05StuffTransform.gameObject.SetActive(false);
         leftTopSlider.gameObject.SetActive(false);
         levelSelectionGuideText.gameObject.SetActive(false);
+        keyGuide.gameObject.SetActive(false);
+        scoreCountText.gameObject.SetActive(false);
 
         quizTransform.gameObject.SetActive(false);
 
@@ -90,8 +93,6 @@ public class GameUI : MonoBehaviour
             levelCompletionPanelText.transform.parent.gameObject.SetActive(true);
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
 
-            scoreCountText.gameObject.SetActive(true);
-
             levelSelectionTransform.gameObject.SetActive(false);
             mainMenuTransform.gameObject.SetActive(false);
             creditsTransform.gameObject.SetActive(false);
@@ -120,12 +121,13 @@ public class GameUI : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.Escape) && !LoadingScreen.startedLoading)
             {
                 levelSelectionGuideText.gameObject.SetActive(false);
+                LoadingScreen.finishedLoading = false;
                 GameNS::StaticData.loadingScreen.LoadLevel(0);
             }
-            else if(Input.GetKeyDown(KeyCode.R)) // OnGameOver() copy paste
+            else if(Input.GetKeyDown(KeyCode.R) && LoadingScreen.finishedLoading) // OnGameOver() copy paste
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 OnViewChanged(false, true);

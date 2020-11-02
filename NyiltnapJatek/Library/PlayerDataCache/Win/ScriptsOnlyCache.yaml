@@ -707,7 +707,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 574a07c3afda2854b69d76956bb1ec90
+      Hash: f67e515a8f2c7efa86aec2df66ec44be
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameUI
@@ -1247,4 +1247,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Level03_Muveszetek.unity
   - Assets/Scenes/Level04_Biosz.unity
   - Assets/Scenes/Level05_Info.unity
-  playerPath: D:/Unity/NyiltnapJatek_Builds/Nov02/12/NyiltnapJatek.exe
+  playerPath: D:/Unity/NyiltnapJatek_Builds/Nov02/14/NyiltnapJatek.exe

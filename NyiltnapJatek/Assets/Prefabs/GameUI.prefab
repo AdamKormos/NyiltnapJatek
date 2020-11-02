@@ -2876,6 +2876,7 @@ MonoBehaviour:
   levelHintBarText: {fileID: 650091863}
   leftTopSlider: {fileID: 3782452619875908260}
   levelSelectionGuideText: {fileID: 3826496417913642554}
+  keyGuide: {fileID: 95396945637432551}
   startsInMainMenu: 0
 --- !u!1 &9125414918928961073
 GameObject:

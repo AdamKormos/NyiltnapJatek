@@ -10,7 +10,7 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] float minimumLoadTime = 4f, maximumLoadTime = 10f;
     [SerializeField] Text hintText = default;
     [SerializeField] string[] hints = default;
-    public static bool finishedLoading { get; private set; }
+    public static bool finishedLoading { get; set; }
     public static bool startedLoading { get; private set; }
 
     private void Start()
@@ -41,6 +41,9 @@ public class LoadingScreen : MonoBehaviour
 
     IEnumerator Load(bool isLoadingMainMenu)
     {
+        GameNS::StaticData.gameUI.keyGuide.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.scoreCountText.gameObject.SetActive(false);
+
         hintText.text = hints[Random.Range(0, hints.Length)];
         float val = Random.Range(minimumLoadTime, maximumLoadTime);
         Debug.Log(val);
