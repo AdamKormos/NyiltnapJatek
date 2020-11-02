@@ -98,7 +98,8 @@ public class PlayerLvl01Human : Player
         else if (collision.tag.Equals("Wax"))
         {
             GameNS::StaticData.gameUI.leftTopSlider.value = Mathf.Clamp(GameNS::StaticData.gameUI.leftTopSlider.value + wingHealthIncreaseOnWaxPickup, 0, GameNS::StaticData.gameUI.leftTopSlider.maxValue);
-            Destroy(collision.gameObject);
+            collision.GetComponent<BoxCollider2D>().enabled = false;
+            collision.GetComponent<SpriteRenderer>().enabled = false;
         }
         else if (collision.tag.Equals("PassiveEnemy") && moveAllowed) OnGameOver();
     }
@@ -109,6 +110,11 @@ public class PlayerLvl01Human : Player
         
         if (respawnedAtCheckpoint)
         {
+            foreach(GameObject g in GameObject.FindGameObjectsWithTag("Wax"))
+            {
+                g.GetComponent<BoxCollider2D>().enabled = true;
+                g.GetComponent<SpriteRenderer>().enabled = true;
+            }
             respawnedAtCheckpoint = false;
         }
     }

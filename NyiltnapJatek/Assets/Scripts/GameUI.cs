@@ -57,7 +57,7 @@ public class GameUI : MonoBehaviour
                 switch (SceneManager.GetActiveScene().buildIndex)
                 {
                     case 1:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Repülj végig a pályán! Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni. A szárny \"életét\" bal felül találod.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("A mitológiából ismert Ikarosszal kell végigrepülnöd a pályán. Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni. A szárny \"életét\" bal felül találod.");
                         break;
                     case 2:
                         GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha lezuhan a golyó, újra kell kezdened a pályát. A platformot vízszintesen tudod mozgatni.");
