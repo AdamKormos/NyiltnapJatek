@@ -88,9 +88,9 @@ public class Player : MonoBehaviour
                     PlayerLvl03Muveszetek.heldAltAtStart = false;
                 }
             }
-        }
 
-        respawnedAtCheckpoint = true;
+            respawnedAtCheckpoint = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
