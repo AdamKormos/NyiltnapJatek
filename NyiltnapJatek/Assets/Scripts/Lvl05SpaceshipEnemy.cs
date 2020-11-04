@@ -18,6 +18,8 @@ public class Lvl05SpaceshipEnemy : MonoBehaviour
     private void OnBecameVisible()
     {
         isOnScreen = true;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(Shoot());
     }
 
@@ -40,7 +42,10 @@ public class Lvl05SpaceshipEnemy : MonoBehaviour
         if (collision.gameObject.GetComponent<Bullet>())
         {
             health--;
-            Destroy(collision.gameObject);
+
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+
             if (health == 0) Score.OnEnemyKilled(this);
         }
     }

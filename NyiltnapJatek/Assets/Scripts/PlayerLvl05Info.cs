@@ -44,7 +44,12 @@ public class PlayerLvl05Info : Player
     {
         currentPosition = transform.position;
 
-        if (Lvl05Server.health <= 0) OnGameOver();
+        if (Lvl05Server.health <= 0)
+        {
+            OnGameOver();
+            EnableEnemies();
+            StartCoroutine(RespawnFrameDelay());
+        }
 
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
         {
@@ -68,6 +73,13 @@ public class PlayerLvl05Info : Player
                 GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
             }
         }
+    }
+
+    IEnumerator RespawnFrameDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        respawnedAtCheckpoint = false;
     }
 
     protected override IEnumerator Move()
@@ -115,6 +127,21 @@ public class PlayerLvl05Info : Player
         if (respawnedAtCheckpoint)
         {
             respawnedAtCheckpoint = false;
+        }
+    }
+
+    private static void EnableEnemies()
+    {
+        foreach (Lvl05Enemy g in FindObjectsOfType<Lvl05Enemy>())
+        {
+            g.GetComponent<Collider2D>().enabled = true;
+            g.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        foreach (Lvl05SpaceshipEnemy g in FindObjectsOfType<Lvl05SpaceshipEnemy>())
+        {
+            g.GetComponent<Collider2D>().enabled = true;
+            g.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 

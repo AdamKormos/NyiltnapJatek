@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected static bool respawnedAtCheckpoint = false;
+    public static bool respawnedAtCheckpoint { get; protected set; }
 
     protected void OnGameOver()
     {

@@ -50,13 +50,17 @@ public class Score : MonoBehaviour
     public static void OnEnemyKilled(Lvl05Enemy enemy)
     {
         GameNS::StaticData.gameUI.scoreCountText.text = (System.Convert.ToInt32(GameNS::StaticData.gameUI.scoreCountText.text) + enemy.scoreReward).ToString();
-        Destroy(enemy.gameObject);
+
+        enemy.GetComponent<Collider2D>().enabled = false;
+        enemy.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public static void OnEnemyKilled(Lvl05SpaceshipEnemy enemy)
     {
         GameNS::StaticData.gameUI.scoreCountText.text = (System.Convert.ToInt32(GameNS::StaticData.gameUI.scoreCountText.text) + enemy.scoreReward).ToString();
-        Destroy(enemy.gameObject);
+
+        enemy.GetComponent<Collider2D>().enabled = false;
+        enemy.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public static void CalculateResults()
