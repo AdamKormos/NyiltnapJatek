@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BallLvl02MatekFizika : MonoBehaviour
 {
@@ -32,11 +33,12 @@ public class BallLvl02MatekFizika : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Vector2 vel = -(new Vector2(rbd.velocity.x, rbd.velocity.y));
-        //rbd.velocity = new Vector2(0f, 0f);
-        //rbd.AddForce(vel * force);
-        //rbd.AddForce(-rbd.velocity.normalized * force, ForceMode2D.Force);
-        velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
+        if (!collision.gameObject.GetComponent<ObstacleLvl02>() || (collision.gameObject.GetComponent<ObstacleLvl02>() && !collision.gameObject.GetComponent<ObstacleLvl02>().IsQuestionAndDestroyed()))
+        {
+            velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
+        }
+
+        velocity.y = (velocity.y < 0 ? Mathf.Clamp(velocity.y, Mathf.NegativeInfinity, -1f) : Mathf.Clamp(velocity.y, 1f, Mathf.Infinity));
     }
 
     private void OnBecameInvisible()

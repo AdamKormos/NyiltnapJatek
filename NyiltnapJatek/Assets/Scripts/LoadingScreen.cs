@@ -34,6 +34,9 @@ public class LoadingScreen : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
         GameNS::StaticData.gameUI.scoreCountText.gameObject.SetActive(false);
         GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(false);
+        GameNS::StaticData.gameUI.correctAnswerText.gameObject.SetActive(false);
         StartCoroutine(Load(sceneIndex == 0)); // Is Scene Index the Main Menu Index?
     }
 

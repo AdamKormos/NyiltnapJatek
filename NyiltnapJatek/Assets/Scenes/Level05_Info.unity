@@ -1911,7 +1911,7 @@ MonoBehaviour:
   moveStrength: 30
   minimumBulletFromClip: 5
   maximumBulletFromClip: 20
-  xMoveStrength: 1
+  xMoveStrength: 1.3
   shootKey: 32
   bulletObject: {fileID: 8183047607732492443, guid: c6642ccd766449547a460aa198948000,
     type: 3}
@@ -8593,7 +8593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c577818a01af16049a0f9324ee36816a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 13
 --- !u!50 &837138228
 Rigidbody2D:
   serializedVersion: 4

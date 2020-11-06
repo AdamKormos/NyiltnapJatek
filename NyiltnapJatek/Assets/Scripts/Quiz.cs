@@ -74,10 +74,7 @@ public class Quiz : MonoBehaviour
                 {
                     quizMaxAll.correctQuestions++;
                     CreateCheckpoint();
-                }
-                else
-                {
-                    Debug.Log("Bad");
+                    GameNS::StaticData.gameUI.StartCoroutine(DisplayCorrectText()); // As this object would be inactive by the time the coroutine does something after the delay
                 }
 
                 CloseQuiz();
@@ -92,6 +89,13 @@ public class Quiz : MonoBehaviour
             checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text, PlayerLvl03Muveszetek.index.ToString());
         }
         else checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text);
+    }
+
+    private IEnumerator DisplayCorrectText()
+    {
+        GameNS::StaticData.gameUI.correctAnswerText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameNS::StaticData.gameUI.correctAnswerText.gameObject.SetActive(false);
     }
 
     public static void InitiateQuiz(string questionName, string[] answers, byte correctAnswerIndex)

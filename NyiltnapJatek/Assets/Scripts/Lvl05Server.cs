@@ -9,7 +9,7 @@ public class Lvl05Server : MonoBehaviour
     [SerializeField] public byte maxHealth = 20;
     public static byte health;
     ParticleSystem particleSystem = default;
-    Vector2 checkpointPosition;
+    Vector3 checkpointPosition;
 
     private void Start()
     {

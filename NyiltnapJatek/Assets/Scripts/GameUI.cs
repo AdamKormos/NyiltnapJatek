@@ -15,6 +15,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Transform loadingScreenTransform = default;
     [SerializeField] public Transform levelSelectionTransform = default;
     [SerializeField] public Transform quizTransform = default;
+    [SerializeField] public Text correctAnswerText = default;
     [SerializeField] public Text quizQuestionText = default;
     [SerializeField] public Transform lvl05StuffTransform = default;
     [SerializeField] public Text bulletCountText = default;
@@ -38,7 +39,7 @@ public class GameUI : MonoBehaviour
         levelSelectionGuideText.gameObject.SetActive(false);
         keyGuide.gameObject.SetActive(false);
         scoreCountText.gameObject.SetActive(false);
-
+        correctAnswerText.gameObject.SetActive(false);
         quizTransform.gameObject.SetActive(false);
 
         if (isMainMenuView)
@@ -53,17 +54,28 @@ public class GameUI : MonoBehaviour
         {
             gradeAllSum.sum = 0;
             quizMaxAll.correctQuestions = 0;
+            Score.value = 0;
             Quiz.checkpoint = null;
+
+            switch (SceneManager.GetActiveScene().buildIndex)
+            {
+                case 5:
+                    GameNS::StaticData.gameUI.scoreCountText.text = "0";
+                    break;
+                default:
+                    GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
+                    break;
+            }
 
             if (!isReloadingLevel)
             {
                 switch (SceneManager.GetActiveScene().buildIndex)
                 {
                     case 1:
-                        GameNS::StaticData.gameUI.LoadLevelHint("A mitológiából ismert Ikarosszal kell végigrepülnöd a pályán. Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szóközzel tudsz repülni. A szárny \"életét\" bal felül találod.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("A mitológiából ismert Ikarosszal kell végigrepülnöd a pályán. Hogy túléld az utat, szükséged lesz a pályán elszórt viaszokra, amik megelőzik, hogy elolvadjon a szárnyad! A szárny nem olvad ha felhő alatt vagy. A szóközzel tudsz repülni. A szárny \"életét\" bal felül találod.");
                         break;
                     case 2:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Vigyázz, ha lezuhan a golyó, újra kell kezdened a pályát. A platformot vízszintesen tudod mozgatni.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Törd szét az összes téglát a golyó segítségével! Minden tégla két ütés után törik szét. Vigyázz, ha lezuhan a golyó, újra kell kezdened a pályát. A platformot vízszintesen tudod mozgatni.");
                         break;
                     case 3:
                         GameNS::StaticData.gameUI.LoadLevelHint("Mozogj a kottavonalakon (fel: W/fel nyíl, le: S/le nyíl), hogy kikerüld az akadályokat! A vonalak közé is lemehetsz, ha lenyomva tartod az Alt-ot. Az Alt elengedésével visszakerülsz arra a vonalra, amelyikről leereszkedtél.");
@@ -74,16 +86,6 @@ public class GameUI : MonoBehaviour
                         break;
                     case 5:
                         GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az űrhajót pedig vízszintesen tudod mozgatni. A szerver életét és a lövedéked mennyiségét bal felül láthatod.");
-                        break;
-                }
-
-                switch(SceneManager.GetActiveScene().buildIndex)
-                {
-                    case 5:
-                        GameNS::StaticData.gameUI.scoreCountText.text = "0";
-                        break;
-                    default:
-                        GameNS::StaticData.gameUI.scoreCountText.text = "00:00.0";
                         break;
                 }
             }

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &29028286
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &185960034
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &193583191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -855,7 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &372430034
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &406462125
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &496985461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &544439836
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &559366312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &892218170
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &916040570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2197,7 +2197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &939870871
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1055658276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2531,7 +2531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1063758144
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2788,7 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1304212538
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2911,7 +2911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1348853002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3137,7 +3137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &1439838462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3418,7 +3418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
-  health: 3
+  health: 2
 --- !u!61 &1521717462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3541,7 +3541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1526265460
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3664,7 +3664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1551002586
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3787,7 +3787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1594766283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4094,7 +4094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!1 &1709519149
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,7 +4527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &1854598721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4751,7 +4751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &2096615225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4874,7 +4874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 0
-  health: 3
+  health: 2
 --- !u!61 &2099875364
 BoxCollider2D:
   m_ObjectHideFlags: 0
