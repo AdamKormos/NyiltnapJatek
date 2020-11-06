@@ -13,6 +13,7 @@ public class PlayerLvl02MatFiz : Player
     // Start is called before the first frame update
     void Start()
     {
+        GameUI.loads = false;
         Quiz.checkpoint = null;
         brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
 
@@ -38,7 +39,7 @@ public class PlayerLvl02MatFiz : Player
     void Update()
     {
         ball.enabled = !quizCollider.quizActive;
-
+        
         if (brickCount > 0)
         {
             if (!isBallOnScreen)
@@ -63,7 +64,9 @@ public class PlayerLvl02MatFiz : Player
         }
         else if(!quizCollider.quizActive) // No quiz is going and there aren't any bricks on the scene
         {
-            LevelSelection.OnLevelCompleted();
+            ball.enabled = false;
+            if(!reachedEnd) LevelSelection.OnLevelCompleted();
+            reachedEnd = true; // ^ Won't repeat
         }
     }
 

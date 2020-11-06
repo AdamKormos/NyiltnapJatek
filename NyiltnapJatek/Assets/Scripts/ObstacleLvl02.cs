@@ -6,7 +6,7 @@ public class ObstacleLvl02 : MonoBehaviour
     [SerializeField] public BrickType brickType = BrickType.Normal;
     [SerializeField] public int health = 1;
 
-    public bool IsQuestionAndDestroyed() { return brickType == BrickType.Question && health == 0; }
+    public bool IsQuestionAndDestroyed() { return brickType == BrickType.Question && health == 1; }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

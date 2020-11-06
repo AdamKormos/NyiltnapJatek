@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameNS::StaticData.gameUI.OnViewChanged(false, true);
         }
-        else
+        else if(Quiz.checkpoint != null)
         {
             //GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
             //moveAllowed = true;
@@ -81,6 +81,11 @@ public class Player : MonoBehaviour
                 if (SceneManager.GetActiveScene().buildIndex == 1)
                 {
                     GameNS::StaticData.gameUI.leftTopSlider.value = PlayerLvl01Human.s_wingHealth;
+                    foreach (GameObject g in GameObject.FindGameObjectsWithTag("Wax"))
+                    {
+                        g.GetComponent<BoxCollider2D>().enabled = true;
+                        g.GetComponent<SpriteRenderer>().enabled = true;
+                    }
                 }
                 else if (SceneManager.GetActiveScene().buildIndex == 3)
                 {

@@ -54,7 +54,7 @@ public class PlayerLvl01Human : Player
 
             hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize.y + 1f), Vector2.up);
 
-            if (hit.transform == null || !hit.transform.tag.Equals("Cloud"))
+            if ((hit.transform == null || !hit.transform.tag.Equals("Cloud")) && !reachedEnd)
             {
                 GameNS::StaticData.gameUI.leftTopSlider.value -= wingHealthDecreasePerFrame;
             }

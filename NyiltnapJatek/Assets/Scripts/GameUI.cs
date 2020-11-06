@@ -118,7 +118,7 @@ public class GameUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
+    public static bool loads = false;
     private void Update()
     {
         if(SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)
@@ -131,8 +131,9 @@ public class GameUI : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.R) && LoadingScreen.finishedLoading) // OnGameOver() copy paste
             {
+                loads = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                OnViewChanged(false, true);
+                GameNS::StaticData.gameUI.OnViewChanged(false, true);
             }
         }
     }

@@ -161,7 +161,6 @@ public class LevelSelection : MonoBehaviour
         PlayerPrefs.Save();
         lockImageArray[maxSceneIndex].enabled = false;
 
-
         GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
     }
 }
