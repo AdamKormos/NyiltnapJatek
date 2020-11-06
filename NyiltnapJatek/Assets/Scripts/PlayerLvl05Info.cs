@@ -23,6 +23,7 @@ public class PlayerLvl05Info : Player
         moveStrength = 30;
         xMoveStrength *= 2f;
 #endif
+        Quiz.checkpoint = null;
 
         bulletCount = 50;
         GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
@@ -88,6 +89,7 @@ public class PlayerLvl05Info : Player
         while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
         GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
+        GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(true);
         GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
         
         while (!reachedEnd)

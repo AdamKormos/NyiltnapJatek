@@ -20,7 +20,7 @@ public class PlayerLvl03Muveszetek : Player
         moveStrength = 60;
         moveTickAmount = 20;
 #endif
-
+        Quiz.checkpoint = null;
         index = 0;
         heldAltAtStart = false;
         waitSecond = 1f / waitSecond;
@@ -36,8 +36,11 @@ public class PlayerLvl03Muveszetek : Player
     void Update()
     {
         currentPosition = transform.position;
-        
-        if(heldAltAtStart && quizCollider.quizActive) StartCoroutine(move(kottaGap / 2));
+
+        if (heldAltAtStart && quizCollider.quizActive)
+        {
+            StartCoroutine(move(kottaGap / 2));
+        }
         else if (!Moving && !quizCollider.quizActive)
         {
             if (heldAltAtStart)
@@ -53,12 +56,12 @@ public class PlayerLvl03Muveszetek : Player
                 {
                     StartCoroutine(move(-kottaGap / 2));
                 }
-                else if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
                 {
                     index++;
                     StartCoroutine(move(kottaGap));
                 }
-                else if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
                 {
                     index--;
                     StartCoroutine(move(-kottaGap));

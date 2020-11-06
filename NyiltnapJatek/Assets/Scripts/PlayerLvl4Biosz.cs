@@ -12,6 +12,7 @@ public class PlayerLvl4Biosz : Player
 #else
         moveStrength = 60;
 #endif
+        Quiz.checkpoint = null;
 
         body = GetComponent<Rigidbody2D>();
         body.freezeRotation = true;

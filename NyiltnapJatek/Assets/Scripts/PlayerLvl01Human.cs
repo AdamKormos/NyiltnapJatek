@@ -25,6 +25,7 @@ public class PlayerLvl01Human : Player
         wingHealthDecreasePerFrame = 0.2f;
         wingHealthIncreaseOnWaxPickup = 40;
 #endif
+        Quiz.checkpoint = null;
 
         s_wingHealth = wingHealth;
         GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;

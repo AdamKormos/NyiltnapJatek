@@ -13,6 +13,7 @@ public class PlayerLvl02MatFiz : Player
     // Start is called before the first frame update
     void Start()
     {
+        Quiz.checkpoint = null;
         brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
 
         ball.gameObject.SetActive(false);

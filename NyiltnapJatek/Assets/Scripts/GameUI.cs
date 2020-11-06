@@ -85,7 +85,7 @@ public class GameUI : MonoBehaviour
                             "\n" + "\n" + "Megjegyzés: Minden pályán lévő tárgy akadály és nekik tudsz ütközni (azaz semmi nem tartozik a háttérhez).");
                         break;
                     case 5:
-                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az űrhajót pedig vízszintesen tudod mozgatni. A szerver életét és a lövedéked mennyiségét bal felül láthatod.");
+                        GameNS::StaticData.gameUI.LoadLevelHint("Védd meg a szervereket az ellenfelek elpusztításával! A szóközzel tudsz lőni, az űrhajót pedig vízszintesen tudod mozgatni. A szerver életét és a lövedéked mennyiségét bal felül láthatod. A pályán lövedékcsomagon is vannak elszórva, melyek 5 és 20 közötti mennyiségű lövedéket adnak.");
                         break;
                 }
             }
