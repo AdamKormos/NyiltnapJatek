@@ -65,7 +65,6 @@ public class Score : MonoBehaviour
 
     public static void CalculateResults()
     {
-        Debug.Log("Fini");
         float percentage = ((((float)quizMaxAll.correctQuestions / (float)quizMaxAll.allQuestions * 3f) 
             + ((float)gradeAllSum.sum / (float)gradeAllSum.maxSum) * 2f));
 
@@ -73,6 +72,9 @@ public class Score : MonoBehaviour
         int grade = (int)(percentage / 0.2f) + 1;
 
         LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);
+        
+        if(SceneManager.GetActiveScene().buildIndex == 2) LevelSelection.OnLevelCompleted();
+
         LevelSelection.FetchCompletionData(tenth, (gradeAllSum.gradeEnum)LevelCompletionUI.calculatedGrade);
     }
 }

@@ -65,8 +65,7 @@ public class PlayerLvl02MatFiz : Player
         else if(!quizCollider.quizActive) // No quiz is going and there aren't any bricks on the scene
         {
             ball.enabled = false;
-            if(!reachedEnd) LevelSelection.OnLevelCompleted();
-            reachedEnd = true; // ^ Won't repeat
+            reachedEnd = true;
         }
     }
 

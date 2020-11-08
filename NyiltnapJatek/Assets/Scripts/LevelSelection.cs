@@ -156,7 +156,8 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
-        maxSceneIndex = Mathf.Clamp(Mathf.Max(currentSceneIndex + 1, maxSceneIndex + 1), 0, 4);
+        if(maxSceneIndex < 4) maxSceneIndex = Mathf.Clamp(currentSceneIndex + 1, 0, 4);
+
         PlayerPrefs.SetInt("MSI", maxSceneIndex);
         PlayerPrefs.Save();
         lockImageArray[maxSceneIndex].enabled = false;
