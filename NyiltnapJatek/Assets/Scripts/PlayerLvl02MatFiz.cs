@@ -13,6 +13,27 @@ public class PlayerLvl02MatFiz : Player
     // Start is called before the first frame update
     void Start()
     {
+        reachedEnd = false;
+
+        gradeAllSum.count = 0;
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+
+        quizMaxAll.correctQuestions = 0;
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
+
+        for (int levelIndex = 0; levelIndex < 5; levelIndex++)
+        {
+            if (PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
+            {
+                Debug.Log("Float grade " + levelIndex + ": " + PlayerPrefs.GetFloat("FGrade" + levelIndex));
+            }
+        }
+
         GameUI.loads = false;
         Quiz.checkpoint = null;
         brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
@@ -39,7 +60,7 @@ public class PlayerLvl02MatFiz : Player
     void Update()
     {
         ball.enabled = !quizCollider.quizActive;
-        
+
         if (brickCount > 0)
         {
             if (!isBallOnScreen)

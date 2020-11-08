@@ -32,14 +32,16 @@ public class RandomAccessFile
 
         for(int levelIndex = 0; levelIndex <= 5; levelIndex++)
         {
-            if(PlayerPrefs.GetFloat("FGrade" + LevelSelection.currentSceneIndex, 100f) != 100f)
+            if(PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
             {
-                sum += PlayerPrefs.GetFloat("FGrade" + LevelSelection.currentSceneIndex);
+                sum += PlayerPrefs.GetFloat("FGrade" + levelIndex);
                 correctAmount++;
             }
         }
 
-        sum /= correctAmount;
+        if (correctAmount == 0) sum = 1f;
+        else sum /= (float)correctAmount;
+
         return Mathf.Clamp(sum, 1.00f, 5.00f);
     }
 

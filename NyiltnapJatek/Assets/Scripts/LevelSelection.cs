@@ -42,6 +42,9 @@ public class LevelSelection : MonoBehaviour
             {
                 panelChildren[i].InjectRecord(RandomAccessFile.LoadData(i-1));
                 panelChildren[i].gameObject.SetActive(true);
+
+                if (i - 1 <= maxSceneIndex) lockImageArray[i - 1].enabled = false;
+                else lockImageArray[i - 1].enabled = true;
             }
         }
     }
@@ -117,41 +120,46 @@ public class LevelSelection : MonoBehaviour
     {
         int arrIndex = SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
 
-        int newTupleInt;
-        gradeAllSum.gradeEnum newTupleGrade;
+        Tuple<int, gradeAllSum.gradeEnum> data;
 
-        if (results[arrIndex] == null)
-        {
-            if(arrIndex == 5) results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(0, gradeAllSum.gradeEnum.one);
-            else results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
-        }
+        var loadedData = RandomAccessFile.LoadData(arrIndex - 1);
 
-        if (arrIndex == 5)
+        if (loadedData == null)
         {
-            if (resultScore >= results[arrIndex].Item1)
-            {
-                newTupleInt = resultScore;
-                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
-                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
-            }
-            else newTupleInt = results[arrIndex].Item1;
+            if(arrIndex == 5) data = new Tuple<int, gradeAllSum.gradeEnum>(0, gradeAllSum.gradeEnum.one);
+            else data = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
         }
         else
         {
-            if (resultScore <= results[arrIndex].Item1)
+            data = new Tuple<int, gradeAllSum.gradeEnum>(PlayerPrefs.GetInt("LvlRes" + arrIndex, arrIndex == 5 ? 0 : Int32.MaxValue), loadedData.Item2);
+        }
+
+        string resultScoreString = "";
+        int dataScore = data.Item1;
+        gradeAllSum.gradeEnum dataGrade = data.Item2;
+
+        if (arrIndex == 5)
+        {
+            if (resultScore >= data.Item1)
             {
-                newTupleInt = resultScore;
-                scoreRepresentations[arrIndex] = GameNS::StaticData.gameUI.scoreCountText.text;
+                resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
             }
-            else newTupleInt = results[arrIndex].Item1;
+            else resultScoreString = loadedData.Item1;
+        }
+        else
+        {
+            if (resultScore <= data.Item1)
+            {
+                resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+                PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
+            }
+            else resultScoreString = loadedData.Item1;
         }
         
-        if (resultGrade > results[arrIndex].Item2) newTupleGrade = resultGrade;
-        else newTupleGrade = results[arrIndex].Item2;
+        if (resultGrade > dataGrade) dataGrade = resultGrade;
 
-        results[arrIndex] = new Tuple<int, gradeAllSum.gradeEnum>(newTupleInt, newTupleGrade);
-
-        RandomAccessFile.SaveData(arrIndex - 1, new Tuple<string, gradeAllSum.gradeEnum>(scoreRepresentations[arrIndex], results[arrIndex].Item2));
+        RandomAccessFile.SaveData(arrIndex - 1, new Tuple<string, gradeAllSum.gradeEnum>(resultScoreString, dataGrade));
     }
 
     public static void OnLevelCompleted()

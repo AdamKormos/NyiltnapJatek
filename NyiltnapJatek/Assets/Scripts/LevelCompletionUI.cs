@@ -8,19 +8,6 @@ public class LevelCompletionUI : MonoBehaviour
 {
     public static int calculatedGrade; // Calculation @ Score.cs
 
-    private void Start()
-    {
-        if (gradeAllSum.maxSum == 0)
-        {
-            Grade[] grades = FindObjectsOfType<Grade>();
-
-            for (int i = 0; i < grades.Length; i++)
-            {
-                gradeAllSum.maxSum += (int)grades[i].nem;
-            }
-        }
-    }
-
     bool exitAllowed = false;
 
     private void Update()

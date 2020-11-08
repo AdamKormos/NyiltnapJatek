@@ -12,6 +12,19 @@ public class PlayerLvl4Biosz : Player
 #else
         moveStrength = 60;
 #endif
+        reachedEnd = false;
+
+        gradeAllSum.count = 0;
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+
+        quizMaxAll.correctQuestions = 0;
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
+
         Quiz.checkpoint = null;
 
         body = GetComponent<Rigidbody2D>();

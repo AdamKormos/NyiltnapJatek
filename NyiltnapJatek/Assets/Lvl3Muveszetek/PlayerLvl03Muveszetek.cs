@@ -20,6 +20,19 @@ public class PlayerLvl03Muveszetek : Player
         moveStrength = 60;
         moveTickAmount = 20;
 #endif
+        reachedEnd = false;
+
+        gradeAllSum.count = 0;
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+
+        quizMaxAll.correctQuestions = 0;
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
+
         Quiz.checkpoint = null;
         index = 0;
         heldAltAtStart = false;

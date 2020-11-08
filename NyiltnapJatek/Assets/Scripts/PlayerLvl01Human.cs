@@ -25,7 +25,20 @@ public class PlayerLvl01Human : Player
         wingHealthDecreasePerFrame = 0.2f;
         wingHealthIncreaseOnWaxPickup = 40;
 #endif
+        reachedEnd = false;
+
         Quiz.checkpoint = null;
+
+        gradeAllSum.count = 0;
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+
+        quizMaxAll.correctQuestions = 0;
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
 
         s_wingHealth = wingHealth;
         GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;

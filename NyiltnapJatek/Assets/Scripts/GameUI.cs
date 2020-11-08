@@ -141,9 +141,9 @@ public class GameUI : MonoBehaviour
 
     IEnumerator StartRoutine()
     {
-#if UNITY_EDITOR
-        PlayerPrefs.SetString("Username", "");
-#endif
+//#if UNITY_EDITOR
+//        PlayerPrefs.SetString("Username", "");
+//#endif
 
         if (PlayerPrefs.GetString("Username", "") == "")
         {
@@ -165,10 +165,12 @@ public class GameUI : MonoBehaviour
         }
 
         PlayerPrefs.SetString("Username", nameInputField.text);
+        PlayerPrefs.Save();
+
         mainMenuTransform.gameObject.SetActive(true);
         nameInputField.gameObject.SetActive(false);
 
-        StartCoroutine(UploadName());
+        //StartCoroutine(UploadName());
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

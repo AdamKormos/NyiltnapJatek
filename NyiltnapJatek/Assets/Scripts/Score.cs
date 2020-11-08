@@ -32,6 +32,7 @@ public class Score : MonoBehaviour
     public IEnumerator Count()
     {
         // The "value" variable represents seconds here.
+        tenth = 0;
         while(!Player.reachedEnd)
         {
             if (!isPaused)
@@ -70,10 +71,14 @@ public class Score : MonoBehaviour
 
         percentage /= 5f;
         int grade = (int)(percentage / 0.2f) + 1;
-
-        PlayerPrefs.SetFloat("FGrade" + LevelSelection.currentSceneIndex, Mathf.Clamp(percentage / 0.2f, 1, 5));
-
         LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);
+
+        if (RandomAccessFile.LoadData(LevelSelection.currentSceneIndex) == null || 
+            (RandomAccessFile.LoadData(LevelSelection.currentSceneIndex) != null && (int)RandomAccessFile.LoadData(LevelSelection.currentSceneIndex).Item2 > LevelCompletionUI.calculatedGrade))
+        {
+            PlayerPrefs.SetFloat("FGrade" + LevelSelection.currentSceneIndex, Mathf.Clamp(percentage / 0.2f, 1, 5));
+            PlayerPrefs.Save();
+        }
         
         if(SceneManager.GetActiveScene().buildIndex == 2) LevelSelection.OnLevelCompleted();
 

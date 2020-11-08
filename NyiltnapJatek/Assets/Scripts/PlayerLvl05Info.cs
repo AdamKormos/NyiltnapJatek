@@ -23,6 +23,19 @@ public class PlayerLvl05Info : Player
         moveStrength = 30;
         xMoveStrength *= 2f;
 #endif
+        reachedEnd = false;
+
+        gradeAllSum.count = 0;
+        Grade[] grades = FindObjectsOfType<Grade>();
+
+        for (int i = 0; i < grades.Length; i++)
+        {
+            gradeAllSum.maxSum += (int)grades[i].nem;
+        }
+
+        quizMaxAll.correctQuestions = 0;
+        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
+
         Quiz.checkpoint = null;
 
         bulletCount = 50;
