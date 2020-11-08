@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameNS = GameNS;
 
 public class RandomAccessFile
 {
@@ -21,6 +22,25 @@ public class RandomAccessFile
         PlayerPrefs.SetInt("MSI", LevelSelection.maxSceneIndex);
         PlayerPrefs.SetString(levelIndex.ToString(), data.Item1 + " " + ((int)data.Item2).ToString());
         PlayerPrefs.Save();
+        GameNS::StaticData.gameUI.StartCoroutine(GameUI.UploadAverage());
+    }
+
+    public static float LoadAverage()
+    {
+        float sum = 0f;
+        int correctAmount = 0;
+
+        for(int levelIndex = 0; levelIndex <= 5; levelIndex++)
+        {
+            if(PlayerPrefs.GetFloat("FGrade" + LevelSelection.currentSceneIndex, 100f) != 100f)
+            {
+                sum += PlayerPrefs.GetFloat("FGrade" + LevelSelection.currentSceneIndex);
+                correctAmount++;
+            }
+        }
+
+        sum /= correctAmount;
+        return Mathf.Clamp(sum, 1.00f, 5.00f);
     }
 
     public static void EraseData()

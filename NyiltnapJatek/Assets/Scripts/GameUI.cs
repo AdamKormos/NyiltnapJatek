@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameNS = GameNS;
@@ -8,6 +10,7 @@ public class GameUI : MonoBehaviour
 {
 #pragma warning disable UNT0013
     //[SerializeField] public Text debugText = default;
+    [SerializeField] public InputField nameInputField = default;
     [SerializeField] public Sprite coinSprite = default;
     [SerializeField] public Transform mainMenuTransform = default;
     [SerializeField] public Transform creditsTransform = default;
@@ -30,6 +33,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public Text keyGuide = default;
     [SerializeField] bool startsInMainMenu = true;
 #pragma warning restore UNT0013
+    public static bool loads = false;
 
     public void OnViewChanged(bool isMainMenuView, bool isReloadingLevel)
     {
@@ -114,11 +118,62 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(StartRoutine());
+    }
+
+    IEnumerator UploadName()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("nev", PlayerPrefs.GetString("Username"));
+        form.AddField("atlag", RandomAccessFile.LoadAverage().ToString());
+        UnityWebRequest www = UnityWebRequest.Post("neumanngame.atwebpages.com/index.php", form);
+        yield return www.Send();
+    }
+
+    public static IEnumerator UploadAverage()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("nev", PlayerPrefs.GetString("Username"));
+        form.AddField("atlag", RandomAccessFile.LoadAverage().ToString());
+        UnityWebRequest www = UnityWebRequest.Post("neumanngame.atwebpages.com/index.php", form);
+        yield return www.Send();
+    }
+
+    IEnumerator StartRoutine()
+    {
+#if UNITY_EDITOR
+        PlayerPrefs.SetString("Username", "");
+#endif
+
+        if (PlayerPrefs.GetString("Username", "") == "")
+        {
+            mainMenuTransform.gameObject.SetActive(false);
+            nameInputField.gameObject.SetActive(true);
+            nameInputField.interactable = true;
+            nameInputField.Select();
+
+            while (nameInputField.text.Length == 0 || !NameReader.allowedToGo)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            Debug.Log("Z");
+        }
+        else
+        {
+            mainMenuTransform.gameObject.SetActive(true);
+            nameInputField.gameObject.SetActive(false);
+        }
+
+        PlayerPrefs.SetString("Username", nameInputField.text);
+        mainMenuTransform.gameObject.SetActive(true);
+        nameInputField.gameObject.SetActive(false);
+
+        StartCoroutine(UploadName());
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    public static bool loads = false;
+
     private void Update()
     {
         if(SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)

@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Lvl05Server.cs" />
     <Compile Include="Assets\Scripts\Lvl05SpaceshipEnemy.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
+    <Compile Include="Assets\Scripts\NameReader.cs" />
     <Compile Include="Assets\Scripts\ObstacleLvl02.cs" />
     <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\ObstacleSpawnerOnCollision.cs" />
