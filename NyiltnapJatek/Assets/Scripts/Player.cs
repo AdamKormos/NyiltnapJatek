@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
                 {
                     PlayerLvl03Muveszetek.index = System.Convert.ToInt32(Quiz.checkpoint.other[0]);
                     PlayerLvl03Muveszetek.heldAltAtStart = false;
+                    PlayerLvl03Muveszetek.Moving = false;
                 }
             }
 

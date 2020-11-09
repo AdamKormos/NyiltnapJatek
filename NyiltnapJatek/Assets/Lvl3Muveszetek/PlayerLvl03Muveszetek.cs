@@ -9,7 +9,7 @@ public class PlayerLvl03Muveszetek : Player
     [SerializeField] private float kottaGap = 8f;
     [SerializeField] private int moveTickAmount = 30;
     [SerializeField] private float waitSecond = 12f;
-    private bool Moving = false;
+    public static bool Moving = false;
     public static int index = 0;
 
     // Start is called before the first frame update
@@ -37,6 +37,7 @@ public class PlayerLvl03Muveszetek : Player
         Quiz.checkpoint = null;
         index = 0;
         heldAltAtStart = false;
+        Moving = false;
         waitSecond = 1f / waitSecond;
 
         cameraOffset = Camera.main.transform.position - transform.position;
@@ -70,12 +71,12 @@ public class PlayerLvl03Muveszetek : Player
                 {
                     StartCoroutine(move(-kottaGap / 2));
                 }
-                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && index != 4)
                 {
                     index++;
                     StartCoroutine(move(kottaGap));
                 }
-                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 0)
                 {
                     index--;
                     StartCoroutine(move(-kottaGap));
@@ -83,7 +84,7 @@ public class PlayerLvl03Muveszetek : Player
             }
         }
 
-        Debug.Log(index);
+        Debug.Log("Index: " + index + " moving? " + Moving + " held alt? " + heldAltAtStart);
     }
 
     //bool brokeAltMove = false;
@@ -127,8 +128,6 @@ public class PlayerLvl03Muveszetek : Player
 
         if (respawnedAtCheckpoint)
         {
-            heldAltAtStart = false;
-            Moving = false;
             respawnedAtCheckpoint = false;
         }
     }

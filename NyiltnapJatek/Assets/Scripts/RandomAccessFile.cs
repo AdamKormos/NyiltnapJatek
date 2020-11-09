@@ -30,7 +30,7 @@ public class RandomAccessFile
         float sum = 0f;
         int correctAmount = 0;
 
-        for(int levelIndex = 0; levelIndex <= 5; levelIndex++)
+        for(int levelIndex = 0; levelIndex < 5; levelIndex++)
         {
             if(PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
             {

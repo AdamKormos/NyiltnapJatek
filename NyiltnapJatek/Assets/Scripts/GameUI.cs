@@ -141,33 +141,36 @@ public class GameUI : MonoBehaviour
 
     IEnumerator StartRoutine()
     {
-//#if UNITY_EDITOR
-//        PlayerPrefs.SetString("Username", "");
-//#endif
+        //#if UNITY_EDITOR
+        //        PlayerPrefs.SetString("Username", "");
+        //#endif
 
-        if (PlayerPrefs.GetString("Username", "") == "")
+        if (startsInMainMenu)
         {
-            mainMenuTransform.gameObject.SetActive(false);
-            nameInputField.gameObject.SetActive(true);
-            nameInputField.interactable = true;
-            nameInputField.Select();
-
-            while (nameInputField.text.Length == 0 || !NameReader.allowedToGo)
+            if (PlayerPrefs.GetString("Username", "") == "")
             {
-                yield return new WaitForSeconds(0.1f);
+                mainMenuTransform.gameObject.SetActive(false);
+                nameInputField.gameObject.SetActive(true);
+                nameInputField.interactable = true;
+                nameInputField.Select();
+
+                while (nameInputField.text.Length == 0 || !NameReader.allowedToGo)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+                Debug.Log("Z");
             }
-            Debug.Log("Z");
-        }
-        else
-        {
+            else
+            {
+                mainMenuTransform.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(false);
+            }
+
+            PlayerPrefs.SetString("Username", nameInputField.text);
+            PlayerPrefs.Save();
+
             mainMenuTransform.gameObject.SetActive(true);
-            nameInputField.gameObject.SetActive(false);
         }
-
-        PlayerPrefs.SetString("Username", nameInputField.text);
-        PlayerPrefs.Save();
-
-        mainMenuTransform.gameObject.SetActive(true);
         nameInputField.gameObject.SetActive(false);
 
         //StartCoroutine(UploadName());
