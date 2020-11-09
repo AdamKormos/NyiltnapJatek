@@ -46,9 +46,6 @@ public class PlayerLvl05Info : Player
         leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
         rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
 
-        GameNS::StaticData.gameUI.leftTopSlider.maxValue = serverObject.maxHealth;
-        GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
-
         cameraOffset = Camera.main.transform.position - transform.position;
         halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
         StartCoroutine(Move());
@@ -59,11 +56,12 @@ public class PlayerLvl05Info : Player
     {
         currentPosition = transform.position;
 
-        if (Lvl05Server.health <= 0)
+        if (Lvl05Server.dead)
         {
+            Lvl05Server.dead = false;
             OnGameOver();
             EnableEnemies();
-            StartCoroutine(RespawnFrameDelay());
+            respawnedAtCheckpoint = false;
         }
 
         if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
@@ -88,13 +86,6 @@ public class PlayerLvl05Info : Player
                 GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
             }
         }
-    }
-
-    IEnumerator RespawnFrameDelay()
-    {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        respawnedAtCheckpoint = false;
     }
 
     protected override IEnumerator Move()
