@@ -16,6 +16,7 @@ public class PlayerLvl02MatFiz : Player
         reachedEnd = false;
 
         gradeAllSum.count = 0;
+        gradeAllSum.maxSum = 0;
         Grade[] grades = FindObjectsOfType<Grade>();
 
         for (int i = 0; i < grades.Length; i++)

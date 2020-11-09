@@ -138,26 +138,49 @@ public class LevelSelection : MonoBehaviour
         int dataScore = data.Item1;
         gradeAllSum.gradeEnum dataGrade = data.Item2;
 
-        if (arrIndex == 5)
+        //if (arrIndex == 5)
+        //{
+        //    if (resultScore >= data.Item1)
+        //    {
+        //        resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+        //        Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+        //    }
+        //    else resultScoreString = loadedData.Item1;
+        //}
+        //else
+        //{
+        //    if (resultScore <= data.Item1)
+        //    {
+        //        resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+        //        PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
+        //    }
+        //    else resultScoreString = loadedData.Item1;
+        //}
+
+        if (resultGrade >= dataGrade)
         {
-            if (resultScore >= data.Item1)
+            dataGrade = resultGrade;
+
+            if (arrIndex == 5)
             {
-                resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
-                Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+                if (resultScore >= data.Item1)
+                {
+                    resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+                    Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+                }
+                else resultScoreString = loadedData.Item1;
             }
-            else resultScoreString = loadedData.Item1;
-        }
-        else
-        {
-            if (resultScore <= data.Item1)
+            else
             {
-                resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
-                PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
+                if (resultScore <= data.Item1)
+                {
+                    resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+                    PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
+                    PlayerPrefs.Save();
+                }
+                else resultScoreString = loadedData.Item1;
             }
-            else resultScoreString = loadedData.Item1;
         }
-        
-        if (resultGrade > dataGrade) dataGrade = resultGrade;
 
         RandomAccessFile.SaveData(arrIndex - 1, new Tuple<string, gradeAllSum.gradeEnum>(resultScoreString, dataGrade));
     }

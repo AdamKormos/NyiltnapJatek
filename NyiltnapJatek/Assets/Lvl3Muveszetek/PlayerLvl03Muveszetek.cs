@@ -23,6 +23,7 @@ public class PlayerLvl03Muveszetek : Player
         reachedEnd = false;
 
         gradeAllSum.count = 0;
+        gradeAllSum.maxSum = 0;
         Grade[] grades = FindObjectsOfType<Grade>();
 
         for (int i = 0; i < grades.Length; i++)
@@ -127,6 +128,7 @@ public class PlayerLvl03Muveszetek : Player
         if (respawnedAtCheckpoint)
         {
             heldAltAtStart = false;
+            Moving = false;
             respawnedAtCheckpoint = false;
         }
     }

@@ -30,6 +30,7 @@ public class PlayerLvl01Human : Player
         Quiz.checkpoint = null;
 
         gradeAllSum.count = 0;
+        gradeAllSum.maxSum = 0;
         Grade[] grades = FindObjectsOfType<Grade>();
 
         for (int i = 0; i < grades.Length; i++)

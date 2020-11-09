@@ -76,7 +76,7 @@ public class Score : MonoBehaviour
         if (RandomAccessFile.LoadData(LevelSelection.currentSceneIndex) == null || 
             (RandomAccessFile.LoadData(LevelSelection.currentSceneIndex) != null && (int)RandomAccessFile.LoadData(LevelSelection.currentSceneIndex).Item2 > LevelCompletionUI.calculatedGrade))
         {
-            PlayerPrefs.SetFloat("FGrade" + LevelSelection.currentSceneIndex, Mathf.Clamp(percentage / 0.2f, 1, 5));
+            PlayerPrefs.SetFloat("FGrade" + LevelSelection.currentSceneIndex, Mathf.Clamp(percentage / 0.2f, 1.00f, 5.00f));
             PlayerPrefs.Save();
         }
         
