@@ -134,7 +134,11 @@ public class GameUI : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("nev", PlayerPrefs.GetString("Username"));
-        form.AddField("atlag", RandomAccessFile.LoadAverage().ToString());
+
+        float result = RandomAccessFile.LoadAverage();
+        Debug.Log("Result: " + result + "   string: " + result.ToString().Substring(0, 4));
+        form.AddField("atlag", result.ToString().Substring(0, 4));
+
         UnityWebRequest www = UnityWebRequest.Post("neumanngame.atwebpages.com/index.php", form);
         yield return www.Send();
     }
@@ -158,7 +162,6 @@ public class GameUI : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.1f);
                 }
-                Debug.Log("Z");
             }
             else
             {

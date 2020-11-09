@@ -35,6 +35,8 @@ public class PlayerLvl02MatFiz : Player
             }
         }
 
+        Debug.Log(RandomAccessFile.LoadAverage().ToString());
+
         GameUI.loads = false;
         Quiz.checkpoint = null;
         brickCount = FindObjectsOfType<ObstacleLvl02>().Length;

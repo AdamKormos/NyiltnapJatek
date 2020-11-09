@@ -34,6 +34,7 @@ public class RandomAccessFile
         {
             if(PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
             {
+                //Debug.Log(PlayerPrefs.GetFloat("FGrade" + levelIndex));
                 sum += PlayerPrefs.GetFloat("FGrade" + levelIndex);
                 correctAmount++;
             }

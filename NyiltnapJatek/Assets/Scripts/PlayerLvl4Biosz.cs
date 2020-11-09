@@ -54,8 +54,8 @@ public class PlayerLvl4Biosz : Player
         if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
         else if (collision.tag.Equals("DNASQ")) 
         { 
-            moveStrength = (int)(moveStrength * 1.25f);
-            body.gravityScale *= 1.5f;
+            moveStrength = Mathf.Clamp((int)(moveStrength * 1.25f), 0, 250);
+            body.gravityScale = Mathf.Clamp(body.gravityScale * 1.5f, 0, 10f);
             Destroy(collision.gameObject);
         }
     }
