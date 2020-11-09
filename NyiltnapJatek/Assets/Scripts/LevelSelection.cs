@@ -181,8 +181,10 @@ public class LevelSelection : MonoBehaviour
                 else resultScoreString = loadedData.Item1;
             }
         }
+        else resultScoreString = (loadedData.Item1 == "" || loadedData.Item1 == null ? GameNS::StaticData.gameUI.scoreCountText.text : loadedData.Item1);
 
-        RandomAccessFile.SaveData(arrIndex - 1, new Tuple<string, gradeAllSum.gradeEnum>(resultScoreString, dataGrade));
+        RandomAccessFile.SaveData(arrIndex - 1, 
+            new Tuple<string, gradeAllSum.gradeEnum>(resultScoreString == "" ? GameNS::StaticData.gameUI.scoreCountText.text : resultScoreString, dataGrade));
     }
 
     public static void OnLevelCompleted()

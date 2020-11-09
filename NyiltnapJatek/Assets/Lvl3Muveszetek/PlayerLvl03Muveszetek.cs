@@ -71,12 +71,12 @@ public class PlayerLvl03Muveszetek : Player
                 {
                     StartCoroutine(move(-kottaGap / 2));
                 }
-                else if (!Input.GetKey(halfMoveKey) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && index != 4)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
                 {
                     index++;
                     StartCoroutine(move(kottaGap));
                 }
-                else if (!Input.GetKey(halfMoveKey) && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 0)
+                else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
                 {
                     index--;
                     StartCoroutine(move(-kottaGap));
