@@ -134,10 +134,8 @@ public class GameUI : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("nev", PlayerPrefs.GetString("Username"));
-
         float result = RandomAccessFile.LoadAverage();
-        Debug.Log("Result: " + result + "   string: " + result.ToString().Substring(0, 4));
-        form.AddField("atlag", result.ToString().Substring(0, 4));
+        form.AddField("atlag", result.ToString());
 
         UnityWebRequest www = UnityWebRequest.Post("neumanngame.atwebpages.com/index.php", form);
         yield return www.Send();
@@ -199,6 +197,8 @@ public class GameUI : MonoBehaviour
                 GameNS::StaticData.gameUI.OnViewChanged(false, true);
             }
         }
+
+        //if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.U)) RandomAccessFile.EraseData();
     }
 
     IEnumerator GenerateLevelSelectionChildren()

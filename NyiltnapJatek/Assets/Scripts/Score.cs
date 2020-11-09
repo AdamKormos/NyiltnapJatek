@@ -73,9 +73,9 @@ public class Score : MonoBehaviour
         int grade = (int)(percentage / 0.2f) + 1;
         LevelCompletionUI.calculatedGrade = Mathf.Clamp(grade, 1, 5);
 
-        if (Mathf.Clamp(percentage / 0.2f, 1.00f, 5.00f) > PlayerPrefs.GetFloat("FGrade" + LevelSelection.currentSceneIndex, -100f))
+        if (Mathf.Clamp(percentage / 0.2f, 1.00f, 5.00f) > PlayerPrefs.GetFloat("FGrade" + LevelSelection.recentOpenedLevel, -100f))
         {
-            PlayerPrefs.SetFloat("FGrade" + LevelSelection.currentSceneIndex, Mathf.Clamp(percentage / 0.2f, 1.00f, 5.00f));
+            PlayerPrefs.SetFloat("FGrade" + LevelSelection.recentOpenedLevel, Mathf.Clamp(percentage / 0.2f, 1.00f, 5.00f));
             PlayerPrefs.Save();
         }
         

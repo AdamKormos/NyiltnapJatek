@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public static bool moveAllowed = true;
     protected bool isOnGround = true;
     protected Vector2 halfPlayerSize = default;
-    public static bool reachedEnd { get; protected set; }
+    public static bool reachedEnd { get; set; }
     public static bool isOnScreen { get; protected set; }
     public static Vector3 currentPosition { get; protected set; }
     protected static Vector2 cameraOffset;

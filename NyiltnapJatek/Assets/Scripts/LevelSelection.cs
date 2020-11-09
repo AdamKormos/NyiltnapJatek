@@ -42,9 +42,6 @@ public class LevelSelection : MonoBehaviour
             {
                 panelChildren[i].InjectRecord(RandomAccessFile.LoadData(i-1));
                 panelChildren[i].gameObject.SetActive(true);
-
-                if (i - 1 <= maxSceneIndex) lockImageArray[i - 1].enabled = false;
-                else lockImageArray[i - 1].enabled = true;
             }
         }
     }
@@ -61,10 +58,9 @@ public class LevelSelection : MonoBehaviour
     private void Start()
     {
 #if UNITY_EDITOR
-        maxSceneIndex = 4;
+        maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
 #else
-        if(Debug.isDebugBuild) maxSceneIndex = 4;
-        else maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
+        maxSceneIndex = PlayerPrefs.GetInt("MSI", 0);
 #endif
 
         s_missingGradeSprite = missingGradeSprite;
@@ -112,9 +108,12 @@ public class LevelSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            GameNS::StaticData.loadingScreen.LoadLevel(currentSceneIndex+1);
+            recentOpenedLevel = currentSceneIndex;
+            GameNS::StaticData.loadingScreen.LoadLevel(recentOpenedLevel+1);
         }
     }
+
+    public static int recentOpenedLevel = 0;
 
     public static void FetchCompletionData(int resultScore, gradeAllSum.gradeEnum resultGrade)
     {
@@ -189,11 +188,20 @@ public class LevelSelection : MonoBehaviour
 
     public static void OnLevelCompleted()
     {
-        if(maxSceneIndex < 4) maxSceneIndex = Mathf.Clamp(currentSceneIndex + 1, 0, 4);
+        if(recentOpenedLevel + 1 > maxSceneIndex) maxSceneIndex = Mathf.Clamp(recentOpenedLevel + 1, 0, 4);
 
         PlayerPrefs.SetInt("MSI", maxSceneIndex);
         PlayerPrefs.Save();
-        lockImageArray[maxSceneIndex].enabled = false;
+
+        for (int i = 0; i <= maxSceneIndex; i++)
+        {
+            lockImageArray[i].enabled = false;
+        }
+
+        for(int i = maxSceneIndex+1; i < 5; i++)
+        {
+            lockImageArray[i].enabled = true;
+        }
 
         GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
     }
