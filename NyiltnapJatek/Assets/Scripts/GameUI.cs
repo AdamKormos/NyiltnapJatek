@@ -167,14 +167,14 @@ public class GameUI : MonoBehaviour
                 nameInputField.gameObject.SetActive(false);
             }
 
-            PlayerPrefs.SetString("Username", nameInputField.text);
+            PlayerPrefs.SetString("Username", NameReader.textStr);
             PlayerPrefs.Save();
 
             mainMenuTransform.gameObject.SetActive(true);
         }
         nameInputField.gameObject.SetActive(false);
 
-        //StartCoroutine(UploadName());
+        StartCoroutine(UploadName());
         StartCoroutine(GenerateLevelSelectionChildren());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
