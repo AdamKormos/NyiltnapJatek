@@ -73,12 +73,10 @@ public class PlayerLvl03Muveszetek : Player
                 }
                 else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && index != 4)
                 {
-                    index++;
                     StartCoroutine(move(kottaGap));
                 }
                 else if (!Input.GetKey(halfMoveKey) && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && index != 0)
                 {
-                    index--;
                     StartCoroutine(move(-kottaGap));
                 }
             }
@@ -112,6 +110,11 @@ public class PlayerLvl03Muveszetek : Player
             transform.position += new Vector3(0, num / moveTickAmount);
             yield return new WaitForEndOfFrame();
         }
+
+        // This part is reached only if the movement finished
+
+        if (num == kottaGap) index++;
+        else if (num == -kottaGap) index--;
 
         Moving = false;
     }
