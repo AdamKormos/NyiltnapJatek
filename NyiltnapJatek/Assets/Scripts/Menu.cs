@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using GameNS = GameNS;
 
+/// <summary>
+/// Main menu class.
+/// </summary>
 public class Menu : MonoBehaviour
 {
     [SerializeField] Color selectedButtonColor = default;
@@ -11,6 +13,9 @@ public class Menu : MonoBehaviour
     private int index = 0;
     public static bool isMenuImgActive { get; private set; }
 
+    /// <summary>
+    /// Resets current button index and button colors.
+    /// </summary>
     private void OnEnable()
     {
         buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
@@ -25,8 +30,8 @@ public class Menu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !menuImg.activeSelf)
         {
             menuImg.SetActive(!menuImg.activeSelf);
-            GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(!menuImg.activeSelf);
-            GameNS::StaticData.gameUI.creditsTransform.gameObject.SetActive(!menuImg.activeSelf);
+            GameUI.instance.levelSelectionTransform.gameObject.SetActive(!menuImg.activeSelf);
+            GameUI.instance.creditsTransform.gameObject.SetActive(!menuImg.activeSelf);
         }
         if (menuImg.activeSelf)
         {
@@ -63,12 +68,12 @@ public class Menu : MonoBehaviour
     
     private void OnLevelSelectionPress()
     {
-        GameNS::StaticData.gameUI.levelSelectionTransform.gameObject.SetActive(true);
+        GameUI.instance.levelSelectionTransform.gameObject.SetActive(true);
     }
 
     private void Credits()
     {
-        GameNS::StaticData.gameUI.creditsTransform.gameObject.SetActive(true);
+        GameUI.instance.creditsTransform.gameObject.SetActive(true);
     }
 
     private void Exit()

@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameNS = GameNS;
 using static UnityEngine.ParticleSystem;
 
+/// <summary>
+/// The class for the server on Lvl05, the object to protect from enemies.
+/// </summary>
 public class Lvl05Server : MonoBehaviour
 {
     [SerializeField] public byte maxHealth = 20;
     public static byte health, s_maxHealth;
-    ParticleSystem particleSystem = default;
-    Vector3 checkpointPosition;
+    new ParticleSystem particleSystem = default;
+    Vector3 checkpointPosition; // TODO: Find out why this is buggy and why it throws the server to a different position than it is supposed to.
     public static bool dead = false;
 
     private void Start()
@@ -17,8 +19,8 @@ public class Lvl05Server : MonoBehaviour
         particleSystem = GetComponent<ParticleSystem>();
         s_maxHealth = maxHealth;
         health = maxHealth;
-        GameNS::StaticData.gameUI.leftTopSlider.maxValue = maxHealth;
-        GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
+        GameUI.instance.leftTopSlider.maxValue = maxHealth;
+        GameUI.instance.leftTopSlider.value = GameUI.instance.leftTopSlider.maxValue;
         particleSystem.Stop();    
     }
 
@@ -39,7 +41,11 @@ public class Lvl05Server : MonoBehaviour
 
     bool canTakeDmg = true;
 
-
+    /// <summary>
+    /// Called when an enemy hits the server. Particles spawn to visualize the damage. On 0 health, server spawns to its checkpoint position and its HP resets.
+    /// </summary>
+    /// <param name="enemyCol"></param>
+    /// <returns></returns>
     private IEnumerator OnDamageTaken(Collision2D enemyCol)
     {
         ShapeModule s = particleSystem.shape;
@@ -50,14 +56,12 @@ public class Lvl05Server : MonoBehaviour
         enemyCol.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
         health--;
-        Debug.Log("Dmg taken");
-        GameNS::StaticData.gameUI.leftTopSlider.value--;
+        GameUI.instance.leftTopSlider.value--;
         if (health == 0)
         {
             dead = true;
-            Debug.Log("MAX: " + maxHealth);
             health = maxHealth;
-            GameNS::StaticData.gameUI.leftTopSlider.value = health;
+            GameUI.instance.leftTopSlider.value = health;
             transform.position = checkpointPosition;
         }
 

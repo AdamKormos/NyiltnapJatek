@@ -1,32 +1,40 @@
 ﻿using UnityEngine;
-using GameNS = GameNS;
 
+/// <summary>
+/// The class of an in-game coin.
+/// TODO: Randomly generate coin value with a required amount given.
+/// </summary>
 public class Grade : MonoBehaviour
 { 
-    public gradeAllSum.gradeEnum nem = default;
+    public gradeEnum nem = default;
 
     private void Start()
     {
         transform.localScale = new Vector3(0.15f, 0.15f, 1);
         //GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         GetComponent<CircleCollider2D>().radius = 2.65f;
-        GetComponent<SpriteRenderer>().sprite = GameNS::StaticData.gameUI.coinSprite;
+        GetComponent<SpriteRenderer>().sprite = GameUI.instance.coinSprite;
 
-        switch(nem)
+        SetColorBasedOnGradeValue();
+    }
+
+    private void SetColorBasedOnGradeValue()
+    {
+        switch (nem)
         {
-            case gradeAllSum.gradeEnum.one:
+            case gradeEnum.one:
                 GetComponent<SpriteRenderer>().color = new Color32(0, 175, 255, 255); // Sötétzöld
                 break;
-            case gradeAllSum.gradeEnum.two:
+            case gradeEnum.two:
                 GetComponent<SpriteRenderer>().color = new Color32(109, 109, 255, 255); // Szürkés
                 break;
-            case gradeAllSum.gradeEnum.three:
+            case gradeEnum.three:
                 GetComponent<SpriteRenderer>().color = new Color32(109, 0, 255, 255); // Lila
                 break;
-            case gradeAllSum.gradeEnum.four:
+            case gradeEnum.four:
                 GetComponent<SpriteRenderer>().color = new Color32(109, 255, 255, 255); // Világoszöld
                 break;
-            case gradeAllSum.gradeEnum.five:
+            case gradeEnum.five:
                 GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255); // Arany
                 break;
         }

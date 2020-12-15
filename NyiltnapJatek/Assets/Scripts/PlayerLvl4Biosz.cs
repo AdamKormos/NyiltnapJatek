@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using GameNS = GameNS;
 
+/// <summary>
+/// Player child for Lvl04. Ability to toggle gravity and boost speed.
+/// </summary>
 public class PlayerLvl4Biosz : Player
 {
     private Rigidbody2D body = default;
@@ -13,20 +15,6 @@ public class PlayerLvl4Biosz : Player
         moveStrength = 60;
 #endif
         reachedEnd = false;
-
-        gradeAllSum.count = 0;
-        gradeAllSum.maxSum = 0;
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
-        {
-            gradeAllSum.maxSum += (int)grades[i].nem;
-        }
-
-        quizMaxAll.correctQuestions = 0;
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
-
-        Quiz.checkpoint = null;
 
         body = GetComponent<Rigidbody2D>();
         body.freezeRotation = true;
@@ -51,25 +39,13 @@ public class PlayerLvl4Biosz : Player
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if (collision.tag.Equals("DNASQ")) 
+        if (collision.CompareTag("LevelEnding")) { reachedEnd = true; }
+        else if (collision.CompareTag("DNASQ")) 
         { 
             moveStrength = Mathf.Clamp((int)(moveStrength * 1.25f), 0, 250);
             body.gravityScale = Mathf.Clamp(body.gravityScale * 1.5f, -10, 10f);
             Destroy(collision.gameObject);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (checkCollision)
-        //{
-        //    body.velocity = new Vector2(0f, 0f);
-        //    transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
-        //    arrow.SetActive(true);
-        //    canRotate = true;
-        //    checkCollision = false;
-        //}
     }
 
     private void OnBecameVisible()
@@ -96,7 +72,7 @@ public class PlayerLvl4Biosz : Player
             {
                 reachedEnd = false;
 
-                //if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
+                //if (GameUI.instance.levelCompletionPanelParent != null)
                 //{
                     LevelSelection.OnLevelCompleted();
                 //}

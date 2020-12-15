@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Globalization;
 using UnityEngine;
-using GameNS = GameNS;
 
+/// <summary>
+/// Player class for Lvl03. Ability to move up and down on lines.
+/// </summary>
 public class PlayerLvl03Muveszetek : Player
 {
     [SerializeField] KeyCode halfMoveKey = default;
@@ -22,19 +24,6 @@ public class PlayerLvl03Muveszetek : Player
 #endif
         reachedEnd = false;
 
-        gradeAllSum.count = 0;
-        gradeAllSum.maxSum = 0;
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
-        {
-            gradeAllSum.maxSum += (int)grades[i].nem;
-        }
-
-        quizMaxAll.correctQuestions = 0;
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
-
-        Quiz.checkpoint = null;
         index = 0;
         heldAltAtStart = false;
         Moving = false;
@@ -88,6 +77,13 @@ public class PlayerLvl03Muveszetek : Player
     //bool brokeAltMove = false;
     public static bool heldAltAtStart = false;
 
+    /// <summary>
+    /// The method used for ALT moves. Might have heavy optimization potential as it was given many probably unnecessary conditions due to the misunderstanding
+    /// of a bug.
+    /// TODO: Refactor.
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
     IEnumerator move(float num)
     {
         Moving = true;
@@ -121,8 +117,8 @@ public class PlayerLvl03Muveszetek : Player
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if (collision.tag.Equals("PassiveEnemy") && moveAllowed) OnGameOver();
+        if (collision.CompareTag("LevelEnding")) { reachedEnd = true; }
+        else if (collision.CompareTag("PassiveEnemy") && moveAllowed) OnGameOver();
     }
 
     private void OnBecameVisible()

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// The ball script used on Lvl02.
+/// </summary>
 public class BallLvl02MatekFizika : MonoBehaviour
 {
     Rigidbody2D rbd = default;
@@ -9,7 +12,7 @@ public class BallLvl02MatekFizika : MonoBehaviour
 
     private void OnDisable()
     {
-        rbd.Sleep();
+        rbd.Sleep(); // So that it doesn't fall off when for example the level is over.
     }
 
     private void OnEnable()
@@ -34,7 +37,7 @@ public class BallLvl02MatekFizika : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.GetComponent<ObstacleLvl02>() || (collision.gameObject.GetComponent<ObstacleLvl02>() && !collision.gameObject.GetComponent<ObstacleLvl02>().IsQuestionAndDestroyed()))
+        if (!collision.gameObject.GetComponent<ObstacleLvl02>() || (collision.gameObject.GetComponent<ObstacleLvl02>() && !collision.gameObject.GetComponent<ObstacleLvl02>().IsQuestionAndDestroyedOnNextHit()))
         {
             velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
         }
@@ -45,7 +48,7 @@ public class BallLvl02MatekFizika : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        if (!GameUI.loads)
+        if (!GameUI.loads) // TODO: This might be unnecessary? I think this was added before the current solution was implemented.
         {
             PlayerLvl02MatFiz.isBallOnScreen = false;
         }

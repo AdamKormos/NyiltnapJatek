@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used on entities that move to a given direction every frame.
+/// </summary>
 public class ConstantMovement : MonoBehaviour
 {
     [SerializeField] protected Vector3 movePerFrame = default;

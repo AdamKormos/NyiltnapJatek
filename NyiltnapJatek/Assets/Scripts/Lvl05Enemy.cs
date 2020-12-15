@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy class for Lvl05.
+/// </summary>
 public class Lvl05Enemy : MonoBehaviour
 {
     [SerializeField] public byte health = 2;
@@ -13,6 +16,10 @@ public class Lvl05Enemy : MonoBehaviour
         maxHealth = health;
     }
 
+    /// <summary>
+    /// Does what it does because of checkpoint simulation, as now, if enemies appear on the screen, they have full health. If they were to be killed, enemies wouldn't
+    /// appear again if they were killed but the player spawned at a checkpoint.
+    /// </summary>
     private void OnBecameVisible()
     {
         health = maxHealth;

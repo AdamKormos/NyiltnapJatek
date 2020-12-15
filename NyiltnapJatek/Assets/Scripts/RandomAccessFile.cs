@@ -2,29 +2,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameNS = GameNS;
 
+/// <summary>
+/// Class used for saving and loading level results based on level indeces.
+/// </summary>
 public class RandomAccessFile
 {
-    public static Tuple<string, gradeAllSum.gradeEnum> LoadData(int levelIndex)
+    /// <summary>
+    /// Loads results based on a level index.
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <returns></returns>
+    public static Tuple<string, gradeEnum> LoadData(int levelIndex)
     {
         string[] data = PlayerPrefs.GetString(levelIndex.ToString()).Split(' ');
 
         if (data.Length == 2)
         {
-            return new Tuple<string, gradeAllSum.gradeEnum>(data[0], (gradeAllSum.gradeEnum)System.Convert.ToInt32(data[1]));
+            return new Tuple<string, gradeEnum>(data[0], (gradeEnum)System.Convert.ToInt32(data[1]));
         }
         else return null;
     }
 
-    public static void SaveData(int levelIndex, Tuple<string, gradeAllSum.gradeEnum> data)
+    /// <summary>
+    /// Saves results to a location defined by the level index. Also uploads the current stats to the database.
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    /// <param name="data"></param>
+    public static void SaveData(int levelIndex, Tuple<string, gradeEnum> data)
     {
         PlayerPrefs.SetInt("MSI", LevelSelection.maxSceneIndex);
         PlayerPrefs.SetString(levelIndex.ToString(), data.Item1 + " " + ((int)data.Item2).ToString());
         PlayerPrefs.Save();
-        GameNS::StaticData.gameUI.StartCoroutine(GameUI.UploadAverage());
+        GameUI.instance.StartCoroutine(GameUI.UploadAverage());
     }
 
+    /// <summary>
+    /// Calculates the average of the completed levels.
+    /// </summary>
+    /// <returns></returns>
     public static float LoadAverage()
     {
         float sum = 0f;
@@ -46,6 +62,9 @@ public class RandomAccessFile
         return Mathf.Clamp(sum, 1.00f, 5.00f);
     }
 
+    /// <summary>
+    /// Deletes every saved data.
+    /// </summary>
     public static void EraseData()
     {
         PlayerPrefs.DeleteAll();

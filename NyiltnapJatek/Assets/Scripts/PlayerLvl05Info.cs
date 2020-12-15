@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GameNS = GameNS;
 
+/// <summary>
+/// Player child for Lvl05. Spaceship with shoot ability.
+/// </summary>
 public class PlayerLvl05Info : Player
 {
     [SerializeField] byte minimumBulletFromClip = 5;
@@ -25,23 +27,9 @@ public class PlayerLvl05Info : Player
 #endif
         reachedEnd = false;
 
-        gradeAllSum.count = 0;
-        gradeAllSum.maxSum = 0;
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
-        {
-            gradeAllSum.maxSum += (int)grades[i].nem;
-        }
-
-        quizMaxAll.correctQuestions = 0;
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
-
-        Quiz.checkpoint = null;
-
         bulletCount = 50;
-        GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
-        GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+        GameUI.instance.lvl05StuffTransform.gameObject.SetActive(false);
+        GameUI.instance.bulletCountText.text = bulletCount.ToString();
 
         leftScreenBound = Camera.main.transform.position.x - ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) + halfPlayerSize.x;
         rightScreenBound = Camera.main.transform.position.x + ((2f * Camera.main.orthographicSize * Camera.main.aspect) / 2) - halfPlayerSize.x;
@@ -64,7 +52,7 @@ public class PlayerLvl05Info : Player
             respawnedAtCheckpoint = false;
         }
 
-        if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+        if (!reachedEnd && !quizCollider.quizActive && !GameUI.instance.levelHintBar.gameObject.activeSelf)
         {
             #region Movement
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -83,7 +71,7 @@ public class PlayerLvl05Info : Player
             {
                 GameObject bullet = Instantiate(bulletObject, transform.position + new Vector3(0, halfPlayerSize.y + 0.1f, -5f), Quaternion.identity);
                 bulletCount--;
-                GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+                GameUI.instance.bulletCountText.text = bulletCount.ToString();
             }
         }
     }
@@ -91,11 +79,11 @@ public class PlayerLvl05Info : Player
     protected override IEnumerator Move()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
-        while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
+        while (GameUI.instance.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
+        GameUI.instance.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
-        GameNS::StaticData.gameUI.bulletCountText.gameObject.SetActive(true);
-        GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
+        GameUI.instance.bulletCountText.gameObject.SetActive(true);
+        GameUI.instance.leftTopSlider.gameObject.SetActive(true);
         
         while (!reachedEnd)
         {
@@ -118,11 +106,11 @@ public class PlayerLvl05Info : Player
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if (collision.tag.Equals("BulletClip"))
+        if (collision.CompareTag("LevelEnding")) { reachedEnd = true; }
+        else if (collision.CompareTag("BulletClip"))
         {
             bulletCount += Random.Range(minimumBulletFromClip, maximumBulletFromClip);
-            GameNS::StaticData.gameUI.bulletCountText.text = bulletCount.ToString();
+            GameUI.instance.bulletCountText.text = bulletCount.ToString();
             Destroy(collision.gameObject);
         }
     }
@@ -137,6 +125,11 @@ public class PlayerLvl05Info : Player
         }
     }
 
+    /// <summary>
+    /// Called when respawned to a checkpoint. 
+    /// TODO: Might make a OnRespawned() virtual in base player. Once that's done, this should go there and make the server spawn at the correct position, or maybe I'll
+    /// just apply an offset calculated from current position and checkpoint position to the player and the server too? That should be good anytime.
+    /// </summary>
     private static void EnableEnemies()
     {
         foreach (Lvl05Enemy g in FindObjectsOfType<Lvl05Enemy>())
@@ -161,7 +154,7 @@ public class PlayerLvl05Info : Player
             //if (transform.position.y > Camera.main.transform.position.y + Camera.main.orthographicSize && reachedEnd)
             //{
                 reachedEnd = false; // Setting it back to false for further levels
-                GameNS::StaticData.gameUI.lvl05StuffTransform.gameObject.SetActive(false);
+                GameUI.instance.lvl05StuffTransform.gameObject.SetActive(false);
 
                 Score.CalculateResults();
                 LevelSelection.OnLevelCompleted();

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using GameNS = GameNS;
 
+/// <summary>
+/// Used for storing information about a level panel. It contains a name and an image. These can be edited in the inspector directly and provide a clean way to work with
+/// level panels in different ways.
+/// </summary>
 [System.Serializable]
 public struct LevelPanelData
 {
@@ -13,6 +16,10 @@ public struct LevelPanelData
     [SerializeField] public Sprite levelImage;
 }
 
+/// <summary>
+/// The class for the level selection menu.
+/// TODO: Has optimization potential and tons of junk to remove.
+/// </summary>
 public class LevelSelection : MonoBehaviour
 {
     [SerializeField] GameObject lockGameObject = default;
@@ -27,14 +34,18 @@ public class LevelSelection : MonoBehaviour
     public static Sprite[] s_gradeSprites { get; private set; }
     public static Sprite s_missingGradeSprite { get; private set; }
     static bool[] completedLevel = new bool[5];
-    static Tuple<int, gradeAllSum.gradeEnum>[] results = new Tuple<int, gradeAllSum.gradeEnum>[6];
+    static Tuple<int, gradeEnum>[] results = new Tuple<int, gradeEnum>[6];
     static string[] scoreRepresentations = new string[6];
     static LevelPanel[] panelChildren = default;
     static Image[] lockImageArray = new Image[5];
 
+    /// <summary>
+    /// Displays guide text and level panels if the array is already initialized. If so, it (for now) excludes the first element (the sample panel, potentially can be removed)
+    /// and loads data for each panel if possible.
+    /// </summary>
     private void OnEnable()
     {
-        if(GameNS::StaticData.gameUI != null) GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(true);
+        if(GameUI.instance != null) GameUI.instance.levelSelectionGuideText.gameObject.SetActive(true); // Guide text appears
 
         if (panelChildren != null)
         {
@@ -46,13 +57,16 @@ public class LevelSelection : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes the applied camera offset so that it points to the first panel when the player opens the menu for the first time. Sets the guide text inactive.
+    /// </summary>
     private void OnDisable()
     {
         transform.position += new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
-        GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position -= new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
+        GameUI.instance.levelSelectionGuideText.transform.position -= new Vector3(currentSceneIndex * xOffsetBetweenPanels, 0);
         currentSceneIndex = 0;
 
-        GameNS::StaticData.gameUI.levelSelectionGuideText.gameObject.SetActive(false);
+        GameUI.instance.levelSelectionGuideText.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -68,11 +82,15 @@ public class LevelSelection : MonoBehaviour
         samplePanel.SetActive(false);
 
         panelStartPosition = samplePanel.transform.position;
-        guideTextStartPos = GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position;
+        guideTextStartPos = GameUI.instance.levelSelectionGuideText.transform.position;
 
         if(panelChildren == null) InitiateChildrenCreation();
     }
 
+    /// <summary>
+    /// Main method for creating the level panel objects. Applies the needed offset for each instantiated panel and spawns a lock if the player isn't allowed to progress
+    /// further.
+    /// </summary>
     private void InitiateChildrenCreation()
     {
         for (int i = 0; i < levelPanels.Count; i++)
@@ -88,7 +106,6 @@ public class LevelSelection : MonoBehaviour
             if (i <= maxSceneIndex) lockImageArray[i].enabled = false;
         }
 
-        //Destroy(lockImageArray[0].gameObject); // First level is always available
         panelChildren = GetComponentsInChildren<LevelPanel>(true); // Collect panels in children
     }
 
@@ -98,63 +115,49 @@ public class LevelSelection : MonoBehaviour
         {
             currentSceneIndex--;
             transform.position += new Vector3(xOffsetBetweenPanels, 0);
-            GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position -= new Vector3(xOffsetBetweenPanels, 0);
+            GameUI.instance.levelSelectionGuideText.transform.position -= new Vector3(xOffsetBetweenPanels, 0);
         }
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentSceneIndex < maxSceneIndex)
         {
             currentSceneIndex++;
             transform.position -= new Vector3(xOffsetBetweenPanels, 0);
-            GameNS::StaticData.gameUI.levelSelectionGuideText.transform.position += new Vector3(xOffsetBetweenPanels, 0);
+            GameUI.instance.levelSelectionGuideText.transform.position += new Vector3(xOffsetBetweenPanels, 0);
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             recentOpenedLevel = currentSceneIndex;
-            GameNS::StaticData.loadingScreen.LoadLevel(recentOpenedLevel+1);
+            LoadingScreen.instance.LoadLevel(recentOpenedLevel+1);
         }
     }
 
     public static int recentOpenedLevel = 0;
 
-    public static void FetchCompletionData(int resultScore, gradeAllSum.gradeEnum resultGrade)
+    /// <summary>
+    /// Called when a level is completed. Determines which data to save out of the existing and the new ones. Technically speaking, it handles the player's best results.
+    /// </summary>
+    /// <param name="resultScore"></param>
+    /// <param name="resultGrade"></param>
+    public static void FetchCompletionData(int resultScore, gradeEnum resultGrade)
     {
-        int arrIndex = SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too
+        int arrIndex = SceneManager.GetActiveScene().buildIndex; // Because the sample panel is part of the array too and main menu is index 0.
 
-        Tuple<int, gradeAllSum.gradeEnum> data;
+        Tuple<int, gradeEnum> data;
 
-        var loadedData = RandomAccessFile.LoadData(arrIndex - 1);
+        Tuple<string, gradeEnum> loadedData = RandomAccessFile.LoadData(arrIndex - 1);
 
         if (loadedData == null)
         {
-            if(arrIndex == 5) data = new Tuple<int, gradeAllSum.gradeEnum>(0, gradeAllSum.gradeEnum.one);
-            else data = new Tuple<int, gradeAllSum.gradeEnum>(Int32.MaxValue, gradeAllSum.gradeEnum.one);
+            if(arrIndex == 5) data = new Tuple<int, gradeEnum>(0, gradeEnum.one);
+            else data = new Tuple<int, gradeEnum>(Int32.MaxValue, gradeEnum.one);
         }
         else
         {
-            data = new Tuple<int, gradeAllSum.gradeEnum>(PlayerPrefs.GetInt("LvlRes" + arrIndex, arrIndex == 5 ? 0 : Int32.MaxValue), loadedData.Item2);
+            data = new Tuple<int, gradeEnum>(PlayerPrefs.GetInt("LvlRes" + arrIndex, arrIndex == 5 ? 0 : Int32.MaxValue), loadedData.Item2);
         }
 
         string resultScoreString = "";
         int dataScore = data.Item1;
-        gradeAllSum.gradeEnum dataGrade = data.Item2;
-
-        //if (arrIndex == 5)
-        //{
-        //    if (resultScore >= data.Item1)
-        //    {
-        //        resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
-        //        Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
-        //    }
-        //    else resultScoreString = loadedData.Item1;
-        //}
-        //else
-        //{
-        //    if (resultScore <= data.Item1)
-        //    {
-        //        resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
-        //        PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
-        //    }
-        //    else resultScoreString = loadedData.Item1;
-        //}
+        gradeEnum dataGrade = data.Item2;
 
         if (resultGrade >= dataGrade)
         {
@@ -164,8 +167,8 @@ public class LevelSelection : MonoBehaviour
             {
                 if (resultScore >= data.Item1)
                 {
-                    resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
-                    Debug.Log(GameNS::StaticData.gameUI.scoreCountText.text);
+                    resultScoreString = GameUI.instance.scoreCountText.text;
+                    Debug.Log(GameUI.instance.scoreCountText.text);
                 }
                 else resultScoreString = loadedData.Item1;
             }
@@ -173,19 +176,22 @@ public class LevelSelection : MonoBehaviour
             {
                 if (resultScore <= data.Item1)
                 {
-                    resultScoreString = GameNS::StaticData.gameUI.scoreCountText.text;
+                    resultScoreString = GameUI.instance.scoreCountText.text;
                     PlayerPrefs.SetInt("LvlRes" + arrIndex, resultScore);
                     PlayerPrefs.Save();
                 }
                 else resultScoreString = loadedData.Item1;
             }
         }
-        else resultScoreString = (loadedData.Item1 == "" || loadedData.Item1 == null ? GameNS::StaticData.gameUI.scoreCountText.text : loadedData.Item1);
+        else resultScoreString = (loadedData.Item1 == "" || loadedData.Item1 == null ? GameUI.instance.scoreCountText.text : loadedData.Item1);
 
         RandomAccessFile.SaveData(arrIndex - 1, 
-            new Tuple<string, gradeAllSum.gradeEnum>(resultScoreString == "" ? GameNS::StaticData.gameUI.scoreCountText.text : resultScoreString, dataGrade));
+            new Tuple<string, gradeEnum>(resultScoreString == "" ? GameUI.instance.scoreCountText.text : resultScoreString, dataGrade));
     }
 
+    /// <summary>
+    /// Called by player on level completion. Handles level progression and removes locks if needed.
+    /// </summary>
     public static void OnLevelCompleted()
     {
         if(recentOpenedLevel + 1 > maxSceneIndex) maxSceneIndex = Mathf.Clamp(recentOpenedLevel + 1, 0, 4);
@@ -203,6 +209,6 @@ public class LevelSelection : MonoBehaviour
             lockImageArray[i].enabled = true;
         }
 
-        GameNS::StaticData.gameUI.levelCompletionPanelParent.CallPanel(true);
+        GameUI.instance.levelCompletionPanelParent.CallPanel(true);
     }
 }

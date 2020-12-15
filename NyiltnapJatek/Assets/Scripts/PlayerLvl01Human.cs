@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GameNS = GameNS;
 
+/// <summary>
+/// Player child for Lvl01. Fly ability with wax pickups.
+/// </summary>
 public class PlayerLvl01Human : Player
 {
     [SerializeField] protected float fallStrength = 0.05f;
@@ -27,23 +29,9 @@ public class PlayerLvl01Human : Player
 #endif
         reachedEnd = false;
 
-        Quiz.checkpoint = null;
-
-        gradeAllSum.count = 0;
-        gradeAllSum.maxSum = 0;
-        Grade[] grades = FindObjectsOfType<Grade>();
-
-        for (int i = 0; i < grades.Length; i++)
-        {
-            gradeAllSum.maxSum += (int)grades[i].nem;
-        }
-
-        quizMaxAll.correctQuestions = 0;
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
-
         s_wingHealth = wingHealth;
-        GameNS::StaticData.gameUI.leftTopSlider.maxValue = wingHealth;
-        GameNS::StaticData.gameUI.leftTopSlider.value = GameNS::StaticData.gameUI.leftTopSlider.maxValue;
+        GameUI.instance.leftTopSlider.maxValue = wingHealth;
+        GameUI.instance.leftTopSlider.value = GameUI.instance.leftTopSlider.maxValue;
 
         cameraOffset = Camera.main.transform.position - transform.position;
         halfPlayerSize = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x / 2, GetComponent<SpriteRenderer>().bounds.size.y / 2);
@@ -55,9 +43,9 @@ public class PlayerLvl01Human : Player
     // Update is called once per frame
     void Update()
     {
-        if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+        if (!reachedEnd && !quizCollider.quizActive && !GameUI.instance.levelHintBar.gameObject.activeSelf)
         {
-            if (Input.GetKey(KeyCode.Space) && GameNS::StaticData.gameUI.leftTopSlider.value > 0)
+            if (Input.GetKey(KeyCode.Space) && GameUI.instance.leftTopSlider.value > 0)
             {
                 transform.position += new Vector3(0, jumpStrength);
             }
@@ -68,9 +56,9 @@ public class PlayerLvl01Human : Player
 
             hit = Physics2D.Raycast(transform.position + new Vector3(0, halfPlayerSize.y + 1f), Vector2.up);
 
-            if ((hit.transform == null || !hit.transform.tag.Equals("Cloud")) && !reachedEnd)
+            if ((hit.transform == null || !hit.transform.CompareTag("Cloud")) && !reachedEnd)
             {
-                GameNS::StaticData.gameUI.leftTopSlider.value -= wingHealthDecreasePerFrame;
+                GameUI.instance.leftTopSlider.value -= wingHealthDecreasePerFrame;
             }
         }
 
@@ -82,17 +70,17 @@ public class PlayerLvl01Human : Player
     protected override IEnumerator Move()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
-        while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
+        while (GameUI.instance.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
+        GameUI.instance.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
 
-        GameNS::StaticData.gameUI.leftTopSlider.gameObject.SetActive(true);
+        GameUI.instance.leftTopSlider.gameObject.SetActive(true);
 
         while (!reachedEnd)
         {
             if (moveAllowed)
             {
                 positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime
-                    * (0.7f + ((GameNS::StaticData.gameUI.leftTopSlider.value / GameNS::StaticData.gameUI.leftTopSlider.maxValue / 10) * 3));
+                    * (0.7f + ((GameUI.instance.leftTopSlider.value / GameUI.instance.leftTopSlider.maxValue / 10) * 3));
                 transform.position += positionToAddOnFrame;
                 Camera.main.transform.position += positionToAddOnFrame;
                 yield return new WaitForEndOfFrame();
@@ -109,14 +97,14 @@ public class PlayerLvl01Human : Player
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("LevelEnding")) { reachedEnd = true; }
-        else if (collision.tag.Equals("Wax"))
+        if (collision.CompareTag("LevelEnding")) { reachedEnd = true; }
+        else if (collision.CompareTag("Wax"))
         {
-            GameNS::StaticData.gameUI.leftTopSlider.value = Mathf.Clamp(GameNS::StaticData.gameUI.leftTopSlider.value + wingHealthIncreaseOnWaxPickup, 0, GameNS::StaticData.gameUI.leftTopSlider.maxValue);
+            GameUI.instance.leftTopSlider.value = Mathf.Clamp(GameUI.instance.leftTopSlider.value + wingHealthIncreaseOnWaxPickup, 0, GameUI.instance.leftTopSlider.maxValue);
             collision.GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<SpriteRenderer>().enabled = false;
         }
-        else if (collision.tag.Equals("PassiveEnemy") && moveAllowed) OnGameOver();
+        else if (collision.CompareTag("PassiveEnemy") && moveAllowed) OnGameOver();
     }
 
     private void OnBecameVisible()
@@ -148,7 +136,7 @@ public class PlayerLvl01Human : Player
             {
                 reachedEnd = false;
 
-                //if (GameNS::StaticData.gameUI.levelCompletionPanelParent != null)
+                //if (GameUI.instance.levelCompletionPanelParent != null)
                 //{
                     LevelSelection.OnLevelCompleted();
                 //}

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using GameNS = GameNS;
 
+/// <summary>
+/// The class that is used on colliders that trigger quizes.
+/// </summary>
 public class quizCollider : MonoBehaviour
 {
     [SerializeField] string questionName = "";
@@ -11,7 +13,7 @@ public class quizCollider : MonoBehaviour
     public static bool quizActive = false;
     private void Start()
     {
-        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(false);
+        GameUI.instance.quizTransform.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +22,7 @@ public class quizCollider : MonoBehaviour
         {
             if (collision.GetComponent<PlayerLvl01Human>())
             {
-                if (GameNS::StaticData.gameUI.leftTopSlider.value > 0)
+                if (GameUI.instance.leftTopSlider.value > 0)
                 {
                     OnPlayerTouch();
                     Destroy(this.gameObject);
@@ -34,10 +36,13 @@ public class quizCollider : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when this collides with the player. Initiates a quiz and activates the quiz transform's gameobject.
+    /// </summary>
     public void OnPlayerTouch()
     {
         quizActive = true;
-        GameNS::StaticData.gameUI.quizTransform.gameObject.SetActive(true);
+        GameUI.instance.quizTransform.gameObject.SetActive(true);
         Quiz.InitiateQuiz(questionName, answers, correctAnswerIndex);
     }
 }

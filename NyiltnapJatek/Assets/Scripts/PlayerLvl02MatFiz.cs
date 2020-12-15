@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameNS = GameNS;
 
+/// <summary>
+/// Player child for Lvl02. Technically, this is the platform's class.
+/// </summary>
 public class PlayerLvl02MatFiz : Player
 {
     [SerializeField] BallLvl02MatekFizika ball = default;
@@ -15,29 +17,16 @@ public class PlayerLvl02MatFiz : Player
     {
         reachedEnd = false;
 
-        gradeAllSum.count = 0;
-        gradeAllSum.maxSum = 0;
-        Grade[] grades = FindObjectsOfType<Grade>();
+        //for (int levelIndex = 0; levelIndex < 5; levelIndex++)
+        //{
+        //    if (PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
+        //    {
+        //        Debug.Log("Float grade " + levelIndex + ": " + PlayerPrefs.GetFloat("FGrade" + levelIndex));
+        //    }
+        //}
 
-        for (int i = 0; i < grades.Length; i++)
-        {
-            gradeAllSum.maxSum += (int)grades[i].nem;
-        }
+        //Debug.Log(RandomAccessFile.LoadAverage().ToString());
 
-        quizMaxAll.correctQuestions = 0;
-        quizMaxAll.allQuestions = FindObjectsOfType<quizCollider>().Length;
-
-        for (int levelIndex = 0; levelIndex < 5; levelIndex++)
-        {
-            if (PlayerPrefs.GetFloat("FGrade" + levelIndex, 100f) != 100f)
-            {
-                Debug.Log("Float grade " + levelIndex + ": " + PlayerPrefs.GetFloat("FGrade" + levelIndex));
-            }
-        }
-
-        Debug.Log(RandomAccessFile.LoadAverage().ToString());
-
-        GameUI.loads = false;
         Quiz.checkpoint = null;
         brickCount = FindObjectsOfType<ObstacleLvl02>().Length;
 
@@ -51,18 +40,23 @@ public class PlayerLvl02MatFiz : Player
         StartCoroutine(WaitForOK());
     }
 
+    /// <summary>
+    /// This is used instead of the inherited Move(). TODO: Change this to Move()? Would probably be better and less complex.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitForOK()
     {
         while (!LoadingScreen.finishedLoading && LoadingScreen.startedLoading) { yield return new WaitForSeconds(0.1f); } // Freeze movement until the scene isn't loaded
-        while (GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
-        GameNS::StaticData.gameUI.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
+        while (GameUI.instance.levelHintBar.gameObject.activeSelf) { yield return new WaitForSeconds(0.1f); }
+        GameUI.instance.scoreCountText.GetComponent<Score>().OnGameLevelOpen();
         ball.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ball.enabled = !quizCollider.quizActive;
+        // So that ball's OnEnable() and OnDisable() get called and they toggle its rigidbody. This way the ball won't randomly bounce when a quiz is going.
+        ball.enabled = !quizCollider.quizActive; 
 
         if (brickCount > 0)
         {
@@ -72,7 +66,7 @@ public class PlayerLvl02MatFiz : Player
                 isBallOnScreen = true;
             }
 
-            if (!reachedEnd && !quizCollider.quizActive && !GameNS::StaticData.gameUI.levelHintBar.gameObject.activeSelf)
+            if (!reachedEnd && !quizCollider.quizActive && !GameUI.instance.levelHintBar.gameObject.activeSelf)
             {
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {

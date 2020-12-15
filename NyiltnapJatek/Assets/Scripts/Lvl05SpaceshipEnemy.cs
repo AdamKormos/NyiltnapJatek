@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class for enemy spaceships for Lvl05.
+/// </summary>
 public class Lvl05SpaceshipEnemy : MonoBehaviour
 {
     [SerializeField] EnemyBullet bullet = default;
@@ -28,6 +31,10 @@ public class Lvl05SpaceshipEnemy : MonoBehaviour
         isOnScreen = false;
     }
 
+    /// <summary>
+    /// Spawns a bullet every x seconds. Bullets have EnemyBullet (gotta change to ConstantMovement) script on them.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Shoot()
     {
         while(isOnScreen)

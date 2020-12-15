@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using GameNS = GameNS;
 
+/// <summary>
+/// The class used for checkpoints. It contains a position, a score and an array for other things like line index on Lvl03.
+/// </summary>
 public class Checkpoint
 {
     public Vector2 position;
@@ -19,6 +21,9 @@ public class Checkpoint
     }
 }
 
+/// <summary>
+/// Class for handling quiz events.
+/// </summary>
 public class Quiz : MonoBehaviour
 {
     [SerializeField] float quizAnswerTimeLimit = 10f;
@@ -37,6 +42,10 @@ public class Quiz : MonoBehaviour
         StartCoroutine(LoadQuestionTexts());
     }
 
+    /// <summary>
+    /// Loads the given answer list into the text children.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadQuestionTexts()
     {
         yield return new WaitForEndOfFrame();
@@ -74,7 +83,7 @@ public class Quiz : MonoBehaviour
                 {
                     quizMaxAll.correctQuestions++;
                     CreateCheckpoint();
-                    GameNS::StaticData.gameUI.StartCoroutine(DisplayCorrectText()); // As this object would be inactive by the time the coroutine does something after the delay
+                    GameUI.instance.StartCoroutine(DisplayCorrectText()); // As this object would be inactive by the time the coroutine does something after the delay
                 }
 
                 CloseQuiz();
@@ -82,30 +91,47 @@ public class Quiz : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a checkpoint. Called on good answer.
+    /// </summary>
     private void CreateCheckpoint()
     {
         if(SceneManager.GetActiveScene().buildIndex == 3)
         {
-            checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text, PlayerLvl03Muveszetek.index.ToString());
+            checkpoint = new Checkpoint(Player.currentPosition, GameUI.instance.scoreCountText.text, PlayerLvl03Muveszetek.index.ToString());
         }
-        else checkpoint = new Checkpoint(Player.currentPosition, GameNS::StaticData.gameUI.scoreCountText.text);
+        else checkpoint = new Checkpoint(Player.currentPosition, GameUI.instance.scoreCountText.text);
     }
 
+    /// <summary>
+    /// Displays a text to indicate that the answer was good if that's the case. Stays active for a second.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DisplayCorrectText()
     {
-        GameNS::StaticData.gameUI.correctAnswerText.gameObject.SetActive(true);
+        GameUI.instance.correctAnswerText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
-        GameNS::StaticData.gameUI.correctAnswerText.gameObject.SetActive(false);
+        GameUI.instance.correctAnswerText.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// The first method to be called when a quiz event is supposed to happen. Stores the necessary things for quizes and freezes player movement.
+    /// </summary>
+    /// <param name="questionName"></param>
+    /// <param name="answers"></param>
+    /// <param name="correctAnswerIndex"></param>
     public static void InitiateQuiz(string questionName, string[] answers, byte correctAnswerIndex)
     {
-        GameNS::StaticData.gameUI.quizQuestionText.text = questionName;
+        GameUI.instance.quizQuestionText.text = questionName;
         answerList = answers;
         correctIndex = correctAnswerIndex;
         Player.moveAllowed = false;
     }
 
+    /// <summary>
+    /// Called when the quiz begins. Initiates the countdown progress bar's decrementation.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator QuizCountdown()
     {
         float toDecrementPerTick = countdownIndicator.maxValue / (quizAnswerTimeLimit * countdownSliderTickPerSec);
@@ -119,6 +145,9 @@ public class Quiz : MonoBehaviour
         if(quizCollider.quizActive) CloseQuiz();
     }
 
+    /// <summary>
+    /// Called when quiz is over. Resets quiz button colors and indeces and allows movement for the player.
+    /// </summary>
     private void CloseQuiz()
     {
         but[rowIndex + colIndex].GetComponent<Image>().color = new Color(1f, 1f, 1f);

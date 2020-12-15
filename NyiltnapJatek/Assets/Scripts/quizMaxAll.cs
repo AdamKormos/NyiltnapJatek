@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Class that holds information related to quizes.
+/// </summary>
 public class quizMaxAll : MonoBehaviour
 {
     public static int allQuestions = 0;

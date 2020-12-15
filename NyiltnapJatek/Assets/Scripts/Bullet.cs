@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used on Lvl05 for spaceship bullets.
+/// </summary>
 public class Bullet : MonoBehaviour
 {
     // Update is called once per frame
