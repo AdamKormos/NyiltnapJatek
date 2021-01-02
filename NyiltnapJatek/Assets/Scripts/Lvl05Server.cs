@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
 /// <summary>
@@ -11,7 +12,6 @@ public class Lvl05Server : MonoBehaviour
     [SerializeField] public byte maxHealth = 20;
     public static byte health, s_maxHealth;
     new ParticleSystem particleSystem = default;
-    Vector3 checkpointPosition; // TODO: Find out why this is buggy and why it throws the server to a different position than it is supposed to.
     public static bool dead = false;
 
     private void Start()
@@ -24,16 +24,9 @@ public class Lvl05Server : MonoBehaviour
         particleSystem.Stop();    
     }
 
-    private void Update()
-    {
-        if (quizCollider.quizActive) checkpointPosition = transform.position;
-
-        Debug.Log(health);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (canTakeDmg && (collision.gameObject.GetComponent<Lvl05Enemy>() || collision.gameObject.GetComponent<EnemyBullet>()))
+        if (canTakeDmg && (collision.gameObject.GetComponent<Lvl05Enemy>() || collision.gameObject.CompareTag("Lvl05EnemyBullet")))
         {
             StartCoroutine(OnDamageTaken(collision));
         }
@@ -42,7 +35,7 @@ public class Lvl05Server : MonoBehaviour
     bool canTakeDmg = true;
 
     /// <summary>
-    /// Called when an enemy hits the server. Particles spawn to visualize the damage. On 0 health, server spawns to its checkpoint position and its HP resets.
+    /// Called when an enemy hits the server. Particles spawn to visualize the damage. On 0 health, the server's HP resets.
     /// </summary>
     /// <param name="enemyCol"></param>
     /// <returns></returns>
@@ -62,7 +55,6 @@ public class Lvl05Server : MonoBehaviour
             dead = true;
             health = maxHealth;
             GameUI.instance.leftTopSlider.value = health;
-            transform.position = checkpointPosition;
         }
 
         canTakeDmg = false;

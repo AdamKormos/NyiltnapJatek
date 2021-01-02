@@ -1,34 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class for enemy spaceships for Lvl05.
 /// </summary>
-public class Lvl05SpaceshipEnemy : MonoBehaviour
+public class Lvl05SpaceshipEnemy : Lvl05Enemy
 {
-    [SerializeField] EnemyBullet bullet = default;
-    [SerializeField] public byte health = 2;
-    [SerializeField] public int scoreReward = 100;
+    [SerializeField] GameObject bullet = default;
     bool isOnScreen = false;
     float halfSpriteHeight = 0f;
 
     private void Start()
     {
+        maxHealth = health;
         halfSpriteHeight = GetComponent<SpriteRenderer>().bounds.size.y / 2;
     }
 
     private void OnBecameVisible()
     {
         isOnScreen = true;
-        GetComponent<Collider2D>().enabled = true;
-        GetComponent<SpriteRenderer>().enabled = true;
+
+        health = maxHealth;
+
+        if (hasHealthSlider)
+        {
+            foreach (Image img in attachedSlider.transform.parent.GetComponentsInChildren<Image>(true))
+            {
+                img.enabled = true;
+            }
+
+            attachedSlider.value = maxHealth;
+        }
+
         StartCoroutine(Shoot());
     }
 
     private void OnBecameInvisible()
     {
         isOnScreen = false;
+
+        if (hasHealthSlider)
+        {
+            foreach (Image img in attachedSlider.transform.parent.GetComponentsInChildren<Image>(true))
+            {
+                img.enabled = false;
+            }
+        }
     }
 
     /// <summary>
@@ -39,21 +58,8 @@ public class Lvl05SpaceshipEnemy : MonoBehaviour
     {
         while(isOnScreen)
         {
-            GameObject b = Instantiate(bullet.gameObject, transform.position - new Vector3(0, halfSpriteHeight, 0), Quaternion.identity, transform.parent);
+            GameObject b = Instantiate(bullet.gameObject, transform.position - new Vector3(0, halfSpriteHeight, 0), Quaternion.Euler(0f, 0f, -180f), transform.parent);
             yield return new WaitForSeconds(Random.Range(2f, 4f));
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Bullet>())
-        {
-            health--;
-
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-
-            if (health == 0) Score.OnEnemyKilled(this);
         }
     }
 }

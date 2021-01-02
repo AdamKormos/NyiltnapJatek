@@ -48,7 +48,7 @@ public class BallLvl02MatekFizika : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        if (!GameUI.loads) // TODO: This might be unnecessary? I think this was added before the current solution was implemented.
+        if (!GameUI.loads)
         {
             PlayerLvl02MatFiz.isBallOnScreen = false;
         }

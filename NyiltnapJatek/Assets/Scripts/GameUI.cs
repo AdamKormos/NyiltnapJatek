@@ -29,6 +29,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] public LevelHintBar levelHintBar = default;
     [SerializeField] public Text levelHintBarText = default;
     [SerializeField] public Slider leftTopSlider = default;
+    [SerializeField] public GameObject lvl05HealthIndicatorSliderObject = default;
     [SerializeField] public Text levelSelectionGuideText = default;
     [SerializeField] public Text keyGuide = default;
     [SerializeField] bool startsInMainMenu = true;

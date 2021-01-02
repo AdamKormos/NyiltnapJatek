@@ -58,30 +58,6 @@ public class Score : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when an enemy has 0 health. Truly, it's not getting destroyed, only the collision and the sprite gets disabled.
-    /// </summary>
-    /// <param name="enemy"></param>
-    public static void OnEnemyKilled(Lvl05Enemy enemy)
-    {
-        GameUI.instance.scoreCountText.text = (System.Convert.ToInt32(GameUI.instance.scoreCountText.text) + enemy.scoreReward).ToString();
-
-        enemy.GetComponent<Collider2D>().enabled = false;
-        enemy.GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    /// <summary>
-    /// Called when an enemy has 0 health. Truly, it's not getting destroyed, only the collision and the sprite gets disabled.
-    /// </summary>
-    /// <param name="enemy"></param>
-    public static void OnEnemyKilled(Lvl05SpaceshipEnemy enemy)
-    {
-        GameUI.instance.scoreCountText.text = (System.Convert.ToInt32(GameUI.instance.scoreCountText.text) + enemy.scoreReward).ToString();
-
-        enemy.GetComponent<Collider2D>().enabled = false;
-        enemy.GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    /// <summary>
     /// Calculates how the player performed on the given level and assigns a grade to it.
     /// </summary>
     public static void CalculateResults()

@@ -910,9 +910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf874a0e82803e469c953cf36825ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 725575077554821042, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
   health: 2
   scoreReward: 100
+  bullet: {fileID: 725575077554821039, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
 --- !u!212 &168956318
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1968,9 +1968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf874a0e82803e469c953cf36825ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 725575077554821042, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
   health: 2
   scoreReward: 100
+  bullet: {fileID: 725575077554821039, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
 --- !u!212 &413551931
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2049,7 +2049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419073992}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 3.1170478, y: 36.21533, z: 7.4541016}
+  m_LocalPosition: {x: 3.1170478, y: 38.04, z: 7.4541016}
   m_LocalScale: {x: 0.21215627, y: 0.28350002, z: 1}
   m_Children: []
   m_Father: {fileID: 456480507}
@@ -2117,9 +2117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf874a0e82803e469c953cf36825ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 725575077554821042, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
   health: 2
   scoreReward: 100
+  bullet: {fileID: 725575077554821039, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
 --- !u!61 &419073996
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2837,6 +2837,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
+        type: 3}
+      propertyPath: lvl05HealthIndicatorSliderObject
+      value: 
+      objectReference: {fileID: 9138061935429977370, guid: 67f965b9e9390454db6bbc9a36e05d89,
+        type: 3}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name
@@ -10635,9 +10641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf874a0e82803e469c953cf36825ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 725575077554821042, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
   health: 2
   scoreReward: 100
+  bullet: {fileID: 725575077554821039, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
 --- !u!212 &1021522917
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13016,9 +13022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf874a0e82803e469c953cf36825ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 725575077554821042, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
   health: 2
   scoreReward: 100
+  bullet: {fileID: 725575077554821039, guid: 4549cab3511a2b046948e480e799a2e7, type: 3}
 --- !u!212 &1769108282
 SpriteRenderer:
   m_ObjectHideFlags: 0

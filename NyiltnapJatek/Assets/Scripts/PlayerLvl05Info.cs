@@ -14,7 +14,8 @@ public class PlayerLvl05Info : Player
     [SerializeField] KeyCode shootKey = KeyCode.Space;
     [SerializeField] GameObject bulletObject = default;
     [SerializeField] Lvl05Server serverObject = default;
-    float leftScreenBound = 0f, rightScreenBound = 0f;
+    float leftScreenBound = 0f, rightScreenBound = 0f, initialServerXPos = 0f;
+    Vector3 serverOffset = default;
     public static int bulletCount { get; private set; }
 
     // Start is called before the first frame update
@@ -26,6 +27,9 @@ public class PlayerLvl05Info : Player
         xMoveStrength *= 2f;
 #endif
         reachedEnd = false;
+
+        initialServerXPos = serverObject.transform.position.x;
+        serverOffset = transform.position - serverObject.transform.position;
 
         bulletCount = 50;
         GameUI.instance.lvl05StuffTransform.gameObject.SetActive(false);
@@ -43,6 +47,7 @@ public class PlayerLvl05Info : Player
     void Update()
     {
         currentPosition = transform.position;
+        serverObject.transform.position = new Vector3(initialServerXPos, currentPosition.y - serverOffset.y);
 
         if (Lvl05Server.dead)
         {
@@ -126,21 +131,19 @@ public class PlayerLvl05Info : Player
     }
 
     /// <summary>
-    /// Called when respawned to a checkpoint. 
-    /// TODO: Might make a OnRespawned() virtual in base player. Once that's done, this should go there and make the server spawn at the correct position, or maybe I'll
-    /// just apply an offset calculated from current position and checkpoint position to the player and the server too? That should be good anytime.
+    /// Called at respawning.
     /// </summary>
     private static void EnableEnemies()
     {
         foreach (Lvl05Enemy g in FindObjectsOfType<Lvl05Enemy>())
         {
-            g.GetComponent<Collider2D>().enabled = true;
+            foreach(Collider2D col in g.GetComponents<Collider2D>()) col.enabled = true;
             g.GetComponent<SpriteRenderer>().enabled = true;
         }
 
         foreach (Lvl05SpaceshipEnemy g in FindObjectsOfType<Lvl05SpaceshipEnemy>())
         {
-            g.GetComponent<Collider2D>().enabled = true;
+            foreach (Collider2D col in g.GetComponents<Collider2D>()) col.enabled = true;
             g.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
