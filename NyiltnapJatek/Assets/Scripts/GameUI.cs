@@ -236,4 +236,15 @@ public class GameUI : MonoBehaviour
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
         }
     }
+
+    /// <summary>
+    /// Called to load the UI texts using the correct language.
+    /// </summary>
+    public static void RefreshLanguageOnAllLocalizationTextsInsideUI()
+    {
+        foreach(InheritedText localizationText in instance.GetComponentsInChildren<InheritedText>())
+        {
+            localizationText.RefreshText();
+        }
+    }
 }
