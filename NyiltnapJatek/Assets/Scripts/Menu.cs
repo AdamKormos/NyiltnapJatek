@@ -23,6 +23,8 @@ public class Menu : MonoBehaviour
         buttons[index].GetComponent<Image>().color = selectedButtonColor;
     }
 
+    bool isInLanguageSelection = false;
+
     void Update()
     {
         isMenuImgActive = menuImg.activeSelf;
@@ -35,32 +37,56 @@ public class Menu : MonoBehaviour
         }
         if (menuImg.activeSelf)
         {
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && index != 0)
+            if (isInLanguageSelection)
             {
-                buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
-                index--;
-                buttons[index].GetComponent<Image>().color = selectedButtonColor;
-            }
-            else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 2)
-            {
-                buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
-                index++;
-                buttons[index].GetComponent<Image>().color = selectedButtonColor;
-            }
-            else if(Input.GetKeyDown(KeyCode.Return))
-            {
-                menuImg.SetActive(!menuImg.activeSelf);
-                switch (index)
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    case 0:
-                        OnLevelSelectionPress();
-                        break;
-                    case 1:
-                        Credits();
-                        break;
-                    case 2:
-                        Exit();
-                        break;
+                    index--;
+                    isInLanguageSelection = false;
+                    return;
+                }
+                else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && (int)LocalizationManager.instance.currentLanguage < LocalizationManager.languageCount)
+                {
+                    LocalizationManager.instance.currentLanguage++;
+                }
+                else if((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && (int)LocalizationManager.instance.currentLanguage > 0)
+                {
+                    LocalizationManager.instance.currentLanguage--;
+                }
+            }
+            else
+            {
+                if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && index != 0)
+                {
+                    buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+                    index--;
+                    buttons[index].GetComponent<Image>().color = selectedButtonColor;
+                }
+                else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && index != 3)
+                {
+                    buttons[index].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+                    index++;
+
+                    isInLanguageSelection = (index == 3);
+                    if (isInLanguageSelection) return;
+
+                    buttons[index].GetComponent<Image>().color = selectedButtonColor;
+                }
+                else if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    menuImg.SetActive(!menuImg.activeSelf);
+                    switch (index)
+                    {
+                        case 0:
+                            OnLevelSelectionPress();
+                            break;
+                        case 1:
+                            Credits();
+                            break;
+                        case 2:
+                            Exit();
+                            break;
+                    }
                 }
             }
         }

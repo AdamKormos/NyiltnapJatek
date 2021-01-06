@@ -9,6 +9,11 @@ public class LocalizationString
 
     public string current
     {
-        get { return texts[(int)LocalizationManager.s_currentLanguage]; }
+        get { return texts[(int)LocalizationManager.instance.currentLanguage]; }
+    }
+
+    public void SetHun(string t)
+    {
+        texts[0] = t;
     }
 }

@@ -6,18 +6,13 @@ public enum LocalizationLanguage { Hungarian, English };
 
 public class LocalizationManager : MonoBehaviour
 {
-    [SerializeField] LocalizationLanguage currentLanguage = LocalizationLanguage.Hungarian;
-    public static LocalizationLanguage s_currentLanguage;
+    [SerializeField] public LocalizationLanguage currentLanguage = LocalizationLanguage.Hungarian;
+    public static int languageCount = 2;
+    public static LocalizationManager instance = default;
 
     // Start is called before the first frame update
     void Start()
     {
-        s_currentLanguage = currentLanguage;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        instance = this;
     }
 }

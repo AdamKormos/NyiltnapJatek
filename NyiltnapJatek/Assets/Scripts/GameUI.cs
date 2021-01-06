@@ -32,14 +32,16 @@ public class GameUI : MonoBehaviour
     [SerializeField] public GameObject lvl05HealthIndicatorSliderObject = default;
     [SerializeField] public Text levelSelectionGuideText = default;
     [SerializeField] public Text keyGuide = default;
-    [SerializeField] bool startsInMainMenu = true;
+    [SerializeField] bool startsInMainMenu = true; // A field used for debugging and testing. By default, this wouldn't be needed for the released version.
 #pragma warning restore UNT0013
     public static bool loads = false;
     public static GameUI instance = default;
 
     private void Awake()
     {
-        if (instance == null)
+        // Storing the instance. This if-else is necessary because for the sake of testing, GameUI objects are placed on every level but there should be 
+        // only one at the same time.
+        if (instance == null) 
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -50,7 +52,7 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartRoutine());
+        if(Application.isPlaying) StartCoroutine(StartRoutine());
     }
 
     /// <summary>
@@ -69,7 +71,8 @@ public class GameUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when the game starts and is responsible for checking the user's username and further game init actions such as cursor visibility.
+    /// Called when the game starts and is responsible for checking the user's username and further game init actions such as cursor visibility and loading the UI based
+    /// on the selected language.
     /// </summary>
     /// <returns></returns>
     IEnumerator StartRoutine()
@@ -80,6 +83,8 @@ public class GameUI : MonoBehaviour
 
         if (startsInMainMenu)
         {
+            RefreshLanguageOnAllLocalizationTextsInsideUI();
+
             if (PlayerPrefs.GetString("Username", "") == "")
             {
                 mainMenuTransform.gameObject.SetActive(false);
@@ -113,22 +118,24 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !instance.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)
+        if (Application.isPlaying)
         {
-            if(Input.GetKeyDown(KeyCode.Escape) && !LoadingScreen.startedLoading)
+            if (SceneManager.GetActiveScene().buildIndex != 0 && !quizCollider.quizActive && !instance.levelHintBar.gameObject.activeSelf && LoadingScreen.finishedLoading)
             {
-                levelSelectionGuideText.gameObject.SetActive(false);
-                LoadingScreen.finishedLoading = false;
-                LoadingScreen.instance.LoadLevel(0);
-            }
-            else if(Input.GetKeyDown(KeyCode.R) && LoadingScreen.finishedLoading) // OnGameOver() copy paste
-            {
-                loads = true;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                instance.OnViewChanged(false, true);
+                if (Input.GetKeyDown(KeyCode.Escape) && !LoadingScreen.startedLoading)
+                {
+                    levelSelectionGuideText.gameObject.SetActive(false);
+                    LoadingScreen.finishedLoading = false;
+                    LoadingScreen.instance.LoadLevel(0);
+                }
+                else if (Input.GetKeyDown(KeyCode.R) && LoadingScreen.finishedLoading) // OnGameOver() copy paste
+                {
+                    loads = true;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    instance.OnViewChanged(false, true);
+                }
             }
         }
-
         //if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.U)) RandomAccessFile.EraseData();
     }
 
@@ -242,9 +249,13 @@ public class GameUI : MonoBehaviour
     /// </summary>
     public static void RefreshLanguageOnAllLocalizationTextsInsideUI()
     {
-        foreach(InheritedText localizationText in instance.GetComponentsInChildren<InheritedText>())
+        foreach(Text text in instance.GetComponentsInChildren<Text>())
         {
+            LocalizationText localizationText = text.gameObject.AddComponent<LocalizationText>();
+            localizationText = (LocalizationText)text;
+            localizationText.SetHunText(text.text);
             localizationText.RefreshText();
+            DestroyImmediate(text);
         }
     }
 }
