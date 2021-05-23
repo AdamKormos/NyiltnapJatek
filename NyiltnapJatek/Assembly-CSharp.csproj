@@ -75,8 +75,6 @@
     <Compile Include="Assets\Scripts\LevelPanel.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
     <Compile Include="Assets\Scripts\LoadingScreen.cs" />
-    <Compile Include="Assets\Scripts\LocalizationManager.cs" />
-    <Compile Include="Assets\Scripts\LocalizationString.cs" />
     <Compile Include="Assets\Scripts\Lvl05Enemy.cs" />
     <Compile Include="Assets\Scripts\Lvl05Server.cs" />
     <Compile Include="Assets\Scripts\Lvl05SpaceshipEnemy.cs" />
@@ -93,7 +91,10 @@
     <Compile Include="Assets\Scripts\Quiz.cs" />
     <Compile Include="Assets\Scripts\RandomAccessFile.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Test\LocalizationText.cs" />
+=======
+>>>>>>> parent of 9bf71b27 (Push before localization feature just in case)
     <Compile Include="Assets\Scripts\gradeAllSum.cs" />
     <Compile Include="Assets\Scripts\quizCollider.cs" />
     <Compile Include="Assets\Scripts\quizMaxAll.cs" />

@@ -243,6 +243,7 @@ public class GameUI : MonoBehaviour
             ToggleChildren(levelCompletionPanelText.transform.parent.gameObject, false);
         }
     }
+<<<<<<< HEAD
 
     /// <summary>
     /// Called to load the UI texts using the correct language.
@@ -258,4 +259,6 @@ public class GameUI : MonoBehaviour
             DestroyImmediate(text);
         }
     }
+=======
+>>>>>>> parent of 9bf71b27 (Push before localization feature just in case)
 }
