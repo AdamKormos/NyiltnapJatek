@@ -83,7 +83,7 @@ public class GameUI : MonoBehaviour
 
         if (startsInMainMenu)
         {
-            RefreshLanguageOnAllLocalizationTextsInsideUI();
+            // RefreshLanguageOnAllLocalizationTextsInsideUI();
 
             if (PlayerPrefs.GetString("Username", "") == "")
             {
