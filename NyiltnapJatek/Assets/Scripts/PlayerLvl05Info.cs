@@ -97,7 +97,7 @@ public class PlayerLvl05Info : Player
                 transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
                 serverObject.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
                 Camera.main.transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(1 / 60);
             }
             else yield return new WaitForSeconds(0.1f);
         }
@@ -105,7 +105,7 @@ public class PlayerLvl05Info : Player
         while (isOnScreen)
         {
             transform.position += new Vector3(0f, 0.05f * moveStrength) * Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1 / 60);
         }
     }
 

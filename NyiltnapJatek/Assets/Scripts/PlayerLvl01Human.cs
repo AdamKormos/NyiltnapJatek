@@ -83,7 +83,7 @@ public class PlayerLvl01Human : Player
                     * (0.7f + ((GameUI.instance.leftTopSlider.value / GameUI.instance.leftTopSlider.maxValue / 10) * 3));
                 transform.position += positionToAddOnFrame;
                 Camera.main.transform.position += positionToAddOnFrame;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(1 / 60);
             }
             else yield return new WaitForSeconds(0.1f);
         }
@@ -91,7 +91,7 @@ public class PlayerLvl01Human : Player
         while (isOnScreen)
         {
             transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1 / 60);
         }
     }
 

@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
             {
                 transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
                 Camera.main.transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(1 / 60);
             }
             else yield return new WaitForSeconds(0.1f);
         }
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         while (isOnScreen)
         {
             transform.position += new Vector3(0.05f * moveStrength, 0f) * Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1 / 60);
         }
     }
 

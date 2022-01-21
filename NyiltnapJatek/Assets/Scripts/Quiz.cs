@@ -48,7 +48,7 @@ public class Quiz : MonoBehaviour
     /// <returns></returns>
     IEnumerator LoadQuestionTexts()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1 / 60);
         for (int i = 0; i < but.Count; i++)
         {
             but[i].GetComponentInChildren<Text>(true).text = answerList[i];

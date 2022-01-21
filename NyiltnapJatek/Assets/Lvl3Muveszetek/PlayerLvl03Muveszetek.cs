@@ -104,7 +104,7 @@ public class PlayerLvl03Muveszetek : Player
             }
 
             transform.position += new Vector3(0, num / moveTickAmount);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1 / 60);
         }
 
         // This part is reached only if the movement finished

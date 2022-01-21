@@ -45,7 +45,7 @@ public class FallingObstacleSpawner : ObstacleSpawner
         while (obstacleT.position.y > positionToDestroyFrom)
         {
             if (!quizCollider.quizActive) obstacleT.position -= new Vector3(0, objectFallStrength);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1 / 60);
         }
 
         GameObject.Destroy(obstacleT.gameObject);
