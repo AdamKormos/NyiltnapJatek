@@ -126,8 +126,9 @@ public class LevelSelection : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             recentOpenedLevel = currentSceneIndex;
-            LoadingScreen.instance.LoadLevel(recentOpenedLevel+1);
+            LoadingScreen.instance.LoadLevel(recentOpenedLevel + 1);
         }
+        else if (Input.GetKeyDown(KeyCode.T)) UnlockAllLevels();
     }
 
     public static int recentOpenedLevel = 0;
@@ -194,6 +195,8 @@ public class LevelSelection : MonoBehaviour
     /// </summary>
     public static void OnLevelCompleted()
     {
+        if (maxSceneIndex == 4) return;
+
         if(recentOpenedLevel + 1 > maxSceneIndex) maxSceneIndex = Mathf.Clamp(recentOpenedLevel + 1, 0, 4);
 
         PlayerPrefs.SetInt("MSI", maxSceneIndex);
@@ -209,6 +212,19 @@ public class LevelSelection : MonoBehaviour
             lockImageArray[i].enabled = true;
         }
 
+        GameUI.instance.levelCompletionPanelParent.CallPanel(true);
+    }
+
+    public static void UnlockAllLevels()
+    {
+        maxSceneIndex = 4;
+        PlayerPrefs.SetInt("MSI", maxSceneIndex);
+        PlayerPrefs.Save();
+
+        for (int i = 0; i <= maxSceneIndex; i++)
+        {
+            lockImageArray[i].enabled = false;
+        }
         GameUI.instance.levelCompletionPanelParent.CallPanel(true);
     }
 }
