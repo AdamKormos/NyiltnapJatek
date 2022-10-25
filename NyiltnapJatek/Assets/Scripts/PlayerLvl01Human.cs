@@ -19,6 +19,7 @@ public class PlayerLvl01Human : Player
     // Start is called before the first frame update
     void Start()
     {
+        /*
 #if UNITY_EDITOR
 #else
         moveStrength = 60;
@@ -27,6 +28,7 @@ public class PlayerLvl01Human : Player
         wingHealthDecreasePerFrame = 0.2f;
         wingHealthIncreaseOnWaxPickup = 40;
 #endif
+        */
         reachedEnd = false;
 
         s_wingHealth = wingHealth;
@@ -79,7 +81,7 @@ public class PlayerLvl01Human : Player
         {
             if (moveAllowed)
             {
-                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * 0.0035f /*Time.deltaTime*/
+                positionToAddOnFrame = new Vector3(0.05f * moveStrength, 0f) * 0.0065f /*Time.deltaTime*/
                     * (0.7f + ((GameUI.instance.leftTopSlider.value / GameUI.instance.leftTopSlider.maxValue / 10) * 3));
                 transform.position += positionToAddOnFrame;
                 Camera.main.transform.position += positionToAddOnFrame;

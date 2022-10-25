@@ -53,6 +53,7 @@ public class GameUI : MonoBehaviour
     private void Start()
     {
         if(Application.isPlaying) StartCoroutine(StartRoutine());
+        if (lvl05HealthIndicatorSliderObject != null) lvl05HealthIndicatorSliderObject.gameObject.SetActive(false);
     }
 
     /// <summary>

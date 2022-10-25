@@ -57,7 +57,9 @@ public class Lvl05Enemy : MonoBehaviour
 
             if (!hasHealthSlider)
             {
+                // Non-functional, should be put on UI!
                 GameObject healthSlider = Instantiate(GameUI.instance.lvl05HealthIndicatorSliderObject.gameObject, transform.position + new Vector3(0, 1f, 0f), Quaternion.identity, this.transform);
+                healthSlider.gameObject.SetActive(true);
                 attachedSlider = healthSlider.GetComponentInChildren<Slider>();
                 attachedSlider.maxValue = maxHealth;
                 hasHealthSlider = true;
