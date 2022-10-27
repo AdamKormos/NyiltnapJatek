@@ -21,11 +21,6 @@ public class PlayerLvl05Info : Player
     // Start is called before the first frame update
     void Start()
     {
-#if UNITY_EDITOR
-#else
-        moveStrength = 30;
-        xMoveStrength *= 2f;
-#endif
         reachedEnd = false;
 
         initialServerXPos = serverObject.transform.position.x;
@@ -62,11 +57,11 @@ public class PlayerLvl05Info : Player
             #region Movement
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position -= new Vector3(0.05f * xMoveStrength, 0f);
+                transform.position -= new Vector3(xMoveStrength, 0f) * Time.deltaTime;
             }
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position += new Vector3(0.05f * xMoveStrength, 0f);
+                transform.position += new Vector3(xMoveStrength, 0f) * Time.deltaTime;
             }
 
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftScreenBound, rightScreenBound), transform.position.y);

@@ -195,21 +195,22 @@ public class LevelSelection : MonoBehaviour
     /// </summary>
     public static void OnLevelCompleted()
     {
-        if (maxSceneIndex == 4) return;
-
-        if(recentOpenedLevel + 1 > maxSceneIndex) maxSceneIndex = Mathf.Clamp(recentOpenedLevel + 1, 0, 4);
-
-        PlayerPrefs.SetInt("MSI", maxSceneIndex);
-        PlayerPrefs.Save();
-
-        for (int i = 0; i <= maxSceneIndex; i++)
+        if (maxSceneIndex != 4)
         {
-            lockImageArray[i].enabled = false;
-        }
+            if (recentOpenedLevel + 1 > maxSceneIndex) maxSceneIndex = Mathf.Clamp(recentOpenedLevel + 1, 0, 4);
 
-        for(int i = maxSceneIndex+1; i < 5; i++)
-        {
-            lockImageArray[i].enabled = true;
+            PlayerPrefs.SetInt("MSI", maxSceneIndex);
+            PlayerPrefs.Save();
+
+            for (int i = 0; i <= maxSceneIndex; i++)
+            {
+                lockImageArray[i].enabled = false;
+            }
+
+            for (int i = maxSceneIndex + 1; i < 5; i++)
+            {
+                lockImageArray[i].enabled = true;
+            }
         }
 
         GameUI.instance.levelCompletionPanelParent.CallPanel(true);

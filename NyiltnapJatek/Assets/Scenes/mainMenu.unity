@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1984457215, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1984457216, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
       propertyPath: m_AnchorMax.y
@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1984457217, guid: 4b355125ce2f0774e896766d12fe9cbe, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3782452620894395859, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
@@ -338,6 +338,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9125414918875546931, guid: 4b355125ce2f0774e896766d12fe9cbe,
+        type: 3}
+      propertyPath: lvl05HealthIndicatorSliderObject
+      value: 
+      objectReference: {fileID: 9138061935429977370, guid: 67f965b9e9390454db6bbc9a36e05d89,
+        type: 3}
     - target: {fileID: 9125414918875546932, guid: 4b355125ce2f0774e896766d12fe9cbe,
         type: 3}
       propertyPath: m_Name

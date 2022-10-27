@@ -71,7 +71,7 @@ public class PlayerLvl03Muveszetek : Player
             }
         }
 
-        Debug.Log("Index: " + index + " moving? " + Moving + " held alt? " + heldAltAtStart);
+        // Debug.Log("Index: " + index + " moving? " + Moving + " held alt? " + heldAltAtStart);
     }
 
     //bool brokeAltMove = false;
